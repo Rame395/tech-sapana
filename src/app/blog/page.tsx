@@ -9,6 +9,13 @@ export const metadata: Metadata = {
   description: "Read our latest articles on software engineering, UI/UX design, and technology trends.",
 };
 
+export function getExcerpt(htmlContent: string, length: number = 130) {
+  if (!htmlContent) return "";
+  const text = htmlContent.replace(/<[^>]*>?/gm, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
+  if (text.length <= length) return text;
+  return text.substring(0, text.lastIndexOf(" ", length)) + "...";
+}
+
 export function getReadingTime(htmlContent: string) {
   if (!htmlContent) return 1;
   const text = htmlContent.replace(/<[^>]*>?/gm, " ");
@@ -66,7 +73,7 @@ export default async function BlogIndexPage() {
                     {post.title}
                   </h2>
                   <p className="text-text-muted text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">
-                    {post.metaDescription || "Click to read this full article on our blog."}
+                    {post.metaDescription || getExcerpt(post.content)}
                   </p>
                   
                   <div className="flex items-center gap-4 text-xs font-medium text-text-muted pt-4 border-t border-border-subtle mt-auto">

@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { Bot, Code2, ArrowRight } from "lucide-react";
 import PromoBanner from "@/components/PromoBanner";
 import MarqueeBanner from "@/components/MarqueeBanner";
 import FaqSection from "@/components/FaqSection";
@@ -316,57 +317,79 @@ export default function HomeClient({ blogSection }: { blogSection: React.ReactNo
       </section>
 
       {/* CLEAN COURSES SECTION */}
-      <section id="courses" className="py-24 bg-bg-primary border-b border-border-subtle">
-        <div className="w-full max-w-[1240px] mx-auto px-6">
+      <section id="courses" className="py-24 bg-bg-primary relative overflow-hidden">
+        {/* Background Accents */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[100px] pointer-events-none translate-y-1/3 -translate-x-1/3"></div>
+
+        <div className="w-full max-w-[1240px] mx-auto px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="mb-16 text-center max-w-2xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 text-brand-blue font-bold text-xs uppercase tracking-widest mb-6">
+              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+              Tech Academy
+            </div>
+            <h2 className="text-3xl md:text-5xl font-[800] text-text-main mb-6 tracking-tight leading-[1.1]">
               Learn Technology.<br/>Build the Future.
             </h2>
-            <p className="text-lg text-text-muted">
+            <p className="text-lg text-text-muted leading-relaxed">
               Practical courses designed to help students, professionals, and business owners use modern technology confidently.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-bg-card border border-border-subtle hover:border-brand-blue/40 rounded-3xl p-10 transition-colors group"
+              className="group relative bg-bg-card border border-border-subtle hover:border-brand-blue/40 rounded-[2rem] p-10 md:p-12 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(37,99,235,0.08)] overflow-hidden flex flex-col h-full"
             >
-              <div className="inline-block px-3 py-1 bg-brand-blue/10 text-brand-blue text-xs font-bold rounded-full mb-6">Online & Kathmandu</div>
-              <h3 className="text-2xl font-bold text-text-main mb-4 tracking-tight group-hover:text-brand-blue transition-colors">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-2xl group-hover:bg-blue-500/10 transition-colors"></div>
+              
+              <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 mb-8 border border-blue-100 dark:border-blue-800/50 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500 shadow-sm">
+                <Bot size={32} strokeWidth={1.5} />
+              </div>
+
+              <div className="inline-block px-3 py-1 bg-brand-blue/10 text-brand-blue text-xs font-bold rounded-full mb-4 w-fit">Online & Kathmandu</div>
+              <h3 className="text-2xl md:text-3xl font-bold text-text-main mb-4 tracking-tight group-hover:text-brand-blue transition-colors">
                 AI for Life & Business
               </h3>
-              <p className="text-text-muted mb-8 leading-relaxed">
+              <p className="text-text-muted mb-10 leading-relaxed text-lg flex-grow">
                 Learn how to use modern AI tools for productivity, research, content, automation, and everyday business tasks with hands-on practice.
               </p>
-              <Link href="/courses" className="font-semibold text-text-main hover:text-brand-blue transition-colors flex items-center gap-2">
-                Explore Course →
+              
+              <Link href="/courses" className="inline-flex items-center gap-2 font-bold text-brand-blue group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors mt-auto">
+                Explore Course <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="bg-bg-card border border-border-subtle hover:border-brand-blue/40 rounded-3xl p-10 transition-colors group"
+              className="group relative bg-bg-card border border-border-subtle hover:border-purple-500/40 rounded-[2rem] p-10 md:p-12 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(168,85,247,0.08)] overflow-hidden flex flex-col h-full"
             >
-              <div className="inline-block px-3 py-1 bg-brand-blue/10 text-brand-blue text-xs font-bold rounded-full mb-6">Hybrid Workshop</div>
-              <h3 className="text-2xl font-bold text-text-main mb-4 tracking-tight group-hover:text-brand-blue transition-colors">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-2xl group-hover:bg-purple-500/10 transition-colors"></div>
+              
+              <div className="w-16 h-16 rounded-2xl bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 mb-8 border border-purple-100 dark:border-purple-800/50 group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all duration-500 shadow-sm">
+                <Code2 size={32} strokeWidth={1.5} />
+              </div>
+
+              <div className="inline-block px-3 py-1 bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-bold rounded-full mb-4 w-fit">Hybrid Workshop</div>
+              <h3 className="text-2xl md:text-3xl font-bold text-text-main mb-4 tracking-tight group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                 Modern Web Development
               </h3>
-              <p className="text-text-muted mb-8 leading-relaxed">
+              <p className="text-text-muted mb-10 leading-relaxed text-lg flex-grow">
                 Hands-on frontend and backend training teaching you how to build, deploy, and scale modern web applications from scratch.
               </p>
-              <Link href="/courses" className="font-semibold text-text-main hover:text-brand-blue transition-colors flex items-center gap-2">
-                Explore Course →
+              
+              <Link href="/courses" className="inline-flex items-center gap-2 font-bold text-purple-600 dark:text-purple-400 group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors mt-auto">
+                Explore Course <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
           </div>
@@ -383,22 +406,25 @@ export default function HomeClient({ blogSection }: { blogSection: React.ReactNo
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-brand-blue rounded-[2.5rem] p-12 md:p-20 text-center shadow-2xl relative overflow-hidden"
+            className="bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-900 rounded-[2.5rem] p-12 md:p-20 text-center shadow-[0_20px_80px_rgba(37,99,235,0.25)] relative overflow-hidden"
           >
-            <div className="absolute inset-0 bg-white/5"></div>
+            {/* Glowing Blobs */}
+            <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-[80px] -translate-y-1/2 -translate-x-1/2"></div>
+            <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-[80px] translate-y-1/2 translate-x-1/2"></div>
+            
             <div className="relative z-10 max-w-3xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-[800] text-white mb-6 tracking-tight leading-[1.1]">
                 Have a software idea?
               </h2>
-              <p className="text-xl text-white/80 mb-10 leading-relaxed font-medium">
+              <p className="text-xl md:text-2xl text-blue-100 mb-10 leading-relaxed font-medium">
                 Tell us what you're building. We'll help you turn the idea into a practical, scalable digital product.
               </p>
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
                 <a
                   href="mailto:contact@techsapana.com"
-                  className="px-8 py-4 bg-white text-brand-blue rounded-xl font-bold shadow-lg hover:scale-105 transition-transform"
+                  className="px-10 py-5 bg-white text-blue-600 rounded-2xl font-bold text-lg shadow-[0_10px_30px_rgba(255,255,255,0.2)] hover:shadow-[0_15px_40px_rgba(255,255,255,0.4)] hover:scale-[1.02] transition-all duration-300 flex items-center gap-3"
                 >
-                  Start Your Project
+                  Start Your Project <ArrowRight size={20} />
                 </a>
               </div>
             </div>

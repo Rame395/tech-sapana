@@ -3,6 +3,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { Clock, Calendar, ArrowRight } from "lucide-react";
 
+export function getExcerpt(htmlContent: string, length: number = 130) {
+  if (!htmlContent) return "";
+  const text = htmlContent.replace(/<[^>]*>?/gm, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
+  if (text.length <= length) return text;
+  return text.substring(0, text.lastIndexOf(" ", length)) + "...";
+}
+
 export function getReadingTime(htmlContent: string) {
   if (!htmlContent) return 1;
   const text = htmlContent.replace(/<[^>]*>?/gm, " ");
@@ -74,7 +81,7 @@ export default async function HomeBlogSection() {
                     {post.title}
                   </h3>
                   <p className="text-text-muted text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">
-                    {post.metaDescription || "Click to read this full article on our blog."}
+                    {post.metaDescription || getExcerpt(post.content)}
                   </p>
                   
                   <div className="flex items-center justify-between text-xs font-medium text-text-muted pt-4 border-t border-border-subtle mt-auto">
