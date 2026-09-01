@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI for Life & Business — Course Details | TechSapana Education</title>
+  <meta name="description" content="Master prompt engineering, custom AI agents, business workflow automations, and practical tools in this 4-week hybrid course by TechSapana." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       THEME VARIABLES
+       ========================================================================== */
+    :root {
+      --brand-blue: #0052CC;
+      --brand-blue-hover: #0040A8;
+      --brand-blue-glow: rgba(0, 82, 204, 0.4);
+      --brand-blue-soft: rgba(0, 82, 204, 0.12);
+
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --container-max: 1240px;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html[data-theme="dark"] {
+      --bg-primary: #07090E;
+      --bg-secondary: #0D111A;
+      --bg-card: rgba(15, 20, 31, 0.85);
+      --bg-card-hover: rgba(22, 29, 44, 0.98);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-medium: rgba(255, 255, 255, 0.16);
+      --border-accent: rgba(0, 82, 204, 0.45);
+      --text-main: #FFFFFF;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --navbar-bg: rgba(7, 9, 14, 0.92);
+      --price-bg: rgba(255, 255, 255, 0.04);
+      --schedule-bg: rgba(0, 82, 204, 0.08);
+    }
+
+    html[data-theme="light"] {
+      --bg-primary: #F8FAFC;
+      --bg-secondary: #FFFFFF;
+      --bg-card: #FFFFFF;
+      --bg-card-hover: #F1F5F9;
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-medium: rgba(0, 0, 0, 0.14);
+      --border-accent: rgba(0, 82, 204, 0.35);
+      --text-main: #0A0E1A;
+      --text-muted: #475569;
+      --text-dim: #64748B;
+      --navbar-bg: rgba(248, 250, 252, 0.92);
+      --price-bg: #F1F5F9;
+      --schedule-bg: rgba(0, 82, 204, 0.05);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body {
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: 1.5rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brand-blue);
+      margin-bottom: 0.75rem;
+      background: var(--brand-blue-soft);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-accent);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.885rem;
+      font-weight: 700;
+      padding: 0.8rem 1.45rem;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+      cursor: pointer;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background-color: var(--brand-blue);
+      color: #FFF;
+      box-shadow: 0 4px 18px var(--brand-blue-glow);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--brand-blue-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border-medium);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--brand-blue);
+      transform: translateY(-2px);
+    }
+
+    .btn-sm {
+      padding: 0.55rem 1.1rem;
+      font-size: 0.825rem;
+    }
+
+    .theme-toggle-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      color: var(--text-main);
+      border-radius: 999px;
+      padding: 0.45rem 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    /* ==========================================================================
+       NAVBAR
+       ========================================================================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1.1rem 0;
+      background: var(--navbar-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      background: var(--brand-blue);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFF;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+
+    .brand-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--text-main);
+    }
+
+    .nav-right-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* ==========================================================================
+       VISUAL HERO & BANNER
+       ========================================================================== */
+    .course-visual-hero {
+      padding-top: 8rem;
+      padding-bottom: 3rem;
+      background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .breadcrumb-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.825rem;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .breadcrumb-row a:hover {
+      color: var(--brand-blue);
+    }
+
+    .hero-split-view {
+      display: grid;
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 991px) {
+      .hero-split-view {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .course-headline {
+      font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .course-subtext {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Visual Banner Container */
+    .hero-banner-frame {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-medium);
+      position: relative;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+    }
+
+    .hero-banner-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .banner-badge-float {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 1.25rem;
+      background: rgba(13, 17, 26, 0.85);
+      border: 1px solid var(--border-accent);
+      backdrop-filter: blur(10px);
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* ==========================================================================
+       SUB-NAV STICKY BAR (JUMP TO SECTIONS)
+       ========================================================================== */
+    .subnav-sticky-bar {
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 65px;
+      background: var(--navbar-bg);
+      backdrop-filter: blur(12px);
+      z-index: 900;
+      padding-block: 0.85rem;
+    }
+
+    .subnav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      overflow-x: auto;
+    }
+
+    .subnav-item {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .subnav-item:hover, .subnav-item.active {
+      color: var(--brand-blue);
+    }
+
+    /* ==========================================================================
+       UNIFIED CONTENT LAYOUT & SIDEBAR
+       ========================================================================== */
+    .page-wrapper {
+      padding-block: 4rem;
+    }
+
+    .unified-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 1024px) {
+      .unified-layout {
+        grid-template-columns: 1fr 340px;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .unified-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .section-block {
+      margin-bottom: 3.5rem;
+    }
+
+    .block-heading {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+      color: var(--text-main);
+    }
+
+    /* Visual Grid for Masteries */
+    .mastery-visual-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 640px) {
+      .mastery-visual-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .mastery-card-visual {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      transition: var(--transition);
+    }
+
+    .mastery-card-visual:hover {
+      border-color: var(--brand-blue);
+      transform: translateY(-2px);
+    }
+
+    .mastery-icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--brand-blue-soft);
+      border: 1px solid var(--border-accent);
+      color: var(--brand-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Accordion Syllabus */
+    .curriculum-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .accordion-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .accordion-block.active {
+      border-color: var(--brand-blue);
+    }
+
+    .accordion-header {
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .accordion-week-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .week-pill {
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: var(--brand-blue);
+      background: var(--brand-blue-soft);
+      padding: 0.25rem 0.55rem;
+      border-radius: 4px;
+    }
+
+    .accordion-icon {
+      color: var(--text-muted);
+      transition: transform 0.25s ease;
+    }
+
+    .accordion-block.active .accordion-icon {
+      transform: rotate(180deg);
+      color: var(--brand-blue);
+    }
+
+    .accordion-content {
+      padding: 0 1.5rem 1.5rem 1.5rem;
+      display: none;
+      border-top: 1px dashed var(--border-subtle);
+      padding-top: 1.25rem;
+    }
+
+    .accordion-block.active .accordion-content {
+      display: block;
+    }
+
+    .lesson-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Tools Stack Icons Grid */
+    .tools-grid-visual {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 640px) {
+      .tools-grid-visual {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .tool-tile-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .tool-tile-card:hover {
+      border-color: var(--brand-blue);
+      transform: translateY(-3px);
+    }
+
+    .tool-tile-symbol {
+      font-size: 1.5rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .tool-tile-name {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .tool-tile-desc {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    /* Mentor Profile Box */
+    .mentor-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+    }
+
+    @media (max-width: 640px) {
+      .mentor-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .mentor-avatar {
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      background: #000;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 2px solid var(--brand-blue);
+    }
+
+    .mentor-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ==========================================================================
+       SIDEBAR CONSOLE
+       ========================================================================== */
+    .course-sidebar-wrapper {
+      position: sticky;
+      top: 6.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .enroll-action-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+    }
+
+    .price-headline-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+    }
+
+    .price-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1;
+    }
+
+    .price-original-striked {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      text-decoration: line-through;
+    }
+
+    .meet-direct-box {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px dashed rgba(16, 185, 129, 0.4);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .meet-direct-meta {
+      font-size: 0.825rem;
+      font-weight: 700;
+      color: #10B981;
+    }
+
+    .sidebar-schedule-list {
+      background: var(--price-bg);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .schedule-spec {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+    }
+
+    .schedule-spec-label {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .schedule-spec-val {
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    .sidebar-perks-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .perk-line {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .perk-line svg {
+      color: #10B981;
+      flex-shrink: 0;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 7, 12, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s, visibility 0.25s;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-window {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-md);
+      width: 100%;
+      max-width: 500px;
+      padding: 2rem;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 3.5rem;
+      padding-bottom: 2rem;
+      margin-top: 5rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 3rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 991px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .footer-link:hover {
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo-wrap" aria-label="TechSapana Home">
+        <div class="brand-mark">TS</div>
+        <span class="brand-name">TechSapana</span>
+      </a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="courses.html" class="nav-link active">Courses</a></li>
+          <li><a href="index.html#services" class="nav-link">Services</a></li>
+          <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-right-actions">
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Theme">
+          <svg id="themeIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span id="themeText">Dark</span>
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="openEnrollModal('Free Demo Booking')">Join Free Demo</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="course-visual-hero">
+      <div class="container">
+        
+        <div class="breadcrumb-row">
+          <a href="courses.html">Courses</a>
+          <span>/</span>
+          <span>Applied AI</span>
+          <span>/</span>
+          <span style="color: var(--text-main);">AI for Life & Business</span>
+        </div>
+
+        <div class="hero-split-view">
+          <div>
+            <div class="eyebrow">4-WEEK INTENSIVE PROGRAM • BATCH 04</div>
+            <h1 class="course-headline">AI for Life & Business</h1>
+            <p class="course-subtext">
+              Master prompt engineering, configure custom AI agents, and automate operational workflows without writing code. Taught by active software engineers.
+            </p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <button class="btn btn-primary" onclick="openEnrollModal('Direct Enrollment')">Enroll In Batch 04</button>
+              <a href="https://meet.google.com/new" target="_blank" rel="noopener" class="btn btn-secondary">Join Live Google Meet Demo</a>
+            </div>
+          </div>
+
+          <div class="hero-banner-frame">
+            <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=900&q=80" alt="AI Course Visual Preview" />
+            <div class="banner-badge-float">
+              <div style="width: 10px; height: 10px; border-radius: 50%; background: #10B981; box-shadow: 0 0 8px #10B981;"></div>
+              <div>
+                <div style="font-size: 0.85rem; font-weight: 800; color: #FFF;">Starting This Wednesday</div>
+                <div style="font-size: 0.725rem; color: #93C5FD;">Only 4 seats remaining</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="subnav-sticky-bar">
+      <div class="container">
+        <ul class="subnav-links">
+          <li><a href="#overview" class="subnav-item active">Overview</a></li>
+          <li><a href="#curriculum" class="subnav-item">Syllabus</a></li>
+          <li><a href="#tools" class="subnav-item">Tools Stack</a></li>
+          <li><a href="#instructor" class="subnav-item">Instructor</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="page-wrapper">
+      <div class="container">
+        <div class="unified-layout">
+          
+          <div class="course-main-content">
+            
+            <div class="section-block" id="overview">
+              <h2 class="block-heading">What You Will Master</h2>
+              <div class="mastery-visual-grid">
+                
+                <div class="mastery-card-visual">
+                  <div class="mastery-icon-box">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <div>
+                    <div style="font-weight: 800; font-size: 0.95rem; margin-bottom: 0.2rem;">Custom GPT Agents</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted);">Build specialized bots loaded with company data.</div>
+                  </div>
+                </div>
+
+                <div class="mastery-card-visual">
+                  <div class="mastery-icon-box">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <div>
+                    <div style="font-weight: 800; font-size: 0.95rem; margin-bottom: 0.2rem;">No-Code Automation</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted);">Connect Gmail, Slack, and Sheets to AI webhooks.</div>
+                  </div>
+                </div>
+
+                <div class="mastery-card-visual">
+                  <div class="mastery-icon-box">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <div>
+                    <div style="font-weight: 800; font-size: 0.95rem; margin-bottom: 0.2rem;">Prompt Frameworks</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted);">Structured 5-part method for precise research & copy.</div>
+                  </div>
+                </div>
+
+                <div class="mastery-card-visual">
+                  <div class="mastery-icon-box">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <div>
+                    <div style="font-weight: 800; font-size: 0.95rem; margin-bottom: 0.2rem;">Operations Pipelines</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted);">Automate invoice parsing and client onboarding 24/7.</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="section-block" id="curriculum">
+              <h2 class="block-heading">4-Week Program Syllabus</h2>
+              <div class="curriculum-accordion">
+                
+                <div class="accordion-block active">
+                  <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-week-title">
+                      <span class="week-pill">WEEK 01</span>
+                      <span>Foundations of AI & Advanced Prompt Engineering</span>
+                    </div>
+                    <div class="accordion-icon">▼</div>
+                  </div>
+                  <div class="accordion-content">
+                    <div class="lesson-bullets">
+                      <div>• How modern LLMs process context, memory, and tokens.</div>
+                      <div>• The 5-part structured prompt framework (Role, Task, Context, Constraints, Format).</div>
+                      <div>• Eliminating hallucinations & zero-shot vs few-shot prompt methods.</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-block">
+                  <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-week-title">
+                      <span class="week-pill">WEEK 02</span>
+                      <span>Building Custom AI Assistants & Knowledge Bases</span>
+                    </div>
+                    <div class="accordion-icon">▼</div>
+                  </div>
+                  <div class="accordion-content">
+                    <div class="lesson-bullets">
+                      <div>• Uploading PDF manuals, company policies, and business data.</div>
+                      <div>• Custom instructions, tone configuration, and private GPT security.</div>
+                      <div>• Creating internal support and customer-facing FAQ bots.</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-block">
+                  <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-week-title">
+                      <span class="week-pill">WEEK 03</span>
+                      <span>Autonomous Workflows & No-Code Automations</span>
+                    </div>
+                    <div class="accordion-icon">▼</div>
+                  </div>
+                  <div class="accordion-content">
+                    <div class="lesson-bullets">
+                      <div>• Connecting Google Sheets, Slack, and Gmail with Make.com & Zapier.</div>
+                      <div>• Automated invoice extraction and data categorization.</div>
+                      <div>• Triggering autonomous AI responses on incoming client inquiries.</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-block">
+                  <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-week-title">
+                      <span class="week-pill">WEEK 04</span>
+                      <span>Capstone Deployment & Commercial Workflows</span>
+                    </div>
+                    <div class="accordion-icon">▼</div>
+                  </div>
+                  <div class="accordion-content">
+                    <div class="lesson-bullets">
+                      <div>• Building your real-world business automation capstone.</div>
+                      <div>• 1-on-1 code and workflow audit with TechSapana engineers.</div>
+                      <div>• Lifetime resource access, course certificate, and alumni community.</div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="section-block" id="tools">
+              <h2 class="block-heading">Tools & Frameworks Stack</h2>
+              <div class="tools-grid-visual">
+                
+                <div class="tool-tile-card">
+                  <div class="tool-tile-symbol">⚡</div>
+                  <div class="tool-tile-name">ChatGPT & GPT-4o</div>
+                  <div class="tool-tile-desc">Core LLM Workflows</div>
+                </div>
+
+                <div class="tool-tile-card">
+                  <div class="tool-tile-symbol">🤖</div>
+                  <div class="tool-tile-name">Custom GPTs</div>
+                  <div class="tool-tile-desc">Specialized Agents</div>
+                </div>
+
+                <div class="tool-tile-card">
+                  <div class="tool-tile-symbol">🔄</div>
+                  <div class="tool-tile-name">Make.com</div>
+                  <div class="tool-tile-desc">Automation Webhooks</div>
+                </div>
+
+                <div class="tool-tile-card">
+                  <div class="tool-tile-symbol">⚡</div>
+                  <div class="tool-tile-name">Zapier AI</div>
+                  <div class="tool-tile-desc">Workflow Bridges</div>
+                </div>
+
+                <div class="tool-tile-card">
+                  <div class="tool-tile-symbol">🎨</div>
+                  <div class="tool-tile-name">Midjourney</div>
+                  <div class="tool-tile-desc">Visual Asset Generation</div>
+                </div>
+
+                <div class="tool-tile-card">
+                  <div class="tool-tile-symbol">📄</div>
+                  <div class="tool-tile-name">Claude 3.5 Sonnet</div>
+                  <div class="tool-tile-desc">Advanced Research</div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="section-block" id="instructor">
+              <h2 class="block-heading">Lead Instructor & Mentor</h2>
+              <div class="mentor-card">
+                <div class="mentor-avatar">
+                  <img src="1B720A1B-0D7A-4049-861C-AB2B0F57851C.jpg" alt="Instructor Profile" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80';" />
+                </div>
+                <div>
+                  <div style="font-size: 1.15rem; font-weight:800;">Krish Jung Thapa & Engineering Team</div>
+                  <div style="font-size: 0.8rem; font-weight:700; color:var(--brand-blue); text-transform:uppercase; margin-bottom:0.4rem;">CEO & Solutions Director, TechSapana</div>
+                  <p style="font-size: 0.9rem; color:var(--text-muted); line-height: 1.55;">
+                    Active software architects with real-world experience building custom business systems and AI automations for clients across Nepal, Australia, and the US.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <aside class="course-sidebar-wrapper">
+            <div class="enroll-action-panel">
+              
+              <div class="price-headline-row">
+                <div>
+                  <div style="font-size: 0.725rem; text-transform:uppercase; font-weight:800; color:var(--text-dim); letter-spacing:0.06em;">Cohort Tuition</div>
+                  <div class="price-num">NPR 12,500</div>
+                </div>
+                <div class="price-original-striked">NPR 18,000</div>
+              </div>
+
+              <div class="meet-direct-box">
+                <div class="meet-direct-meta">
+                  <div>Free Demo Classroom</div>
+                  <div style="font-size: 0.725rem; color:var(--text-muted); font-weight:500;">Direct Google Meet Access</div>
+                </div>
+                <a href="https://meet.google.com/new" target="_blank" rel="noopener" class="btn btn-sm" style="background:#10B981; color:#FFF; font-size:0.75rem; padding: 0.4rem 0.75rem;">
+                  Join Live →
+                </a>
+              </div>
+
+              <div class="sidebar-schedule-list">
+                <div class="schedule-spec">
+                  <span class="schedule-spec-label">Start Date:</span>
+                  <span class="schedule-spec-val">Wed, Sep 03</span>
+                </div>
+                <div class="schedule-spec">
+                  <span class="schedule-spec-label">Schedule:</span>
+                  <span class="schedule-spec-val">Mon, Wed, Fri</span>
+                </div>
+                <div class="schedule-spec">
+                  <span class="schedule-spec-label">Class Timing:</span>
+                  <span class="schedule-spec-val">7:00 – 8:30 PM NPT</span>
+                </div>
+                <div class="schedule-spec">
+                  <span class="schedule-spec-label">Remaining Seats:</span>
+                  <span class="schedule-spec-val" style="color:#EF4444;">Only 4 Left</span>
+                </div>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+                <button class="btn btn-primary" style="width: 100%;" onclick="openEnrollModal('Direct Cohort Enrollment')">
+                  Enroll In Batch 04
+                </button>
+                <button class="btn btn-secondary" style="width: 100%;" onclick="openEnrollModal('Free Demo Session Booking')">
+                  Download Syllabus & Demo
+                </button>
+              </div>
+            </div>
+
+            <div class="sidebar-perks-box">
+              <div class="perk-line">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>100% Practical Capstone Project</span>
+              </div>
+              <div class="perk-line">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Certificate of Completion Included</span>
+              </div>
+              <div class="perk-line">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Direct Mentorship from Engineers</span>
+              </div>
+            </div>
+
+          </aside>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-logo-wrap" style="margin-bottom: 0.75rem;">
+            <div class="brand-mark">TS</div>
+            <span class="brand-name">TechSapana</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); max-width: 320px;">
+            Turning Dreams Into Digital Reality. Practical technology courses & enterprise software engineering.
+          </p>
+        </div>
+
+        <div>
+          <h4 style="font-size: 0.825rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem;">Education</h4>
+          <ul class="footer-links">
+            <li><a href="courses.html">All Programs</a></li>
+            <li><a href="courses.html">Starting This Week</a></li>
+            <li><a href="courses.html">Free Google Meet Demo</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="font-size: 0.825rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem;">Company</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About TechSapana</a></li>
+            <li><a href="index.html#services">Services</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="font-size: 0.825rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem;">Contact</h4>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">
+            <p><strong>Kathmandu, Nepal</strong></p>
+            <p>Serving Nepal, USA & Australia</p>
+            <p style="margin-top: 0.5rem;">contact@techsapana.com</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim); flex-wrap: wrap; gap: 1rem;">
+        <div>© 2026 TechSapana Pvt. Ltd. All rights reserved.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="enrollModal">
+    <div class="modal-window">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <div>
+          <span class="eyebrow" style="margin-bottom: 0.25rem;">AI for Life & Business</span>
+          <h3 style="font-size: 1.25rem; font-weight: 800;" id="modalDynamicTitle">Confirm Registration</h3>
+        </div>
+        <button onclick="closeEnrollModal()" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.2rem;">✕</button>
+      </div>
+
+      <form onsubmit="event.preventDefault(); submitEnrollForm();" style="display: flex; flex-direction: column; gap: 0.85rem;">
+        <input type="text" placeholder="Full Name *" required style="background: var(--bg-primary); border: 1px solid var(--border-subtle); padding: 0.75rem 1rem; border-radius: var(--radius-sm); color: var(--text-main); outline: none;" />
+        <input type="email" placeholder="Email Address *" required style="background: var(--bg-primary); border: 1px solid var(--border-subtle); padding: 0.75rem 1rem; border-radius: var(--radius-sm); color: var(--text-main); outline: none;" />
+        <input type="tel" placeholder="WhatsApp / Phone Number *" required style="background: var(--bg-primary); border: 1px solid var(--border-subtle); padding: 0.75rem 1rem; border-radius: var(--radius-sm); color: var(--text-main); outline: none;" />
+        
+        <select style="background: var(--bg-primary); border: 1px solid var(--border-subtle); padding: 0.75rem 1rem; border-radius: var(--radius-sm); color: var(--text-main); outline: none;">
+          <option value="Batch 04 (Starts Wednesday) — NPR 12,500">Batch 04 (Starts Wednesday) — NPR 12,500</option>
+          <option value="Free Live Demo Class Only">Free Live Demo Class (Google Meet)</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.25rem;">Submit & Receive Calendar Invite</button>
+        <div id="enrollFormStatus" style="font-size: 0.85rem; text-align: center; color: var(--brand-blue); display: none;">Thank you! Your seat and Google Meet details have been sent.</div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Theme Switcher
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeText = document.getElementById('themeText');
+    const themeIcon = document.getElementById('themeIcon');
+    const htmlEl = document.documentElement;
+
+    const sunSVG = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
+    const moonSVG = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
+
+    themeBtn.addEventListener('click', () => {
+      const current = htmlEl.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', next);
+      themeText.textContent = next === 'dark' ? 'Dark' : 'Light';
+      themeIcon.innerHTML = next === 'dark' ? moonSVG : sunSVG;
+    });
+
+    // Accordion
+    function toggleAccordion(headerEl) {
+      const block = headerEl.parentElement;
+      const isActive = block.classList.contains('active');
+      document.querySelectorAll('.accordion-block').forEach(b => b.classList.remove('active'));
+      if (!isActive) block.classList.add('active');
+    }
+
+    // Modal
+    const modal = document.getElementById('enrollModal');
+    function openEnrollModal(type) {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeEnrollModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    function submitEnrollForm() {
+      const status = document.getElementById('enrollFormStatus');
+      status.style.display = 'block';
+      setTimeout(() => {
+        closeEnrollModal();
+        status.style.display = 'none';
+      }, 2500);
+    }
+  </script>
+</body>
+</html>

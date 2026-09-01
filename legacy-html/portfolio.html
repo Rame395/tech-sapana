@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio & Case Studies — TechSapana</title>
+  <meta name="description" content="Explore real digital products, e-commerce platforms, custom management systems, and hospitality solutions engineered by TechSapana." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       THEME VARIABLES & COLOR PALETTE
+       ========================================================================== */
+    :root {
+      --brand-blue: #0052CC;
+      --brand-blue-hover: #0040A8;
+      --brand-blue-glow: rgba(0, 82, 204, 0.4);
+      --brand-blue-soft: rgba(0, 82, 204, 0.12);
+
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --container-max: 1240px;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html[data-theme="dark"] {
+      --bg-primary: #07090E;
+      --bg-secondary: #0D111A;
+      --bg-card: rgba(15, 20, 31, 0.85);
+      --bg-card-hover: rgba(22, 29, 44, 0.98);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-medium: rgba(255, 255, 255, 0.16);
+      --border-accent: rgba(0, 82, 204, 0.45);
+      --text-main: #FFFFFF;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --navbar-bg: rgba(7, 9, 14, 0.92);
+      --grid-line: rgba(255, 255, 255, 0.035);
+    }
+
+    html[data-theme="light"] {
+      --bg-primary: #F8FAFC;
+      --bg-secondary: #FFFFFF;
+      --bg-card: #FFFFFF;
+      --bg-card-hover: #F1F5F9;
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-medium: rgba(0, 0, 0, 0.14);
+      --border-accent: rgba(0, 82, 204, 0.35);
+      --text-main: #0A0E1A;
+      --text-muted: #475569;
+      --text-dim: #64748B;
+      --navbar-bg: rgba(248, 250, 252, 0.92);
+      --grid-line: rgba(0, 0, 0, 0.035);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body {
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: 1.5rem;
+    }
+
+    .section-spacing {
+      padding-block: 5.5rem;
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brand-blue);
+      margin-bottom: 0.75rem;
+      background: var(--brand-blue-soft);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-accent);
+    }
+
+    .title-lg {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .title-lg span {
+      color: var(--brand-blue);
+    }
+
+    .desc-lead {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 640px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 0.85rem 1.75rem;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+      cursor: pointer;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background-color: var(--brand-blue);
+      color: #FFF;
+      box-shadow: 0 4px 20px var(--brand-blue-glow);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--brand-blue-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border-medium);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--brand-blue);
+      transform: translateY(-2px);
+    }
+
+    .btn-sm {
+      padding: 0.55rem 1.15rem;
+      font-size: 0.825rem;
+    }
+
+    .theme-toggle-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      color: var(--text-main);
+      border-radius: 999px;
+      padding: 0.45rem 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    /* ==========================================================================
+       NAVBAR
+       ========================================================================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1.1rem 0;
+      background: var(--navbar-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      background: var(--brand-blue);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFF;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+
+    .brand-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--text-main);
+    }
+
+    .nav-right-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* ==========================================================================
+       PORTFOLIO HERO & CATEGORY FILTER
+       ========================================================================== */
+    .portfolio-hero {
+      padding-top: 9.5rem;
+      padding-bottom: 3rem;
+      position: relative;
+    }
+
+    .filter-sticky-strip {
+      padding-block: 1.25rem;
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 65px;
+      background: var(--navbar-bg);
+      backdrop-filter: blur(12px);
+      z-index: 900;
+      margin-top: 2rem;
+    }
+
+    .categories-tabs {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+    }
+
+    .category-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      border-radius: 999px;
+      padding: 0.55rem 1.25rem;
+      font-size: 0.825rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+
+    .category-btn:hover {
+      border-color: var(--brand-blue);
+      color: var(--text-main);
+    }
+
+    .category-btn.active {
+      background: var(--brand-blue);
+      border-color: var(--brand-blue);
+      color: #FFF;
+      box-shadow: 0 4px 15px var(--brand-blue-glow);
+    }
+
+    /* ==========================================================================
+       PORTFOLIO GRID (VIDEO PREVIEW CARDS)
+       ========================================================================== */
+    .portfolio-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 991px) {
+      .portfolio-grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .portfolio-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .portfolio-card:hover {
+      border-color: var(--brand-blue);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 45px rgba(0, 82, 204, 0.2);
+    }
+
+    /* Media Video / Image Simulator Wrapper */
+    .portfolio-media-wrapper {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      position: relative;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .portfolio-media-wrapper img, 
+    .portfolio-media-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .portfolio-card:hover .portfolio-media-wrapper img {
+      transform: scale(1.04);
+    }
+
+    /* Play Video Overlay Button */
+    .video-play-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.9;
+      transition: var(--transition);
+    }
+
+    .portfolio-card:hover .video-play-overlay {
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .play-icon-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--brand-blue);
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 25px var(--brand-blue-glow);
+      transition: transform 0.25s ease;
+    }
+
+    .portfolio-card:hover .play-icon-circle {
+      transform: scale(1.1);
+    }
+
+    .industry-tag-float {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(7, 9, 14, 0.8);
+      border: 1px solid var(--border-accent);
+      backdrop-filter: blur(8px);
+      font-size: 0.725rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #FFF;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      z-index: 2;
+    }
+
+    /* Card Text Body */
+    .portfolio-text-block {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    .portfolio-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .portfolio-summary {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-tags-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-pill {
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+      color: var(--text-dim);
+    }
+
+    /* ==========================================================================
+       VIDEO LIGHTBOX MODAL (FOR PLAYING WALKTHROUGHS)
+       ========================================================================== */
+    .video-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 7, 12, 0.9);
+      backdrop-filter: blur(12px);
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s, visibility 0.25s;
+    }
+
+    .video-modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .video-modal-container {
+      width: 100%;
+      max-width: 900px;
+      background: #000;
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.9);
+    }
+
+    .video-modal-header {
+      padding: 1rem 1.25rem;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .video-frame-container {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #04060A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ==========================================================================
+       FOOTER & MODAL
+       ========================================================================== */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--brand-blue) 250%);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-lg);
+      padding: 4rem 2rem;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+
+    .footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 3.5rem;
+      padding-bottom: 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 3rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 991px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .footer-link:hover {
+      color: var(--text-main);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 7, 12, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s, visibility 0.25s;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-window {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-md);
+      width: 100%;
+      max-width: 500px;
+      padding: 2rem;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo-wrap" aria-label="TechSapana Home">
+        <div class="brand-mark">TS</div>
+        <span class="brand-name">TechSapana</span>
+      </a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="courses.html" class="nav-link">Courses</a></li>
+          <li><a href="index.html#services" class="nav-link">Services</a></li>
+          <li><a href="portfolio.html" class="nav-link active">Projects</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-right-actions">
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Theme">
+          <svg id="themeIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span id="themeText">Dark</span>
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="openModal()">Get Free Consultation</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="portfolio-hero">
+      <div class="container">
+        <div class="eyebrow">PROVEN EXECUTION</div>
+        <h1 class="title-lg">
+          Built. Launched. <span>Used in Production.</span>
+        </h1>
+        <p class="desc-lead">
+          Explore our client case studies across e-commerce retail, hospitality management systems, medical platforms, and enterprise SaaS. Click any video walkthrough to preview live system UI.
+        </p>
+      </div>
+    </section>
+
+    <div class="filter-sticky-strip">
+      <div class="container">
+        <div class="categories-tabs">
+          <button class="category-btn active" data-filter="all">All Projects (4)</button>
+          <button class="category-btn" data-filter="ecommerce">🛒 E-Commerce & Retail</button>
+          <button class="category-btn" data-filter="hospitality">🏨 Hospitality & Tourism</button>
+          <button class="category-btn" data-filter="management">⚙️ Management Systems (ERP)</button>
+          <button class="category-btn" data-filter="health">🏥 Healthcare & Medical</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="section-spacing" style="padding-top: 3rem;">
+      <div class="container">
+        
+        <div class="portfolio-grid-2" id="portfolioGrid">
+          
+          <article class="portfolio-card" data-category="ecommerce">
+            <div class="portfolio-media-wrapper" onclick="openVideoModal('Apex Retail Omnichannel Store', 'https://www.youtube.com/embed/dQw4w9WgXcQ')">
+              <span class="industry-tag-float">🛒 E-Commerce</span>
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="Apex Retail Platform" />
+              <div class="video-play-overlay">
+                <div class="play-icon-circle">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="portfolio-text-block">
+              <div>
+                <h3 class="portfolio-title">Apex Retail Omnichannel Store</h3>
+                <p class="portfolio-summary">
+                  A lightning-fast headless e-commerce store with multi-currency checkout, warehouse inventory synchronization, and automated local payment gateway integrations.
+                </p>
+                <div class="tech-tags-flex">
+                  <span class="tech-pill">Next.js</span>
+                  <span class="tech-pill">Stripe & eSewa</span>
+                  <span class="tech-pill">PostgreSQL</span>
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="openVideoModal('Apex Retail Omnichannel Store', 'https://www.youtube.com/embed/dQw4w9WgXcQ')">
+                ▶ Watch Video Walkthrough
+              </button>
+            </div>
+          </article>
+
+          <article class="portfolio-card" data-category="hospitality">
+            <div class="portfolio-media-wrapper" onclick="openVideoModal('Himalayan Lodge Booking Portal', 'https://www.youtube.com/embed/dQw4w9WgXcQ')">
+              <span class="industry-tag-float">🏨 Hospitality & Tourism</span>
+              <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80" alt="Himalayan Lodge Portal" />
+              <div class="video-play-overlay">
+                <div class="play-icon-circle">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="portfolio-text-block">
+              <div>
+                <h3 class="portfolio-title">Himalayan Lodge & Trek Booking System</h3>
+                <p class="portfolio-summary">
+                  An automated reservation platform featuring real-time room availability syncing, multi-language support, and instant SMS/WhatsApp booking confirmations.
+                </p>
+                <div class="tech-tags-flex">
+                  <span class="tech-pill">React</span>
+                  <span class="tech-pill">Node.js API</span>
+                  <span class="tech-pill">Twilio SMS</span>
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="openVideoModal('Himalayan Lodge Booking Portal', 'https://www.youtube.com/embed/dQw4w9WgXcQ')">
+                ▶ Watch Video Walkthrough
+              </button>
+            </div>
+          </article>
+
+          <article class="portfolio-card" data-category="management">
+            <div class="portfolio-media-wrapper" onclick="openVideoModal('Global Logistics ERP & Fleet Dashboard', 'https://www.youtube.com/embed/dQw4w9WgXcQ')">
+              <span class="industry-tag-float">⚙️ Management System</span>
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80" alt="Global Logistics ERP" />
+              <div class="video-play-overlay">
+                <div class="play-icon-circle">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="portfolio-text-block">
+              <div>
+                <h3 class="portfolio-title">Global Logistics ERP & Fleet Dashboard</h3>
+                <p class="portfolio-summary">
+                  A custom enterprise resource planning tool built to monitor high-frequency shipment tracking, driver dispatch logs, and automated invoice reconciliation.
+                </p>
+                <div class="tech-tags-flex">
+                  <span class="tech-pill">Custom Software</span>
+                  <span class="tech-pill">React</span>
+                  <span class="tech-pill">Python FastAPI</span>
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="openVideoModal('Global Logistics ERP & Fleet Dashboard', 'https://www.youtube.com/embed/dQw4w9WgXcQ')">
+                ▶ Watch Video Walkthrough
+              </button>
+            </div>
+          </article>
+
+          <article class="portfolio-card" data-category="health">
+            <div class="portfolio-media-wrapper" onclick="openVideoModal('CarePulse Patient Management Portal', 'https://www.youtube.com/embed/dQw4w9WgXcQ')">
+              <span class="industry-tag-float">🏥 Healthcare & Medical</span>
+              <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80" alt="CarePulse Portal" />
+              <div class="video-play-overlay">
+                <div class="play-icon-circle">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="portfolio-text-block">
+              <div>
+                <h3 class="portfolio-title">CarePulse Patient Management Portal</h3>
+                <p class="portfolio-summary">
+                  A HIPAA-compliant medical practice management web app enabling secure appointment scheduling, electronic medical records, and automated prescription reminders.
+                </p>
+                <div class="tech-tags-flex">
+                  <span class="tech-pill">TypeScript</span>
+                  <span class="tech-pill">Encrypted PostgreSQL</span>
+                  <span class="tech-pill">Tailwind</span>
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="openVideoModal('CarePulse Patient Management Portal', 'https://www.youtube.com/embed/dQw4w9WgXcQ')">
+                ▶ Watch Video Walkthrough
+              </button>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section-spacing">
+      <div class="container">
+        <div class="cta-banner">
+          <h2 class="title-lg" style="font-size: 2.4rem;">Have a Project in Mind? Let's Build It Right.</h2>
+          <p style="color: var(--text-muted); max-width: 520px; margin-inline: auto; margin-bottom: 2rem; font-size: 1.05rem;">
+            Tell us about your product vision. We'll help you scope, design, and engineer a reliable digital solution.
+          </p>
+          <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <button class="btn btn-primary" onclick="openModal()">Start Your Project</button>
+            <a href="https://wa.me/" target="_blank" rel="noopener" class="btn btn-secondary">Talk via WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="video-modal-overlay" id="videoModal">
+    <div class="video-modal-container">
+      <div class="video-modal-header">
+        <div style="font-weight: 800; font-size: 0.95rem; color: #FFF;" id="videoModalTitle">Project Walkthrough</div>
+        <button onclick="closeVideoModal()" style="background:none; border:none; color:#94A3B8; cursor:pointer; font-size:1.2rem;">✕</button>
+      </div>
+      <div class="video-frame-container">
+        <iframe id="videoIframe" width="100%" height="100%" src="" title="Project Walkthrough" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-logo-wrap" style="margin-bottom: 0.75rem;">
+            <div class="brand-mark">TS</div>
+            <span class="brand-name">TechSapana</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); max-width: 320px;">
+            Turning Dreams Into Digital Reality. Engineering modern websites and software for companies worldwide.
+          </p>
+        </div>
+
+        <div>
+          <h4 style="font-size: 0.825rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem;">Portfolio</h4>
+          <ul class="footer-links">
+            <li><a href="portfolio.html" class="footer-link">All Projects</a></li>
+            <li><a href="portfolio.html" class="footer-link">E-Commerce</a></li>
+            <li><a href="portfolio.html" class="footer-link">Management Systems</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="font-size: 0.825rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem;">Company</h4>
+          <ul class="footer-links">
+            <li><a href="about.html" class="footer-link">About TechSapana</a></li>
+            <li><a href="courses.html" class="footer-link">Courses</a></li>
+            <li><a href="index.html#services" class="footer-link">Services</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="font-size: 0.825rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem;">Offices</h4>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">
+            <p><strong>Kathmandu, Nepal</strong></p>
+            <p>Serving Nepal, USA & Australia</p>
+            <p style="margin-top: 0.5rem;">contact@techsapana.com</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim); flex-wrap: wrap; gap: 1rem;">
+        <div>© 2026 TechSapana Pvt. Ltd. All rights reserved.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="contactModalOverlay">
+    <div class="modal-window">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h3 style="font-size: 1.25rem; font-weight: 800;">Start Your Project</h3>
+        <button onclick="closeModal()" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.2rem;">✕</button>
+      </div>
+
+      <form onsubmit="event.preventDefault(); submitForm();" style="display: flex; flex-direction: column; gap: 0.85rem;">
+        <input type="text" placeholder="Your Full Name *" required style="background: var(--bg-primary); border: 1px solid var(--border-subtle); padding: 0.75rem 1rem; border-radius: var(--radius-sm); color: var(--text-main); outline: none;" />
+        <input type="email" placeholder="Business Email *" required style="background: var(--bg-primary); border: 1px solid var(--border-subtle); padding: 0.75rem 1rem; border-radius: var(--radius-sm); color: var(--text-main); outline: none;" />
+        <textarea rows="3" placeholder="Tell us what you're building..." required style="background: var(--bg-primary); border: 1px solid var(--border-subtle); padding: 0.75rem 1rem; border-radius: var(--radius-sm); color: var(--text-main); outline: none; resize: vertical;"></textarea>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Project Inquiry</button>
+        <div id="formStatus" style="font-size: 0.85rem; text-align: center; color: var(--brand-blue); display: none;">Thank you! Our engineering lead will reach out within 24 hours.</div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // 1. Theme Switcher Logic
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeText = document.getElementById('themeText');
+    const themeIcon = document.getElementById('themeIcon');
+    const htmlEl = document.documentElement;
+
+    const sunSVG = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
+    const moonSVG = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
+
+    themeBtn.addEventListener('click', () => {
+      const current = htmlEl.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', next);
+      themeText.textContent = next === 'dark' ? 'Dark' : 'Light';
+      themeIcon.innerHTML = next === 'dark' ? moonSVG : sunSVG;
+    });
+
+    // 2. Category Filter Tabs Logic
+    const filterBtns = document.querySelectorAll('.category-btn');
+    const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.getAttribute('data-filter');
+
+        portfolioCards.forEach(card => {
+          const cat = card.getAttribute('data-category');
+          if (filter === 'all' || cat === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // 3. Video Modal Walkthroughs
+    const videoModal = document.getElementById('videoModal');
+    const videoIframe = document.getElementById('videoIframe');
+    const videoModalTitle = document.getElementById('videoModalTitle');
+
+    function openVideoModal(title, videoUrl) {
+      videoModalTitle.textContent = title;
+      videoIframe.src = videoUrl + "?autoplay=1";
+      videoModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal() {
+      videoModal.classList.remove('active');
+      videoIframe.src = "";
+      document.body.style.overflow = '';
+    }
+
+    // 4. Lead Modal Controls
+    const modal = document.getElementById('contactModalOverlay');
+    function openModal() {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    function submitForm() {
+      const status = document.getElementById('formStatus');
+      status.style.display = 'block';
+      setTimeout(() => {
+        closeModal();
+        status.style.display = 'none';
+      }, 2500);
+    }
+  </script>
+</body>
+</html>

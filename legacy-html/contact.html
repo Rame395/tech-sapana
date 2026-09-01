@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact TechSapana — Nepal, USA & Australia Offices</title>
+  <meta name="description" content="Get in touch with TechSapana. Book a free consultation, visit our Kathmandu or US office, or connect instantly via regional WhatsApp lines." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       THEME VARIABLES & COLOR PALETTE
+       ========================================================================== */
+    :root {
+      --brand-blue: #0052CC;
+      --brand-blue-hover: #0040A8;
+      --brand-blue-glow: rgba(0, 82, 204, 0.4);
+      --brand-blue-soft: rgba(0, 82, 204, 0.12);
+
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --container-max: 1240px;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html[data-theme="dark"] {
+      --bg-primary: #07090E;
+      --bg-secondary: #0D111A;
+      --bg-card: rgba(15, 20, 31, 0.85);
+      --bg-card-hover: rgba(22, 29, 44, 0.98);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-medium: rgba(255, 255, 255, 0.16);
+      --border-accent: rgba(0, 82, 204, 0.45);
+      --text-main: #FFFFFF;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --navbar-bg: rgba(7, 9, 14, 0.92);
+      --grid-line: rgba(255, 255, 255, 0.035);
+    }
+
+    html[data-theme="light"] {
+      --bg-primary: #F8FAFC;
+      --bg-secondary: #FFFFFF;
+      --bg-card: #FFFFFF;
+      --bg-card-hover: #F1F5F9;
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-medium: rgba(0, 0, 0, 0.14);
+      --border-accent: rgba(0, 82, 204, 0.35);
+      --text-main: #0A0E1A;
+      --text-muted: #475569;
+      --text-dim: #64748B;
+      --navbar-bg: rgba(248, 250, 252, 0.92);
+      --grid-line: rgba(0, 0, 0, 0.035);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body {
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: 1.5rem;
+    }
+
+    .section-spacing {
+      padding-block: 5.5rem;
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brand-blue);
+      margin-bottom: 0.75rem;
+      background: var(--brand-blue-soft);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-accent);
+    }
+
+    .title-lg {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .title-lg span {
+      color: var(--brand-blue);
+    }
+
+    .desc-lead {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 0.85rem 1.75rem;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+      cursor: pointer;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background-color: var(--brand-blue);
+      color: #FFF;
+      box-shadow: 0 4px 20px var(--brand-blue-glow);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--brand-blue-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border-medium);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--brand-blue);
+      transform: translateY(-2px);
+    }
+
+    .btn-sm {
+      padding: 0.55rem 1.15rem;
+      font-size: 0.825rem;
+    }
+
+    .theme-toggle-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      color: var(--text-main);
+      border-radius: 999px;
+      padding: 0.45rem 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    /* ==========================================================================
+       NAVBAR
+       ========================================================================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1.1rem 0;
+      background: var(--navbar-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      background: var(--brand-blue);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFF;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+
+    .brand-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--text-main);
+    }
+
+    .nav-right-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* ==========================================================================
+       FLOATING WHATSAPP BUTTON (MIDDLE RIGHT) WITH REGIONAL TOGGLES
+       ========================================================================== */
+    .whatsapp-float-container {
+      position: fixed;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1500;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.5rem;
+    }
+
+    .whatsapp-trigger-btn {
+      background: #25D366;
+      color: #FFF;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45);
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+    }
+
+    .whatsapp-trigger-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+    }
+
+    .whatsapp-menu-popup {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 200px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: var(--transition);
+    }
+
+    .whatsapp-menu-popup.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .wa-region-link {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.55rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.825rem;
+      font-weight: 700;
+      color: var(--text-main);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .wa-region-link:hover {
+      background: rgba(37, 211, 102, 0.1);
+      border-color: #25D366;
+      color: #25D366;
+    }
+
+    /* ==========================================================================
+       CONTACT PAGE ARCHITECTURE (REGION TOGGLE + FORM + MAP)
+       ========================================================================== */
+    .contact-hero {
+      padding-top: 9.5rem;
+      padding-bottom: 3rem;
+      position: relative;
+    }
+
+    /* Region Selector Tabs */
+    .region-toggle-strip {
+      display: flex;
+      gap: 0.65rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .region-tab-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      border-radius: 999px;
+      padding: 0.6rem 1.4rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .region-tab-btn:hover {
+      border-color: var(--brand-blue);
+      color: var(--text-main);
+    }
+
+    .region-tab-btn.active {
+      background: var(--brand-blue);
+      border-color: var(--brand-blue);
+      color: #FFF;
+      box-shadow: 0 4px 15px var(--brand-blue-glow);
+    }
+
+    /* Contact Grid */
+    .contact-main-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3.5rem;
+      align-items: start;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 991px) {
+      .contact-main-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    .contact-form-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-lg);
+      padding: 2.75rem;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    }
+
+    @media (max-width: 640px) {
+      .contact-form-card {
+        padding: 1.75rem;
+      }
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .form-row-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .input-group label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .form-input-ctrl {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      color: var(--text-main);
+      font-size: 0.925rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-input-ctrl:focus {
+      border-color: var(--brand-blue);
+      box-shadow: 0 0 0 3px var(--brand-blue-soft);
+    }
+
+    /* Regional Office & Map Section */
+    .office-info-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .office-address-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .office-region-tag {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--brand-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .office-location-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .office-spec-line {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .office-spec-line svg {
+      color: var(--brand-blue);
+      flex-shrink: 0;
+    }
+
+    /* Map Box (Dynamic toggle for Nepal & USA, hidden for AUS with notice) */
+    .map-frame-box {
+      width: 100%;
+      height: 260px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-medium);
+      background: #000;
+      position: relative;
+    }
+
+    .map-frame-box iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: contrast(110%) brightness(85%);
+    }
+
+    .aus-remote-notice {
+      height: 260px;
+      background: var(--bg-card);
+      border: 1px dashed var(--border-medium);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    .footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 3.5rem;
+      padding-bottom: 2rem;
+      margin-top: 5rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 3rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 991px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .footer-link:hover {
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="whatsapp-float-container">
+    <div class="whatsapp-menu-popup" id="waMenuPopup">
+      <div style="font-size: 0.75rem; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; padding-bottom: 0.25rem;">Select Region WhatsApp</div>
+      
+      <a href="https://wa.me/9779800000000?text=Hello%20TechSapana%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" class="wa-region-link">
+        <span>🇳🇵 Nepal Support</span>
+      </a>
+      
+      <a href="https://wa.me/10000000000?text=Hello%20TechSapana%2C%20I%20am%20calling%20from%20the%20US." target="_blank" rel="noopener" class="wa-region-link">
+        <span>🇺🇸 United States</span>
+      </a>
+      
+      <a href="https://wa.me/61000000000?text=Hello%20TechSapana%2C%20I%20am%20calling%20from%20Australia." target="_blank" rel="noopener" class="wa-region-link">
+        <span>🇦🇺 Australia Team</span>
+      </a>
+    </div>
+
+    <button class="whatsapp-trigger-btn" id="waTriggerBtn" aria-label="Open WhatsApp Chat">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.198-.198.347-.764.966-.937 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+    </button>
+  </div>
+
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo-wrap" aria-label="TechSapana Home">
+        <div class="brand-mark">TS</div>
+        <span class="brand-name">TechSapana</span>
+      </a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="courses.html" class="nav-link">Courses</a></li>
+          <li><a href="index.html#services" class="nav-link">Services</a></li>
+          <li><a href="contact.html" class="nav-link active">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-right-actions">
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Theme">
+          <svg id="themeIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span id="themeText">Dark</span>
+        </button>
+        <a href="#contactForm" class="btn btn-primary btn-sm">Book Free Consultation</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="contact-hero" id="contactForm">
+      <div class="container">
+        
+        <div style="max-width: 700px;">
+          <div class="eyebrow">GLOBAL INQUIRIES</div>
+          <h1 class="title-lg">
+            Let’s Build Something <span>Meaningful Together.</span>
+          </h1>
+          <p class="desc-lead">
+            Select your preferred region below to connect with our local engineering and consultation teams in Nepal, the United States, or Australia.
+          </p>
+        </div>
+
+        <div class="region-toggle-strip">
+          <button class="region-tab-btn active" data-region="nepal" onclick="switchRegion('nepal')">
+            <span>🇳🇵</span> Nepal Hub
+          </button>
+          <button class="region-tab-btn" data-region="usa" onclick="switchRegion('usa')">
+            <span>🇺🇸</span> United States
+          </button>
+          <button class="region-tab-btn" data-region="aus" onclick="switchRegion('aus')">
+            <span>🇦🇺</span> Australia
+          </button>
+        </div>
+
+        <div class="contact-main-grid">
+          
+          <div class="contact-form-card">
+            <div style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.35rem;" id="formHeadingTitle">Book Free Consultation (Nepal Hub)</div>
+            <p style="font-size: 0.885rem; color: var(--text-muted); margin-bottom: 1.75rem;" id="formSubNotice">Direct scheduling with our Kathmandu engineering leadership.</p>
+
+            <form onsubmit="event.preventDefault(); submitConsultationForm();">
+              <div class="form-row-2">
+                <div class="input-group">
+                  <label>Full Name *</label>
+                  <input type="text" class="form-input-ctrl" placeholder="John Doe" required />
+                </div>
+                <div class="input-group">
+                  <label>Business Email *</label>
+                  <input type="email" class="form-input-ctrl" placeholder="john@company.com" required />
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="input-group">
+                  <label>Phone / WhatsApp *</label>
+                  <input type="tel" class="form-input-ctrl" placeholder="+977 9800000000" required />
+                </div>
+                <div class="input-group">
+                  <label>Service Required *</label>
+                  <select class="form-input-ctrl">
+                    <option>Website Development</option>
+                    <option>Custom Software & ERP</option>
+                    <option>AI Solutions & Automation</option>
+                    <option>Training & Courses</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label>Project Scope & Requirements *</label>
+                <textarea rows="4" class="form-input-ctrl" placeholder="Tell us what you're building..." required style="resize: vertical;"></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%;">
+                Confirm Free Consultation
+              </button>
+              <div id="consultationStatus" style="font-size: 0.85rem; text-align: center; color: var(--brand-blue); display: none; margin-top: 0.75rem;">
+                Thank you! Your consultation has been scheduled. Our regional team will contact you shortly.
+              </div>
+            </form>
+          </div>
+
+          <div class="office-info-stack">
+            
+            <div class="office-address-card">
+              <span class="office-region-tag" id="officeRegionTag">🇳🇵 Primary Development Lab</span>
+              <h3 class="office-location-title" id="officeTitle">Kathmandu, Nepal</h3>
+              
+              <div class="office-spec-line">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span id="officeAddress">Baluwatar, Kathmandu 44600, Nepal</span>
+              </div>
+              
+              <div class="office-spec-line">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span id="officePhone">+977 1-4000000 / WhatsApp Support</span>
+              </div>
+
+              <div class="office-spec-line">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span id="officeHours">Support Hours: Sun – Fri (9:00 AM – 6:00 PM NPT)</span>
+              </div>
+            </div>
+
+            <div id="mapContainer">
+              <div class="map-frame-box">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.368369049448!2d85.3240!3d27.7172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjfCsDQzJzAyLjIiTiA4NcKwMTknMjYuNCJF!5e0!3m2!1sen!2snp!4v1650000000000!5m2!1sen!2snp" allowfullscreen="" loading="lazy"></iframe>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-logo-wrap" style="margin-bottom: 0.75rem;">
+            <div class="brand-mark">TS</div>
+            <span class="brand-name">TechSapana</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); max-width: 320px;">
+            Turning Dreams Into Digital Reality. Engineering modern websites and software for companies worldwide.
+          </p>
+        </div>
+
+        <div>
+          <h4 style="font-size: 0.825rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem;">Regions</h4>
+          <ul class="footer-links">
+            <li><a href="#" onclick="switchRegion('nepal'); return false;" class="footer-link">Nepal Hub (Kathmandu)</a></li>
+            <li><a href="#" onclick="switchRegion('usa'); return false;" class="footer-link">United States Office</a></li>
+            <li><a href="#" onclick="switchRegion('aus'); return false;" class="footer-link">Australia Liaison</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="font-size: 0.825rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem;">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="about.html" class="footer-link">About TechSapana</a></li>
+            <li><a href="courses.html" class="footer-link">Courses</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="font-size: 0.825rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem;">Global Contact</h4>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">
+            <p><strong>Kathmandu, Nepal</strong></p>
+            <p>Serving Nepal, USA & Australia</p>
+            <p style="margin-top: 0.5rem;">contact@techsapana.com</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim); flex-wrap: wrap; gap: 1rem;">
+        <div>© 2026 TechSapana Pvt. Ltd. All rights reserved.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 1. Theme Switcher Logic
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeText = document.getElementById('themeText');
+    const themeIcon = document.getElementById('themeIcon');
+    const htmlEl = document.documentElement;
+
+    const sunSVG = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
+    const moonSVG = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
+
+    themeBtn.addEventListener('click', () => {
+      const current = htmlEl.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', next);
+      themeText.textContent = next === 'dark' ? 'Dark' : 'Light';
+      themeIcon.innerHTML = next === 'dark' ? moonSVG : sunSVG;
+    });
+
+    // 2. Floating WhatsApp Menu Toggle
+    const waTrigger = document.getElementById('waTriggerBtn');
+    const waPopup = document.getElementById('waMenuPopup');
+
+    waTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      waPopup.classList.toggle('open');
+    });
+
+    window.addEventListener('click', () => {
+      if (waPopup.classList.contains('open')) {
+        waPopup.classList.remove('open');
+      }
+    });
+
+    // 3. Regional Switcher Logic (Nepal / USA / Australia)
+    const regionTabs = document.querySelectorAll('.region-tab-btn');
+    const formHeadingTitle = document.getElementById('formHeadingTitle');
+    const formSubNotice = document.getElementById('formSubNotice');
+    
+    const officeRegionTag = document.getElementById('officeRegionTag');
+    const officeTitle = document.getElementById('officeTitle');
+    const officeAddress = document.getElementById('officeAddress');
+    const officePhone = document.getElementById('officePhone');
+    const officeHours = document.getElementById('officeHours');
+    const mapContainer = document.getElementById('mapContainer');
+
+    const regionData = {
+      nepal: {
+        formTitle: "Book Free Consultation (Nepal Hub)",
+        formSub: "Direct scheduling with our Kathmandu engineering leadership.",
+        tag: "🇳🇵 Primary Development Lab",
+        title: "Kathmandu, Nepal",
+        address: "Baluwatar, Kathmandu 44600, Nepal",
+        phone: "+977 1-4000000 / WhatsApp Support",
+        hours: "Support Hours: Sun – Fri (9:00 AM – 6:00 PM NPT)",
+        hasMap: true,
+        mapEmbed: `<div class="map-frame-box"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.368369049448!2d85.3240!3d27.7172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sMjfCsDQzJzAyLjIiTiA4NcKwMTknMjYuNCJF!5e0!3m2!1sen!2snp!4v1650000000000!5m2!1sen!2snp" allowfullscreen="" loading="lazy"></iframe></div>`
+      },
+      usa: {
+        formTitle: "Book Free Consultation (United States)",
+        formSub: "Schedule a discovery call aligned with US EST/PST business hours.",
+        tag: "🇺🇸 United States Office",
+        title: "Delaware, United States",
+        address: "1209 Orange St, Wilmington, DE 19801, USA",
+        phone: "+1 (555) 000-0000 / US Direct Line",
+        hours: "Support Hours: Mon – Fri (9:00 AM – 5:00 PM EST)",
+        hasMap: true,
+        mapEmbed: `<div class="map-frame-box"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3058.4!2d-75.548!3d39.744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMznCsDQ0JzM4LjQiTiA3NcKwMzInNTIuOCJX!5e0!3m2!1sen!2sus!4v1650000000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe></div>`
+      },
+      aus: {
+        formTitle: "Book Free Consultation (Australia)",
+        formSub: "Connect with our AEST-aligned project managers and consultants.",
+        tag: "🇦🇺 Australia Liaison Hub",
+        title: "Sydney / Melbourne, Australia",
+        address: "Remote Operations & Client Success Hub (AEST)",
+        phone: "+61 2 0000 0000 / Australian Support",
+        hours: "Support Hours: Mon – Fri (9:00 AM – 5:00 PM AEST)",
+        hasMap: false,
+        mapEmbed: `<div class="aus-remote-notice">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--brand-blue)" stroke-width="2" style="margin-bottom: 0.75rem;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <div style="font-weight: 800; color: var(--text-main); margin-bottom: 0.25rem;">AEST Dedicated Operations</div>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">We serve Australian clients via dedicated remote project leads and AEST-synced video consultations.</p>
+        </div>`
+      }
+    };
+
+    function switchRegion(regionKey) {
+      regionTabs.forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-region') === regionKey);
+      });
+
+      const data = regionData[regionKey];
+      formHeadingTitle.textContent = data.formTitle;
+      formSubNotice.textContent = data.formSub;
+      
+      officeRegionTag.textContent = data.tag;
+      officeTitle.textContent = data.title;
+      officeAddress.textContent = data.address;
+      officePhone.textContent = data.phone;
+      officeHours.textContent = data.hours;
+      mapContainer.innerHTML = data.mapEmbed;
+    }
+
+    // 4. Form Submit
+    function submitConsultationForm() {
+      const status = document.getElementById('consultationStatus');
+      status.style.display = 'block';
+      setTimeout(() => {
+        status.style.display = 'none';
+      }, 4000);
+    }
+  </script>
+</body>
+</html>

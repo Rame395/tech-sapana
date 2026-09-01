@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Courses & Practical Workshops — TechSapana Education</title>
+  <meta name="description" content="Learn practical technology, modern software engineering, and AI tools with transparent pricing, live start dates, class timings, and Google Meet demo sessions." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       THEME VARIABLES & COLOR PALETTE
+       ========================================================================== */
+    :root {
+      --brand-blue: #0052CC;
+      --brand-blue-hover: #0040A8;
+      --brand-blue-glow: rgba(0, 82, 204, 0.4);
+      --brand-blue-soft: rgba(0, 82, 204, 0.12);
+
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --container-max: 1240px;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html[data-theme="dark"] {
+      --bg-primary: #07090E;
+      --bg-secondary: #0D111A;
+      --bg-card: rgba(15, 20, 31, 0.85);
+      --bg-card-hover: rgba(22, 29, 44, 0.98);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-medium: rgba(255, 255, 255, 0.16);
+      --border-accent: rgba(0, 82, 204, 0.45);
+      --text-main: #FFFFFF;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --navbar-bg: rgba(7, 9, 14, 0.9);
+      --badge-hot: rgba(245, 158, 11, 0.15);
+      --badge-hot-text: #F59E0B;
+      --badge-urgent: rgba(239, 68, 68, 0.15);
+      --badge-urgent-text: #EF4444;
+      --price-bg: rgba(255, 255, 255, 0.04);
+      --schedule-bg: rgba(0, 82, 204, 0.08);
+    }
+
+    html[data-theme="light"] {
+      --bg-primary: #F8FAFC;
+      --bg-secondary: #FFFFFF;
+      --bg-card: #FFFFFF;
+      --bg-card-hover: #F1F5F9;
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-medium: rgba(0, 0, 0, 0.14);
+      --border-accent: rgba(0, 82, 204, 0.35);
+      --text-main: #0A0E1A;
+      --text-muted: #475569;
+      --text-dim: #64748B;
+      --navbar-bg: rgba(248, 250, 252, 0.9);
+      --badge-hot: #FEF3C7;
+      --badge-hot-text: #B45309;
+      --badge-urgent: #FEE2E2;
+      --badge-urgent-text: #DC2626;
+      --price-bg: #F1F5F9;
+      --schedule-bg: rgba(0, 82, 204, 0.05);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body {
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: 1.5rem;
+    }
+
+    .section-spacing {
+      padding-block: 4.5rem;
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brand-blue);
+      margin-bottom: 0.75rem;
+      background: var(--brand-blue-soft);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-accent);
+    }
+
+    .title-lg {
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+
+    .title-lg span {
+      color: var(--brand-blue);
+    }
+
+    .desc-lead {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      line-height: 1.6;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.885rem;
+      font-weight: 700;
+      padding: 0.75rem 1.45rem;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+      cursor: pointer;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background-color: var(--brand-blue);
+      color: #FFF;
+      box-shadow: 0 4px 18px var(--brand-blue-glow);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--brand-blue-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border-medium);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--brand-blue);
+      transform: translateY(-2px);
+    }
+
+    .btn-sm {
+      padding: 0.55rem 1.1rem;
+      font-size: 0.825rem;
+    }
+
+    .theme-toggle-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      color: var(--text-main);
+      border-radius: 999px;
+      padding: 0.45rem 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    /* ==========================================================================
+       NAVBAR
+       ========================================================================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1.1rem 0;
+      background: var(--navbar-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      background: var(--brand-blue);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFF;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+
+    .brand-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--text-main);
+    }
+
+    .nav-right-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* ==========================================================================
+       HERO & STARTING THIS WEEK SPOTLIGHT BANNER
+       ========================================================================== */
+    .courses-hero {
+      padding-top: 8rem;
+      padding-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .hero-flex-top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Starting This Week Spotlight Strip */
+    .starting-week-banner {
+      margin-top: 2.5rem;
+      width: 100%;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(0, 82, 204, 0.16) 100%);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .starting-left-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.15rem;
+      text-align: left;
+    }
+
+    .live-pulse-ring {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 12px #10B981;
+      animation: pulse 1.8s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.9); }
+    }
+
+    .starting-headline {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .urgent-badge {
+      background: var(--badge-urgent);
+      color: var(--badge-urgent-text);
+      font-size: 0.725rem;
+      font-weight: 800;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .starting-subtext {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    .meet-link-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #10B981;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    /* ==========================================================================
+       CATEGORY FILTER TABS (STICKY)
+       ========================================================================== */
+    .filter-sticky-strip {
+      padding-block: 1.25rem;
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 65px;
+      background: var(--navbar-bg);
+      backdrop-filter: blur(12px);
+      z-index: 900;
+    }
+
+    .categories-tabs {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+    }
+
+    .category-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      border-radius: 999px;
+      padding: 0.55rem 1.25rem;
+      font-size: 0.825rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+
+    .category-btn:hover {
+      border-color: var(--brand-blue);
+      color: var(--text-main);
+    }
+
+    .category-btn.active {
+      background: var(--brand-blue);
+      border-color: var(--brand-blue);
+      color: #FFF;
+      box-shadow: 0 4px 15px var(--brand-blue-glow);
+    }
+
+    /* ==========================================================================
+       COURSE CARDS (GRAPHICS + TIMINGS + START DATES + PRICING)
+       ========================================================================== */
+    .courses-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+      margin-top: 1.5rem;
+    }
+
+    @media (max-width: 1024px) {
+      .courses-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .courses-grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .course-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: var(--transition);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .course-card:hover {
+      border-color: var(--brand-blue);
+      transform: translateY(-4px);
+      box-shadow: 0 14px 35px rgba(0, 82, 204, 0.2);
+    }
+
+    /* Course Graphic Header */
+    .course-visual-header {
+      width: 100%;
+      height: 160px;
+      position: relative;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .course-visual-header img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .course-card:hover .course-visual-header img {
+      transform: scale(1.04);
+    }
+
+    .course-graphic-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(7, 9, 14, 0.1) 0%, rgba(7, 9, 14, 0.85) 100%);
+    }
+
+    .course-badge-cluster {
+      position: absolute;
+      top: 0.85rem;
+      left: 0.85rem;
+      right: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 2;
+    }
+
+    .tag-top-pick {
+      background: var(--badge-hot);
+      color: var(--badge-hot-text);
+      font-size: 0.725rem;
+      font-weight: 800;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+    }
+
+    .tag-this-week {
+      background: #EF4444;
+      color: #FFFFFF;
+      font-size: 0.725rem;
+      font-weight: 800;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+    }
+
+    .tag-upcoming {
+      background: var(--brand-blue);
+      color: #FFFFFF;
+      font-size: 0.725rem;
+      font-weight: 800;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+    }
+
+    .format-pill {
+      font-size: 0.725rem;
+      color: #FFFFFF;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+    }
+
+    /* Card Details */
+    .course-content-block {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .course-card-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.4rem;
+      line-height: 1.3;
+    }
+
+    .course-card-desc {
+      font-size: 0.885rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 1.15rem;
+    }
+
+    /* Start Date & Live Class Timings Box */
+    .schedule-info-box {
+      background: var(--schedule-bg);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 0.95rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 1.15rem;
+    }
+
+    .schedule-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    .schedule-row svg {
+      color: var(--brand-blue);
+      flex-shrink: 0;
+    }
+
+    .schedule-row span.time-sub {
+      color: var(--text-dim);
+      font-weight: 500;
+      font-size: 0.75rem;
+    }
+
+    .course-curriculum-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.15rem;
+      padding-top: 0.65rem;
+      border-top: 1px dashed var(--border-subtle);
+    }
+
+    .curriculum-point {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.825rem;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .curriculum-point svg {
+      color: var(--brand-blue);
+      flex-shrink: 0;
+    }
+
+    /* Pricing */
+    .course-pricing-strip {
+      background: var(--price-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+    }
+
+    .price-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+    }
+
+    .price-value-box {
+      text-align: right;
+    }
+
+    .price-current {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1;
+    }
+
+    .price-current span {
+      font-size: 0.775rem;
+      color: var(--brand-blue);
+      font-weight: 700;
+    }
+
+    .price-original {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-decoration: line-through;
+    }
+
+    /* Card Actions */
+    .course-footer-actions {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 0.65rem;
+      margin-top: auto;
+    }
+
+    .btn-meet-direct {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #10B981;
+      font-size: 0.785rem;
+      font-weight: 700;
+      padding: 0.55rem 0.75rem;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      transition: var(--transition);
+    }
+
+    .btn-meet-direct:hover {
+      background: #10B981;
+      color: #FFF;
+    }
+
+    /* ==========================================================================
+       MODAL: DEMO & CALENDAR TIMING
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 7, 12, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s, visibility 0.25s;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-window {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-md);
+      width: 100%;
+      max-width: 520px;
+      padding: 2rem;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    }
+
+    .modal-meet-callout {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px dashed rgba(16, 185, 129, 0.4);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .modal-meet-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .modal-meet-text {
+      font-size: 0.85rem;
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    .modal-meet-time {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    .footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 3.5rem;
+      padding-bottom: 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 3rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 991px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .footer-link:hover {
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo-wrap" aria-label="TechSapana Home">
+        <div class="brand-mark">TS</div>
+        <span class="brand-name">TechSapana</span>
+      </a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="courses.html" class="nav-link active">Courses</a></li>
+          <li><a href="index.html#services" class="nav-link">Services</a></li>
+          <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-right-actions">
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Theme">
+          <svg id="themeIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span id="themeText">Dark</span>
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="openDemoModal('General Live Demo Session')">Join Live Demo</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="courses-hero">
+      <div class="container">
+        <div class="hero-flex-top">
+          <div class="eyebrow">TECHSAPANA EDUCATION VERTICAL</div>
+          <h1 class="title-lg">
+            Practical Technology. <span>Transparent Pricing.</span>
+          </h1>
+          <p class="desc-lead">
+            Hands-on programs taught by active software engineers. Test drive any course through our free live Google Meet demo classes before enrolling.
+          </p>
+
+          <div class="starting-week-banner">
+            <div class="starting-left-meta">
+              <span class="live-pulse-ring"></span>
+              <div>
+                <div class="starting-headline">
+                  <span>Starting This Week: AI for Life & Business (Batch 04)</span>
+                  <span class="urgent-badge">Only 4 Seats Left</span>
+                  <span class="meet-link-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                    Live Meet
+                  </span>
+                </div>
+                <div class="starting-subtext">Starts Wednesday • 7:00 PM – 8:30 PM NPT • Live Google Meet & Kathmandu Studio</div>
+              </div>
+            </div>
+            
+            <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;">
+              <a href="https://meet.google.com/new" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="border-color: #10B981; color: #10B981;">
+                Join Live Meet →
+              </a>
+              <button class="btn btn-primary btn-sm" onclick="openDemoModal('AI for Life & Business — Starting This Week')">
+                Claim Batch Seat
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="filter-sticky-strip">
+      <div class="container">
+        <div class="categories-tabs">
+          <button class="category-btn active" data-category="all">All Programs (6)</button>
+          <button class="category-btn" data-category="this-week">⚡ Starting This Week</button>
+          <button class="category-btn" data-category="top-picks">⭐ Top Picks</button>
+          <button class="category-btn" data-category="upcoming">📅 Upcoming Cohorts</button>
+          <button class="category-btn" data-category="ai">Applied AI & Automation</button>
+          <button class="category-btn" data-category="dev">Software & Web Engineering</button>
+          <button class="category-btn" data-category="design">UI/UX & Product Design</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="section-spacing">
+      <div class="container">
+        
+        <div class="courses-grid-3" id="courseGrid">
+          
+          <div class="course-card" data-cat="this-week top-picks ai upcoming">
+            <div class="course-visual-header">
+              <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=700&q=80" alt="AI for Life & Business Graphic Preview" />
+              <div class="course-graphic-overlay"></div>
+              <div class="course-badge-cluster">
+                <span class="tag-this-week">⚡ Starting This Week</span>
+                <span class="format-pill">Hybrid • 4 Weeks</span>
+              </div>
+            </div>
+
+            <div class="course-content-block">
+              <h3 class="course-card-title">AI for Life & Business</h3>
+              <p class="course-card-desc">
+                Learn how to configure custom GPTs, automate daily business paperwork, write structured prompts, and deploy autonomous workflows.
+              </p>
+
+              <div class="schedule-info-box">
+                <div class="schedule-row">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <span>Starts This Wednesday (Sep 03)</span>
+                </div>
+                <div class="schedule-row">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>7:00 PM – 8:30 PM NPT <span class="time-sub">(Mon, Wed, Fri)</span></span>
+                </div>
+              </div>
+              
+              <div class="course-curriculum-highlights">
+                <div class="curriculum-point">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Prompt Engineering & Context Design</span>
+                </div>
+                <div class="curriculum-point">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>No-code Business Automations (Make/Zapier)</span>
+                </div>
+                <div class="curriculum-point">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Live Production Capstone Deployment</span>
+                </div>
+              </div>
+
+              <div class="course-pricing-strip">
+                <div>
+                  <div class="price-label">Program Tuition</div>
+                  <div class="price-original">NPR 18,000</div>
+                </div>
+                <div class="price-value-box">
+                  <div class="price-current">NPR 12,500 <span>/ cohort</span></div>
+                </div>
+              </div>
+
+              <div class="course-footer-actions">
+                <a href="https://meet.google.com/new" target="_blank" rel="noopener" class="btn-meet-direct" title="Join Live Google Meet">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                  Meet Link
+                </a>
+                <button class="btn btn-primary btn-sm" onclick="openDemoModal('AI for Life & Business (Starts Wednesday — NPR 12,500)')">Enroll Cohort</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="course-card" data-cat="top-picks dev upcoming">
+            <div class="course-visual-header">
+              <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=700&q=80" alt="Full-Stack Web Engineering Graphic Preview" />
+              <div class="course-graphic-overlay"></div>
+              <div class="course-badge-cluster">
+                <span class="tag-top-pick">⭐ Top Pick</span>
+                <span class="format-pill">Online • 8 Weeks</span>
+              </div>
+            </div>
+
+            <div class="course-content-block">
+              <h3 class="course-card-title">Modern Full-Stack Engineering</h3>
+              <p class="course-card-desc">
+                From frontend component design to backend API architecture using Next.js App Router, Node.js, and PostgreSQL. Built on real production stacks.
+              </p>
+
+              <div class="schedule-info-box">
+                <div class="schedule-row">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <span>Starts Sunday, Sep 07</span>
+                </div>
+                <div class="schedule-row">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>8:00 PM – 9:30 PM NPT <span class="time-sub">(Sun, Tue, Thu)</span></span>
+                </div>
+              </div>
+              
+              <div class="course-curriculum-highlights">
+                <div class="curriculum-point">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Next.js App Router & Server Components</span>
+                </div>
+                <div class="curriculum-point">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>PostgreSQL & Relational Data Models</span>
+                </div>
+                <div class="curriculum-point">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>CI/CD Cloud Deployments & Security</span>
+                </div>
+              </div>
+
+              <div class="course-pricing-strip">
+                <div>
+                  <div class="price-label">Program Tuition</div>
+                  <div class="price-original">NPR 35,000</div>
+                </div>
+                <div class="price-value-box">
+                  <div class="price-current">NPR 24,000 <span>/ cohort</span></div>
+                </div>
+              </div>
+
+              <div class="course-footer-actions">
+                <a href="https://meet.google.com/new" target="_blank" rel="noopener" class="btn-meet-direct">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                  Meet Link
+                </a>
+                <button class="btn btn-primary btn-sm" onclick="openDemoModal('Modern Full-Stack Engineering (NPR 24,000)')">Enroll Cohort</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="course-card" data-cat="this-week upcoming design">
+            <div class="course-visual-header">
+              <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=700&q=80" alt="UI/UX & Product Design Systems Graphic Preview" />
+              <div class="course-graphic-overlay"></div>
+              <div class="course-badge-cluster">
+                <span class="tag-this-week">⚡ Starting Friday</span>
+                <span class="format-pill">Kathmandu Studio • 6 Weeks</span>
+              </div>
+            </div>
+
+            <div class="course-content-block">
+              <h3 class="course-card-title">UI/UX & Product Design Systems</h3>
+              <p class="course-card-desc">
+                Learn user journey mapping, design systems, interactive Figma wireframing, and conversion rate optimization (CRO) fundamentals.
+              </p>
+
+              <div class="schedule-info-box">
+                <div class="schedule-row">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <span>Starts This Friday (Sep 05)</span>
+                </div>
+                <div class="schedule-row">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>6:00 PM – 7:30 PM NPT <span class="time-sub">(Tue, Fri, Sat)</span></span>
+                </div>
+              </div>
+              
+              <div class="course-curriculum-highlights">
+                <div class="curriculum-point">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Figma Auto-Layout & Component Tokens</span>
+                </div>
+                <div class="curriculum-point">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Conversion Journey Audits & UX Testing</span>
+                </div>
+                <div class="curriculum-point">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Design Handoff & Developer Collaboration</span>
+                </div>
+              </div>
+
+              <div class="course-pricing-strip">
+                <div>
+                  <div class="price-label">Program Tuition</div>
+                  <div class="price-original">NPR 25,000</div>
+                </div>
+                <div class="price-value-box">
+                  <div class="price-current">NPR 18,000 <span>/ cohort</span></div>
+                </div>
+              </div>
+
+              <div class="course-footer-actions">
+                <a href="https://meet.google.com/new" target="_blank" rel="noopener" class="btn-meet-direct">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                  Meet Link
+                </a>
+                <button class="btn btn-primary btn-sm" onclick="openDemoModal('UI/UX Product Design (Starts Friday — NPR 18,000)')">Enroll Cohort</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="course-card" data-cat="ai upcoming">
+            <div class="course-visual-header">
+              <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=700&q=80" alt="AI Automation Graphic Preview" />
+              <div class="course-graphic-overlay"></div>
+              <div class="course-badge-cluster">
+                <span class="tag-upcoming">📅 Upcoming</span>
+                <span class="format-pill">Live Workshop • 2 Weeks</span>
+              </div>
+            </div>
+
+            <div class="course-content-block">
+              <h3 class="course-card-title">AI Automation for Business</h3>
+              <p class="course-card-desc">
+                Connect your business spreadsheets, CRM, invoicing, and email to autonomous AI agents that handle repetitive tasks 24/7.
+              </p>
+
+              <div class="schedule-info-box">
+                <div class="schedule-row">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <span>Starts Sep 14, 2026</span>
+                </div>
+                <div class="schedule-row">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>7:30 PM – 9:00 PM NPT <span class="time-sub">(Mon, Thu)</span></span>
+                </div>
+              </div>
+              
+              <div class="course-curriculum-highlights">
+                <div class="curriculum-point">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Make.com & Zapier AI Webhooks</span>
+                </div>
+                <div class="curriculum-point">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Automated Customer Support Chatbots</span>
+                </div>
+                <div class="curriculum-point">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Document Parsing & Data Extraction</span>
+                </div>
+              </div>
+
+              <div class="course-pricing-strip">
+                <div>
+                  <div class="price-label">Program Tuition</div>
+                  <div class="price-original">NPR 15,000</div>
+                </div>
+                <div class="price-value-box">
+                  <div class="price-current">NPR 9,500 <span>/ cohort</span></div>
+                </div>
+              </div>
+
+              <div class="course-footer-actions">
+                <a href="https://meet.google.com/new" target="_blank" rel="noopener" class="btn-meet-direct">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                  Meet Link
+                </a>
+                <button class="btn btn-primary btn-sm" onclick="openDemoModal('AI Automation for Business (NPR 9,500)')">Enroll Cohort</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="course-card" data-cat="dev upcoming">
+            <div class="course-visual-header">
+              <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=700&q=80" alt="React Patterns Graphic Preview" />
+              <div class="course-graphic-overlay"></div>
+              <div class="course-badge-cluster">
+                <span class="tag-upcoming">📅 Upcoming</span>
+                <span class="format-pill">Online • 4 Weeks</span>
+              </div>
+            </div>
+
+            <div class="course-content-block">
+              <h3 class="course-card-title">Production React & State Architecture</h3>
+              <p class="course-card-desc">
+                Master clean frontend architecture, asynchronous data fetching, accessible components, and enterprise state management.
+              </p>
+
+              <div class="schedule-info-box">
+                <div class="schedule-row">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <span>Starts Sep 16, 2026</span>
+                </div>
+                <div class="schedule-row">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>8:00 PM – 9:30 PM NPT <span class="time-sub">(Wed, Fri)</span></span>
+                </div>
+              </div>
+              
+              <div class="course-curriculum-highlights">
+                <div class="curriculum-point">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Custom React Hooks & Context Patterns</span>
+                </div>
+                <div class="curriculum-point">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>TanStack Query & Cache Management</span>
+                </div>
+                <div class="curriculum-point">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Core Web Vitals & Performance Tuning</span>
+                </div>
+              </div>
+
+              <div class="course-pricing-strip">
+                <div>
+                  <div class="price-label">Program Tuition</div>
+                  <div class="price-original">NPR 20,000</div>
+                </div>
+                <div class="price-value-box">
+                  <div class="price-current">NPR 14,000 <span>/ cohort</span></div>
+                </div>
+              </div>
+
+              <div class="course-footer-actions">
+                <a href="https://meet.google.com/new" target="_blank" rel="noopener" class="btn-meet-direct">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                  Meet Link
+                </a>
+                <button class="btn btn-primary btn-sm" onclick="openDemoModal('Production React (NPR 14,000)')">Enroll Cohort</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="course-card" data-cat="top-picks ai">
+            <div class="course-visual-header">
+              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=80" alt="AI for Content Graphic Preview" />
+              <div class="course-graphic-overlay"></div>
+              <div class="course-badge-cluster">
+                <span class="tag-top-pick">⭐ Top Pick</span>
+                <span class="format-pill">Weekend Masterclass</span>
+              </div>
+            </div>
+
+            <div class="course-content-block">
+              <h3 class="course-card-title">AI for Content & Market Research</h3>
+              <p class="course-card-desc">
+                Accelerate market research, copy creation, SEO outlines, and presentation decks with structured AI prompting frameworks.
+              </p>
+
+              <div class="schedule-info-box">
+                <div class="schedule-row">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <span>Next Saturday Masterclass</span>
+                </div>
+                <div class="schedule-row">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>11:00 AM – 3:30 PM NPT <span class="time-sub">(Intensive Live)</span></span>
+                </div>
+              </div>
+              
+              <div class="course-curriculum-highlights">
+                <div class="curriculum-point">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Advanced Market Research Prompts</span>
+                </div>
+                <div class="curriculum-point">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>SEO-Optimized Content Pipelines</span>
+                </div>
+                <div class="curriculum-point">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Slide Decks & Visual Generation</span>
+                </div>
+              </div>
+
+              <div class="course-pricing-strip">
+                <div>
+                  <div class="price-label">Program Tuition</div>
+                  <div class="price-original">NPR 10,000</div>
+                </div>
+                <div class="price-value-box">
+                  <div class="price-current">NPR 6,500 <span>/ workshop</span></div>
+                </div>
+              </div>
+
+              <div class="course-footer-actions">
+                <a href="https://meet.google.com/new" target="_blank" rel="noopener" class="btn-meet-direct">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                  Meet Link
+                </a>
+                <button class="btn btn-primary btn-sm" onclick="openDemoModal('AI for Content (NPR 6,500)')">Enroll Cohort</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-logo-wrap" style="margin-bottom: 0.75rem;">
+            <div class="brand-mark">TS</div>
+            <span class="brand-name">TechSapana</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); max-width: 320px;">
+            Turning Dreams Into Digital Reality. Practical technology courses & enterprise software engineering.
+          </p>
+        </div>
+
+        <div>
+          <h4 style="font-size: 0.825rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem;">Education</h4>
+          <ul class="footer-links">
+            <li><a href="courses.html">All Programs</a></li>
+            <li><a href="courses.html">Starting This Week</a></li>
+            <li><a href="courses.html">Free Google Meet Demo</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="font-size: 0.825rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem;">Company</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About TechSapana</a></li>
+            <li><a href="index.html#services">Services</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="font-size: 0.825rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem;">Contact</h4>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">
+            <p><strong>Kathmandu, Nepal</strong></p>
+            <p>Serving Nepal, USA & Australia</p>
+            <p style="margin-top: 0.5rem;">contact@techsapana.com</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim); flex-wrap: wrap; gap: 1rem;">
+        <div>© 2026 TechSapana Pvt. Ltd. All rights reserved.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="demoModalOverlay">
+    <div class="modal-window">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <div>
+          <span class="eyebrow" style="margin-bottom: 0.25rem;">TechSapana Live Learning</span>
+          <h3 style="font-size: 1.25rem; font-weight: 800;" id="modalDynamicTitle">Reserve Live Seat</h3>
+        </div>
+        <button onclick="closeDemoModal()" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.2rem;">✕</button>
+      </div>
+
+      <div class="modal-meet-callout">
+        <div class="modal-meet-meta">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          <div>
+            <div class="modal-meet-text">Google Meet Room Link Active</div>
+            <div class="modal-meet-time">Next Batch Orientation: Wednesday 7:00 PM NPT</div>
+          </div>
+        </div>
+        <a href="https://meet.google.com/new" target="_blank" rel="noopener" class="btn btn-sm" style="background:#10B981; color:#fff; font-size:0.75rem; padding: 0.4rem 0.75rem;">
+          Join Direct
+        </a>
+      </div>
+
+      <form onsubmit="event.preventDefault(); submitDemoForm();" style="display: flex; flex-direction: column; gap: 0.85rem;">
+        <input type="text" placeholder="Full Name *" required style="background: var(--bg-primary); border: 1px solid var(--border-subtle); padding: 0.75rem 1rem; border-radius: var(--radius-sm); color: var(--text-main); outline: none;" />
+        <input type="email" placeholder="Email Address *" required style="background: var(--bg-primary); border: 1px solid var(--border-subtle); padding: 0.75rem 1rem; border-radius: var(--radius-sm); color: var(--text-main); outline: none;" />
+        <input type="tel" placeholder="WhatsApp / Phone Number *" required style="background: var(--bg-primary); border: 1px solid var(--border-subtle); padding: 0.75rem 1rem; border-radius: var(--radius-sm); color: var(--text-main); outline: none;" />
+        
+        <select id="selectedCourseField" style="background: var(--bg-primary); border: 1px solid var(--border-subtle); padding: 0.75rem 1rem; border-radius: var(--radius-sm); color: var(--text-main); outline: none;">
+          <option value="AI for Life & Business">AI for Life & Business (Starts This Wed — NPR 12,500)</option>
+          <option value="Modern Full-Stack Engineering">Modern Full-Stack Engineering (Starts Sep 07 — NPR 24,000)</option>
+          <option value="UI/UX & Product Design">UI/UX & Product Design (Starts Friday — NPR 18,000)</option>
+          <option value="AI Automation for Business">AI Automation for Business (Starts Sep 14 — NPR 9,500)</option>
+          <option value="Production React">Production React & State (Starts Sep 16 — NPR 14,000)</option>
+          <option value="AI for Content">AI for Content & Research (Saturday Masterclass — NPR 6,500)</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.25rem;">Confirm Registration & Calendar Invite</button>
+        <div id="demoFormStatus" style="font-size: 0.85rem; text-align: center; color: var(--brand-blue); display: none;">Thank you! Your seat and class calendar invitation have been sent.</div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // 1. Theme Switcher Logic
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeText = document.getElementById('themeText');
+    const themeIcon = document.getElementById('themeIcon');
+    const htmlEl = document.documentElement;
+
+    const sunSVG = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
+    const moonSVG = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
+
+    themeBtn.addEventListener('click', () => {
+      const current = htmlEl.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', next);
+      themeText.textContent = next === 'dark' ? 'Dark' : 'Light';
+      themeIcon.innerHTML = next === 'dark' ? moonSVG : sunSVG;
+    });
+
+    // 2. Category Filter Tabs Logic (Includes "this-week")
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const courseCards = document.querySelectorAll('.course-card');
+
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        categoryBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const selectedCat = btn.getAttribute('data-category');
+
+        courseCards.forEach(card => {
+          const cardCats = card.getAttribute('data-cat');
+          if (selectedCat === 'all' || cardCats.includes(selectedCat)) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // 3. Modal Control
+    const modal = document.getElementById('demoModalOverlay');
+    const modalTitle = document.getElementById('modalDynamicTitle');
+    const courseSelect = document.getElementById('selectedCourseField');
+
+    function openDemoModal(contextTitle) {
+      modal.classList.add('active');
+      modalTitle.textContent = contextTitle || 'Reserve Live Seat';
+      
+      Array.from(courseSelect.options).forEach(opt => {
+        if (contextTitle && contextTitle.includes(opt.value)) {
+          opt.selected = true;
+        }
+      });
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDemoModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function submitDemoForm() {
+      const status = document.getElementById('demoFormStatus');
+      status.style.display = 'block';
+      setTimeout(() => {
+        closeDemoModal();
+        status.style.display = 'none';
+      }, 2500);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  role      Role     @default(STUDENT)
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  enrollments Enrollment[]
+}
+
+enum Role {
+  ADMIN
+  STUDENT
+}
+
+model Course {
+  id            String   @id @default(cuid())
+  title         String
+  slug          String   @unique
+  description   String
+  price         Float
+  originalPrice Float?
+  imageUrl      String?
+  badgeText1    String?
+  badge1Style   String?  @default("red")
+  badgeText2    String?
+  startDateText String?
+  scheduleText  String?
+  highlights    String[] // Array of strings for bullet points
+  published     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  enrollments Enrollment[]
+}
+
+model Enrollment {
+  id        String   @id @default(cuid())
+  userId    String
+  courseId  String
+  createdAt DateTime @default(now())
+  
+  user      User     @relation(fields: [userId], references: [id])
+  course    Course   @relation(fields: [courseId], references: [id])
+  
+  @@unique([userId, courseId])
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  createdAt DateTime @default(now())
+  read      Boolean  @default(false)
+}
+
+model PromoBanner {
+  id              String   @id @default("default")
+  isActive        Boolean  @default(false)
+  badgeText       String   @default("LIMITED TIME OFFER")
+  title           String   @default("20% OFF THE WEEKEND CRASH COURSE.")
+  targetDate      DateTime @default(now())
+  buttonText      String   @default("Enroll Now")
+  buttonLink      String   @default("/courses")
+  marqueeIsActive Boolean  @default(true)
+  marqueeText     String   @default("A leading tech institution in Nepal guiding students to global success")
+  updatedAt       DateTime @updatedAt
+}
+
+model Project {
+  id           String   @id @default(cuid())
+  title        String
+  slug         String   @unique
+  description  String
+  imageUrl     String?
+  videoUrl     String?
+  category     String   // e.g., "ecommerce", "hospitality", "management", "health"
+  technologies String[]
+  client       String?
+  liveUrl      String?
+  published    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+
+model Faq {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+

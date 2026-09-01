@@ -1,0 +1,90 @@
+@import "tailwindcss";
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme inline {
+  --color-brand-blue: #0052cc;
+  --color-brand-blue-hover: #003ea3;
+  --color-brand-blue-soft: rgba(0, 82, 204, 0.12);
+  --color-brand-blue-glow: rgba(0, 82, 204, 0.35);
+
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-card: var(--bg-card);
+  --color-bg-card-hover: var(--bg-card-hover);
+  --color-bg-elevated: var(--bg-elevated);
+
+  --color-border-subtle: var(--border-subtle);
+  --color-border-medium: var(--border-medium);
+  --color-border-accent: var(--border-accent);
+
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  --color-text-dim: var(--text-dim);
+  --color-navbar-bg: var(--navbar-bg);
+
+  --color-grid-line: var(--grid-line);
+  --color-strip-bg: var(--strip-bg);
+  --color-metric-box-bg: var(--metric-box-bg);
+  --color-cta-from: var(--cta-from);
+  --color-cta-to: var(--cta-to);
+
+  --animate-marquee: marquee 120s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+:root,
+html[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-elevated: #ffffff;
+
+  --border-subtle: rgba(0, 0, 0, 0.07);
+  --border-medium: rgba(0, 0, 0, 0.12);
+  --border-accent: rgba(0, 82, 204, 0.3);
+
+  --text-main: #0b101d;
+  --text-muted: #475569;
+  --text-dim: #64748b;
+  --navbar-bg: rgba(248, 250, 252, 0.92);
+
+  --grid-line: rgba(0, 0, 0, 0.035);
+  --strip-bg: #ffffff;
+  --metric-box-bg: #ffffff;
+  --cta-from: #f4f8fc;
+  --cta-to: #9ec5f7;
+}
+
+html[data-theme="dark"] {
+  --bg-primary: #07090e;
+  --bg-secondary: #0d111a;
+  --bg-card: rgba(13, 17, 26, 0.75);
+  --bg-card-hover: rgba(20, 26, 40, 0.95);
+  --bg-elevated: #111622;
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.15);
+  --border-accent: rgba(0, 82, 204, 0.4);
+
+  --text-main: #ffffff;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --navbar-bg: rgba(7, 9, 14, 0.92);
+
+  --grid-line: rgba(255, 255, 255, 0.035);
+  --strip-bg: rgba(255, 255, 255, 0.015);
+  --metric-box-bg: rgba(255, 255, 255, 0.025);
+  --cta-from: #0d1522;
+  --cta-to: #052353;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+}

@@ -1,0 +1,1962 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechSapana — Turning Dreams Into Digital Reality</title>
+  <meta name="description" content="TechSapana designs and engineers high-converting websites, custom software, and AI solutions for businesses across Nepal, the USA, Australia, and beyond." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       THEME VARIABLES: DARK & LIGHT MODES
+       Color Source of Truth: TechSapana Royal Blue (#0052CC) & Clean White
+       ========================================================================== */
+    :root {
+      --brand-blue: #0052CC;
+      --brand-blue-hover: #003EA3;
+      --brand-blue-soft: rgba(0, 82, 204, 0.12);
+      --brand-blue-glow: rgba(0, 82, 204, 0.35);
+
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --container-max: 1240px;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --transition-base: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Dark Mode (Default) */
+    html[data-theme="dark"] {
+      --bg-primary: #07090E;
+      --bg-secondary: #0D111A;
+      --bg-card: rgba(13, 17, 26, 0.75);
+      --bg-card-hover: rgba(20, 26, 40, 0.95);
+      --bg-elevated: #111622;
+
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-medium: rgba(255, 255, 255, 0.15);
+      --border-accent: rgba(0, 82, 204, 0.4);
+
+      --text-main: #FFFFFF;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --navbar-bg: rgba(7, 9, 14, 0.92);
+      --grid-line: rgba(255, 255, 255, 0.035);
+      --strip-bg: rgba(255, 255, 255, 0.015);
+      --metric-box-bg: rgba(255, 255, 255, 0.025);
+    }
+
+    /* Light Mode */
+    html[data-theme="light"] {
+      --bg-primary: #F8FAFC;
+      --bg-secondary: #FFFFFF;
+      --bg-card: #FFFFFF;
+      --bg-card-hover: #F1F5F9;
+      --bg-elevated: #FFFFFF;
+
+      --border-subtle: rgba(0, 0, 0, 0.07);
+      --border-medium: rgba(0, 0, 0, 0.12);
+      --border-accent: rgba(0, 82, 204, 0.3);
+
+      --text-main: #0B101D;
+      --text-muted: #475569;
+      --text-dim: #64748B;
+      --navbar-bg: rgba(248, 250, 252, 0.92);
+      --grid-line: rgba(0, 0, 0, 0.035);
+      --strip-bg: #FFFFFF;
+      --metric-box-bg: #FFFFFF;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body {
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition-base);
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: 1.5rem;
+    }
+
+    .section-padding {
+      padding-block: 5.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .section-padding {
+        padding-block: 3.75rem;
+      }
+    }
+
+    .section-header {
+      max-width: 700px;
+      margin-bottom: 3rem;
+    }
+
+    .section-header.center {
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.785rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brand-blue);
+      margin-bottom: 1rem;
+      background: var(--brand-blue-soft);
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-accent);
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      color: var(--text-main);
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      font-size: 0.925rem;
+      font-weight: 700;
+      padding: 0.85rem 1.65rem;
+      border-radius: var(--radius-sm);
+      transition: var(--transition-base);
+      cursor: pointer;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background-color: var(--brand-blue);
+      color: #FFFFFF;
+      box-shadow: 0 4px 20px var(--brand-blue-glow);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--brand-blue-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0, 82, 204, 0.5);
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-card);
+      color: var(--text-main);
+      border-color: var(--border-medium);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-card-hover);
+      border-color: var(--brand-blue);
+      transform: translateY(-2px);
+    }
+
+    .btn-sm {
+      padding: 0.55rem 1.15rem;
+      font-size: 0.85rem;
+    }
+
+    .theme-toggle-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      color: var(--text-main);
+      border-radius: 999px;
+      padding: 0.45rem 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.825rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition-base);
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--brand-blue);
+    }
+
+    /* ==========================================================================
+       1. NAVBAR
+       ========================================================================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1.15rem 0;
+      transition: var(--transition-base);
+    }
+
+    .navbar.scrolled {
+      background: var(--navbar-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.8rem 0;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      background: var(--brand-blue);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFF;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+
+    .brand-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--text-main);
+    }
+
+    .nav-right-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--text-main);
+    }
+
+    @media (max-width: 991px) {
+      .nav-links, .nav-cta-desktop {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+    }
+
+    /* ==========================================================================
+       2. INTERACTIVE HERO SECTION (Split: Messaging + High-Impact Slider)
+       ========================================================================== */
+    .hero-section {
+      padding-top: 8.5rem;
+      padding-bottom: 3.5rem;
+      position: relative;
+    }
+
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(circle at center top, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at center top, black 30%, transparent 80%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 991px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2.5rem;
+      }
+    }
+
+    .hero-badge-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 991px) {
+      .hero-badge-wrap {
+        justify-content: center;
+      }
+    }
+
+    .hero-tagline {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--brand-blue);
+      letter-spacing: 0.04em;
+    }
+
+    .hero-title {
+      font-size: clamp(2.3rem, 4.5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-desc {
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+
+    @media (max-width: 991px) {
+      .hero-desc {
+        margin-inline: auto;
+      }
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 991px) {
+      .hero-actions {
+        justify-content: center;
+      }
+    }
+
+    /* Interactive Hero Visual Showcase / Slider */
+    .hero-slider-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-lg);
+      padding: 0.85rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15), 0 0 40px var(--brand-blue-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slider-viewport {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background: #000;
+    }
+
+    .slider-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-slide {
+      min-width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slide-gradient-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(7, 9, 14, 0.2) 0%, rgba(7, 9, 14, 0.85) 100%);
+      pointer-events: none;
+    }
+
+    .slide-caption-layer {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 1.25rem;
+      right: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      z-index: 2;
+    }
+
+    .slide-badge {
+      align-self: flex-start;
+      background: rgba(0, 82, 204, 0.85);
+      backdrop-filter: blur(8px);
+      color: #FFF;
+      font-size: 0.725rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    .slide-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .slide-subtitle {
+      font-size: 0.825rem;
+      color: #CBD5E1;
+    }
+
+    /* Floating Web Agency Pill - Instant Cognition */
+    .hero-float-pill {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      z-index: 3;
+      background: rgba(7, 9, 14, 0.85);
+      border: 1px solid var(--border-medium);
+      backdrop-filter: blur(10px);
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.785rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+    }
+
+    /* Slider Nav / Progress Dots */
+    .slider-nav-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.85rem;
+      padding-inline: 0.5rem;
+    }
+
+    .slider-dots {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .slider-dot {
+      width: 24px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border-medium);
+      cursor: pointer;
+      transition: var(--transition-base);
+    }
+
+    .slider-dot.active {
+      width: 42px;
+      background: var(--brand-blue);
+    }
+
+    .slider-arrows {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .slider-arrow-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition-base);
+    }
+
+    .slider-arrow-btn:hover {
+      border-color: var(--brand-blue);
+      background: var(--brand-blue-soft);
+    }
+
+    /* ==========================================================================
+       3. THREE DIFFERENTIATED DEDICATED SECTIONS
+       ========================================================================== */
+    
+    /* SECTION A: REGIONAL DELIVERY HUBS STRIP */
+    .delivery-hubs-section {
+      padding-block: 2.25rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .delivery-hubs-card {
+      background: var(--strip-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .delivery-hubs-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .delivery-pulse-icon {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand-blue);
+      box-shadow: 0 0 0 4px var(--brand-blue-soft);
+      display: inline-block;
+    }
+
+    .delivery-hubs-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+    }
+
+    .delivery-hubs-list {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .hub-pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: 999px;
+      padding: 0.45rem 1.15rem;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text-main);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: var(--transition-base);
+    }
+
+    .hub-pill-btn:hover {
+      border-color: var(--brand-blue);
+      background: var(--brand-blue-soft);
+      transform: translateY(-2px);
+    }
+
+    .hub-flag {
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    /* SECTION B: TRUST BAR */
+    .client-trust-section {
+      padding-block: 2.25rem;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      position: relative;
+      z-index: 1;
+    }
+
+    .client-trust-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .trust-badge-label {
+      font-size: 0.775rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .trust-clients-grid {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .client-logo-item {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      opacity: 0.75;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      transition: var(--transition-base);
+    }
+
+    .client-logo-item svg {
+      color: var(--brand-blue);
+    }
+
+    .client-logo-item:hover {
+      opacity: 1;
+      color: var(--text-main);
+      transform: translateY(-1px);
+    }
+
+    /* SECTION C: STATS SHOWCASE */
+    .metrics-showcase-section {
+      padding-block: 4.5rem;
+      position: relative;
+    }
+
+    .metrics-grid-four {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 991px) {
+      .metrics-grid-four {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 540px) {
+      .metrics-grid-four {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .metric-card {
+      background: var(--metric-box-bg);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+      transition: var(--transition-base);
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 48px;
+      height: 3px;
+      background: var(--brand-blue);
+      border-radius: 0 0 4px 0;
+      transition: width 0.3s ease;
+    }
+
+    .metric-card:hover {
+      border-color: var(--brand-blue);
+      transform: translateY(-4px);
+      box-shadow: 0 18px 36px rgba(0, 82, 204, 0.08);
+    }
+
+    .metric-card:hover::before {
+      width: 100%;
+    }
+
+    .metric-number-wrap {
+      font-size: 2.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.15rem;
+    }
+
+    .metric-accent-sign {
+      color: var(--brand-blue);
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+
+    .metric-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.25rem;
+    }
+
+    .metric-caption {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ==========================================================================
+       4. COMPANY PROFILE (ABOUT TECHSAPANA)
+       ========================================================================== */
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 991px) {
+      .about-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .about-story-p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .about-feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-bottom: 2rem;
+    }
+
+    .about-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .about-feature-item svg {
+      color: var(--brand-blue);
+      flex-shrink: 0;
+    }
+
+    .about-visual-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      position: relative;
+    }
+
+    .about-highlight-stat {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    /* ==========================================================================
+       5. COURSES & TRAINING
+       ========================================================================== */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .courses-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .course-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition-base);
+    }
+
+    .course-card:hover {
+      border-color: var(--brand-blue);
+      transform: translateY(-3px);
+    }
+
+    .course-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .badge-upcoming {
+      background: var(--brand-blue-soft);
+      color: var(--brand-blue);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-accent);
+    }
+
+    .course-delivery {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      font-weight: 600;
+    }
+
+    .course-name {
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .course-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.65;
+    }
+
+    .link-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 700;
+      color: var(--brand-blue);
+      font-size: 0.9rem;
+    }
+
+    .link-arrow:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* ==========================================================================
+       6. INDUSTRIES WE SERVE
+       ========================================================================== */
+    .industries-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 991px) {
+      .industries-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .industry-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 1.15rem 1.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      transition: var(--transition-base);
+    }
+
+    .industry-card:hover {
+      border-color: var(--brand-blue);
+    }
+
+    .industry-icon {
+      color: var(--brand-blue);
+    }
+
+    .industry-name {
+      font-size: 0.925rem;
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       7. TESTIMONIALS
+       ========================================================================== */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 991px) {
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .testimonial-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .stars {
+      color: #F59E0B;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+
+    .testimonial-quote {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .author-info h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .author-info p {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    /* ==========================================================================
+       8. BLOG / INSIGHTS
+       ========================================================================== */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 991px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .blog-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.85rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition-base);
+    }
+
+    .blog-card:hover {
+      border-color: var(--brand-blue);
+      transform: translateY(-3px);
+    }
+
+    .blog-meta-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-bottom: 0.75rem;
+    }
+
+    .blog-badge {
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--brand-blue);
+    }
+
+    .blog-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 0.75rem;
+    }
+
+    .blog-excerpt {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ==========================================================================
+       9. FINAL CTA & FOOTER
+       ========================================================================== */
+    .final-cta-section {
+      padding-block: 5.5rem;
+    }
+
+    .cta-banner {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--brand-blue) 250%);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-lg);
+      padding: 4rem 2rem;
+      text-align: center;
+      box-shadow: 0 20px 50px -10px rgba(0,0,0,0.4);
+    }
+
+    .cta-title {
+      font-size: clamp(2rem, 3.8vw, 2.75rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 1rem;
+    }
+
+    .cta-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-inline: auto;
+      margin-bottom: 2rem;
+    }
+
+    .cta-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 4.5rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+    }
+
+    @media (max-width: 991px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .footer-col-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-main);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .footer-link {
+      font-size: 0.885rem;
+      color: var(--text-muted);
+    }
+
+    .footer-link:hover {
+      color: var(--text-main);
+    }
+
+    .footer-contact-info {
+      font-size: 0.885rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    /* Modal Form */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 7, 12, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-window {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-md);
+      width: 100%;
+      max-width: 540px;
+      padding: 2.25rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .modal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .form-input {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 0.95rem;
+      color: var(--text-main);
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--brand-blue);
+    }
+
+    .form-feedback-message {
+      font-size: 0.85rem;
+      color: var(--brand-blue);
+      text-align: center;
+      display: none;
+    }
+
+    .form-feedback-message.success {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo-wrap" aria-label="TechSapana Home">
+        <div class="brand-mark">TS</div>
+        <span class="brand-name">TechSapana</span>
+      </a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="#hero" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#courses" class="nav-link">Courses</a></li>
+          <li><a href="#industries" class="nav-link">Industries</a></li>
+          <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+          <li><a href="#blog" class="nav-link">Insights</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-right-actions">
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Switch Theme">
+          <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span id="themeText">Dark</span>
+        </button>
+
+        <div class="nav-cta-desktop">
+          <a href="#contact" class="btn btn-primary btn-sm">Get Free Consultation</a>
+        </div>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section" id="hero">
+      <div class="hero-bg-grid"></div>
+      <div class="container">
+        <div class="hero-grid">
+          
+          <div>
+            <div class="hero-badge-wrap">
+              <span class="eyebrow" style="margin-bottom: 0;">WEB • SOFTWARE • AI SOLUTIONS</span>
+              <span class="hero-tagline">Turning Dreams Into Digital Reality</span>
+            </div>
+            <h1 class="hero-title">We Build Websites & Software That Move Your Business Forward.</h1>
+            <p class="hero-desc">
+              From high-converting websites to custom enterprise platforms, TechSapana designs and delivers digital products engineered for real revenue growth.
+            </p>
+            <div class="hero-actions">
+              <a href="#contact" class="btn btn-primary">Start Your Project</a>
+              <a href="#about" class="btn btn-secondary">Learn More About Us</a>
+            </div>
+          </div>
+
+          <div class="hero-slider-box" id="heroCarousel">
+            <div class="hero-float-pill">
+              <span class="live-dot"></span>
+              <span>Web & Software Engineers</span>
+            </div>
+
+            <div class="slider-viewport">
+              <div class="slider-track" id="sliderTrack">
+                
+                <div class="hero-slide">
+                  <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80" alt="TechSapana engineering team deploying client software" />
+                  <div class="slide-gradient-overlay"></div>
+                  <div class="slide-caption-layer">
+                    <span class="slide-badge">⚡ Live Systems</span>
+                    <div class="slide-title">Client Software & Web Engineering</div>
+                    <div class="slide-subtitle">Kathmandu Development Studio</div>
+                  </div>
+                </div>
+
+                <div class="hero-slide">
+                  <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&q=80" alt="TechSapana project strategy session with international business clients" />
+                  <div class="slide-gradient-overlay"></div>
+                  <div class="slide-caption-layer">
+                    <span class="slide-badge">🤝 Client Partners</span>
+                    <div class="slide-title">Architecture & UX Strategy Sessions</div>
+                    <div class="slide-subtitle">Serving Nepal, USA & Australia</div>
+                  </div>
+                </div>
+
+                <div class="hero-slide">
+                  <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80" alt="TechSapana tech innovation lab and workspace" />
+                  <div class="slide-gradient-overlay"></div>
+                  <div class="slide-caption-layer">
+                    <span class="slide-badge">🏢 TechSapana HQ</span>
+                    <div class="slide-title">Engineering & AI Innovation Lab</div>
+                    <div class="slide-subtitle">High-Performance Dedicated Teams</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="slider-nav-controls">
+              <div class="slider-dots" id="sliderDots">
+                <span class="slider-dot active" data-index="0"></span>
+                <span class="slider-dot" data-index="1"></span>
+                <span class="slider-dot" data-index="2"></span>
+              </div>
+              <div class="slider-arrows">
+                <button class="slider-arrow-btn" id="prevSlideBtn" aria-label="Previous Slide">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <button class="slider-arrow-btn" id="nextSlideBtn" aria-label="Next Slide">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="delivery-hubs-section">
+      <div class="container">
+        <div class="delivery-hubs-card">
+          <div class="delivery-hubs-meta">
+            <span class="delivery-pulse-icon"></span>
+            <span class="delivery-hubs-title">Operating & Delivery Hubs</span>
+          </div>
+          <div class="delivery-hubs-list">
+            <div class="hub-pill-btn">
+              <span class="hub-flag">🇳🇵</span>
+              <span>Nepal Hub</span>
+            </div>
+            <div class="hub-pill-btn">
+              <span class="hub-flag">🇺🇸</span>
+              <span>United States</span>
+            </div>
+            <div class="hub-pill-btn">
+              <span class="hub-flag">🇦🇺</span>
+              <span>Australia</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="client-trust-section">
+      <div class="container">
+        <div class="client-trust-container">
+          <div class="trust-badge-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>Trusted By Commercial Leaders</span>
+          </div>
+          <div class="trust-clients-grid">
+            <div class="client-logo-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              <span>Enterprise Hub</span>
+            </div>
+            <div class="client-logo-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+              <span>Global Logistics AU</span>
+            </div>
+            <div class="client-logo-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+              <span>Apex Retail NP</span>
+            </div>
+            <div class="client-logo-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span>Venture Dynamics</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics-showcase-section">
+      <div class="container">
+        <div class="metrics-grid-four">
+          
+          <div class="metric-card">
+            <div class="metric-number-wrap">
+              <span>50</span><span class="metric-accent-sign">+</span>
+            </div>
+            <div class="metric-title">Projects Engineered</div>
+            <div class="metric-caption">Custom web & software platforms delivered</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-number-wrap">
+              <span>30</span><span class="metric-accent-sign">+</span>
+            </div>
+            <div class="metric-title">Businesses Empowered</div>
+            <div class="metric-caption">SMEs and fast-scaling enterprise partners</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-number-wrap">
+              <span>3</span><span class="metric-accent-sign">+</span>
+            </div>
+            <div class="metric-title">Core Global Markets</div>
+            <div class="metric-caption">Active client engagements in NP, USA & AU</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-number-wrap">
+              <span>99.9</span><span class="metric-accent-sign">%</span>
+            </div>
+            <div class="metric-title">Deployment Reliability</div>
+            <div class="metric-caption">Continuous uptime & verified code standards</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding" id="about">
+      <div class="container">
+        <div class="about-layout">
+          <div>
+            <div class="eyebrow">COMPANY PROFILE</div>
+            <h2 class="section-title">Built in Nepal. Thinking Globally.</h2>
+            <p class="about-story-p">
+              TechSapana is a technology and software development company focused on transforming commercial concepts into reliable, high-performance digital products.
+            </p>
+            <p class="about-story-p">
+              We combine human-centered UI/UX design with robust software engineering to help companies elevate their digital footprint in Nepal while maintaining international delivery standards for clients across Australia, the USA, and global markets.
+            </p>
+            <ul class="about-feature-list">
+              <li class="about-feature-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                Engineered with performance, security, and scalability in mind
+              </li>
+              <li class="about-feature-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                Strict milestone-driven delivery without bloated agency overheads
+              </li>
+            </ul>
+            <a href="#contact" class="btn btn-primary">Get In Touch</a>
+          </div>
+
+          <div class="about-visual-box">
+            <div style="font-size: 0.825rem; font-weight:800; color:var(--brand-blue); letter-spacing:0.1em; text-transform:uppercase;">Global Delivery Operations</div>
+            <h3 style="font-size: 1.5rem; font-weight: 800; margin-block: 0.5rem 1rem;">Kathmandu • USA • Australia</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.65;">
+              Operating with an agile remote-first workflow that aligns with US Eastern/Pacific, Australian (AEST), and Asian business hours.
+            </p>
+            <div class="about-highlight-stat">
+              <div style="font-size: 1.05rem; font-weight:700; color:var(--text-main);">International Engineering Standards</div>
+              <div style="font-size: 0.85rem; color:var(--text-muted); margin-top:0.25rem;">Clean code architectures, automated CI/CD pipelines, accessible designs, and scalable cloud setups.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding" id="courses" style="background-color: var(--bg-secondary);">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">TRAINING & EDUCATION</div>
+          <h2 class="section-title">Learn Technology. Build the Future.</h2>
+          <p class="section-desc">Practical courses designed to help students, professionals, and business owners use modern technology and AI tools confidently.</p>
+        </div>
+
+        <div class="courses-grid">
+          <div class="course-card">
+            <div>
+              <div class="course-meta">
+                <span class="badge-upcoming">Upcoming</span>
+                <span class="course-delivery">Online & Kathmandu Physical</span>
+              </div>
+              <h3 class="course-name">AI for Life & Business</h3>
+              <p class="course-desc">
+                Learn how to use modern AI tools for productivity, research, content, automation, and everyday business tasks with hands-on practice.
+              </p>
+            </div>
+            <a href="#contact" class="link-arrow">View Course <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+
+          <div class="course-card">
+            <div>
+              <div class="course-meta">
+                <span class="badge-upcoming">Upcoming</span>
+                <span class="course-delivery">Hybrid Workshop</span>
+              </div>
+              <h3 class="course-name">Modern Web Development</h3>
+              <p class="course-desc">
+                Hands-on frontend and backend training teaching you how to build, deploy, and scale modern web applications from scratch.
+              </p>
+            </div>
+            <a href="#contact" class="link-arrow">View Course <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding" id="industries">
+      <div class="container">
+        <div class="section-header center">
+          <div class="eyebrow">DOMAINS</div>
+          <h2 class="section-title">Technology for Businesses Across Industries.</h2>
+          <p class="section-desc">Solutions customized to solve the specific operational bottlenecks of each sector.</p>
+        </div>
+
+        <div class="industries-grid">
+          <div class="industry-card">
+            <div class="industry-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+            <span class="industry-name">Education</span>
+          </div>
+          <div class="industry-card">
+            <div class="industry-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+            <span class="industry-name">Hospitality</span>
+          </div>
+          <div class="industry-card">
+            <div class="industry-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
+            <span class="industry-name">Retail & E-commerce</span>
+          </div>
+          <div class="industry-card">
+            <div class="industry-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+            <span class="industry-name">Professional Services</span>
+          </div>
+          <div class="industry-card">
+            <div class="industry-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+            <span class="industry-name">Startups & SMEs</span>
+          </div>
+          <div class="industry-card">
+            <div class="industry-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+            <span class="industry-name">Travel & Tourism</span>
+          </div>
+          <div class="industry-card">
+            <div class="industry-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+            <span class="industry-name">Organizations & NGOs</span>
+          </div>
+          <div class="industry-card">
+            <div class="industry-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div>
+            <span class="industry-name">Technology Companies</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding" id="testimonials" style="background-color: var(--bg-secondary);">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">FEEDBACK</div>
+          <h2 class="section-title">What Our Clients Say.</h2>
+          <p class="section-desc">Reliable feedback from businesses that rely on our software and web solutions.</p>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div>
+              <div class="stars">★★★★★</div>
+              <p class="testimonial-quote">
+                "TechSapana delivered a website that completely changed how our international prospects view our services. Structured communication and flawless execution."
+              </p>
+            </div>
+            <div class="author-info">
+              <h4>Managing Director</h4>
+              <p>Consulting Agency — Nepal</p>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div>
+              <div class="stars">★★★★★</div>
+              <p class="testimonial-quote">
+                "Finding an engineering team that understands clean code and fast UI delivery without constant back-and-forth was critical for our team in Australia."
+              </p>
+            </div>
+            <div class="author-info">
+              <h4>Operations Manager</h4>
+              <p>Commercial Services — Australia</p>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div>
+              <div class="stars">★★★★★</div>
+              <p class="testimonial-quote">
+                "Their custom management system eliminated days of manual spreadsheet data reconciliation for us. A true technology partner in every sense."
+              </p>
+            </div>
+            <div class="author-info">
+              <h4>Founder & CEO</h4>
+              <p>Retail Operations — USA</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding" id="blog">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">INSIGHTS</div>
+          <h2 class="section-title">Insights From TechSapana.</h2>
+          <p class="section-desc">Practical perspectives on software architecture, design decisions, and AI integration.</p>
+        </div>
+
+        <div class="blog-grid">
+          <article class="blog-card">
+            <div>
+              <div class="blog-meta-top">
+                <span class="blog-badge">Website Strategy</span>
+                <span>5 min read</span>
+              </div>
+              <h3 class="blog-title">How Much Does a Business Website Cost?</h3>
+              <p class="blog-excerpt">A breakdown of design, architecture, and deployment expenses for growing businesses looking for scalable web platforms.</p>
+            </div>
+            <a href="#contact" class="link-arrow">Read Article <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </article>
+
+          <article class="blog-card">
+            <div>
+              <div class="blog-meta-top">
+                <span class="blog-badge">Software</span>
+                <span>7 min read</span>
+              </div>
+              <h3 class="blog-title">Custom Software vs Off-the-Shelf: What Should You Choose?</h3>
+              <p class="blog-excerpt">When does your unique business workflow demand custom architecture over recurring monthly SaaS subscriptions?</p>
+            </div>
+            <a href="#contact" class="link-arrow">Read Article <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </article>
+
+          <article class="blog-card">
+            <div>
+              <div class="blog-meta-top">
+                <span class="blog-badge">AI Automation</span>
+                <span>4 min read</span>
+              </div>
+              <h3 class="blog-title">How AI Can Automate Repetitive Business Tasks</h3>
+              <p class="blog-excerpt">Actionable methods to integrate AI into your customer onboarding, support routing, and daily data tasks.</p>
+            </div>
+            <a href="#contact" class="link-arrow">Read Article <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta-section" id="contact">
+      <div class="container">
+        <div class="cta-banner">
+          <h2 class="cta-title">Have a Website or Software Idea?</h2>
+          <p class="cta-desc">
+            Tell us what you're building. We'll help you turn the idea into a practical, scalable digital product.
+          </p>
+          <div class="cta-actions">
+            <a href="mailto:contact@techsapana.com" class="btn btn-primary">Start Your Project</a>
+            <a href="https://wa.me/" target="_blank" rel="noopener" class="btn btn-secondary">Talk to Our Team</a>
+          </div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">
+            Serving businesses in Nepal, the USA, Australia & worldwide.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-logo-wrap" style="margin-bottom: 1rem;">
+            <div class="brand-mark">TS</div>
+            <span class="brand-name">TechSapana</span>
+          </div>
+          <p style="font-size: 0.885rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem;">
+            Turning Dreams Into Digital Reality. Engineering modern websites, custom business software, and AI solutions for growing companies worldwide.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#about" class="footer-link">About TechSapana</a></li>
+            <li><a href="#courses" class="footer-link">Training & Courses</a></li>
+            <li><a href="#industries" class="footer-link">Industries</a></li>
+            <li><a href="#testimonials" class="footer-link">Testimonials</a></li>
+            <li><a href="#blog" class="footer-link">Insights</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Courses</h4>
+          <ul class="footer-links">
+            <li><a href="#courses" class="footer-link">AI for Business</a></li>
+            <li><a href="#courses" class="footer-link">Web Development</a></li>
+            <li><a href="#courses" class="footer-link">All Workshops</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Global Contact</h4>
+          <div class="footer-contact-info">
+            <p><strong>Kathmandu, Nepal</strong></p>
+            <p style="margin-bottom: 0.5rem;">Serving Nepal, USA, Australia & Global Clients</p>
+            <p>Email: contact@techsapana.com</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 TechSapana Pvt. Ltd. All rights reserved.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="contactModalOverlay">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div>
+          <span class="eyebrow" style="margin-bottom: 0.35rem;">Direct Intake</span>
+          <h3 style="font-size: 1.35rem; font-weight: 800;">Start Your Project</h3>
+        </div>
+        <button class="modal-close-btn" id="closeModalBtn" aria-label="Close form">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <form id="projectScopingForm" class="modal-form" onsubmit="event.preventDefault(); handleFormSubmit();">
+        <div class="form-group">
+          <label for="clientName">Full Name *</label>
+          <input type="text" id="clientName" required placeholder="Your Name" class="form-input" />
+        </div>
+        <div class="form-group">
+          <label for="clientEmail">Business Email *</label>
+          <input type="email" id="clientEmail" required placeholder="you@company.com" class="form-input" />
+        </div>
+        <div class="form-group">
+          <label for="clientRegion">Your Primary Market *</label>
+          <select id="clientRegion" class="form-input" required>
+            <option value="NP">Nepal</option>
+            <option value="AU">Australia</option>
+            <option value="US">United States</option>
+            <option value="GLOBAL">Other Market</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="projectDetails">Brief Project Scope *</label>
+          <textarea id="projectDetails" rows="3" required placeholder="Tell us what you are looking to build..." class="form-input" style="resize: vertical;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+          Submit Inquiry
+        </button>
+        <div id="formFeedback" class="form-feedback-message"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Sticky Navbar
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 30) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // 2. Dark/Light Mode Switcher Logic
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      const themeIcon = document.getElementById('themeIcon');
+      const themeText = document.getElementById('themeText');
+      const htmlElement = document.documentElement;
+
+      const sunSVG = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
+      const moonSVG = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
+
+      themeToggleBtn.addEventListener('click', () => {
+        const currentTheme = htmlElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        htmlElement.setAttribute('data-theme', newTheme);
+        themeText.textContent = newTheme === 'dark' ? 'Dark' : 'Light';
+        themeIcon.innerHTML = newTheme === 'dark' ? moonSVG : sunSVG;
+      });
+
+      // 3. Hero Carousel Logic
+      const track = document.getElementById('sliderTrack');
+      const dots = document.querySelectorAll('.slider-dot');
+      const prevBtn = document.getElementById('prevSlideBtn');
+      const nextBtn = document.getElementById('nextSlideBtn');
+      const carouselContainer = document.getElementById('heroCarousel');
+      let currentSlide = 0;
+      const totalSlides = dots.length;
+      let autoPlayInterval;
+
+      function updateSlide(index) {
+        currentSlide = (index + totalSlides) % totalSlides;
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === currentSlide);
+        });
+      }
+
+      function nextSlide() {
+        updateSlide(currentSlide + 1);
+      }
+
+      function prevSlide() {
+        updateSlide(currentSlide - 1);
+      }
+
+      nextBtn.addEventListener('click', nextSlide);
+      prevBtn.addEventListener('click', prevSlide);
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const index = parseInt(dot.getAttribute('data-index'));
+          updateSlide(index);
+        });
+      });
+
+      // Autoplay
+      function startAutoplay() {
+        autoPlayInterval = setInterval(nextSlide, 4500);
+      }
+      function stopAutoplay() {
+        clearInterval(autoPlayInterval);
+      }
+
+      startAutoplay();
+      carouselContainer.addEventListener('mouseenter', stopAutoplay);
+      carouselContainer.addEventListener('mouseleave', startAutoplay);
+
+      // 4. Modal Handlers
+      const modalOverlay = document.getElementById('contactModalOverlay');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const openModalTriggers = document.querySelectorAll('a[href="#contact"]');
+
+      function openModal(e) {
+        if (e) e.preventDefault();
+        modalOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      openModalTriggers.forEach(btn => btn.addEventListener('click', openModal));
+      closeModalBtn?.addEventListener('click', closeModal);
+      modalOverlay?.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) closeModal();
+      });
+
+      // 5. Form Submit Handler
+      window.handleFormSubmit = function() {
+        const feedback = document.getElementById('formFeedback');
+        const form = document.getElementById('projectScopingForm');
+        feedback.textContent = "Thank you. Your inquiry has been sent to our team.";
+        feedback.className = "form-feedback-message success";
+        form.reset();
+        setTimeout(() => {
+          closeModal();
+          feedback.textContent = "";
+          feedback.className = "form-feedback-message";
+        }, 3000);
+      };
+    });
+  </script>
+</body>
+</html>
