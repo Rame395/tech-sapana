@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import PromoBanner from "@/components/PromoBanner";
 import MarqueeBanner from "@/components/MarqueeBanner";
 import FaqSection from "@/components/FaqSection";
+import HomeBlogSection from "@/components/HomeBlogSection";
 import { ShaderBackground } from "@/components/ui/hero-shader";
 import FloatingTechIcons from "@/components/ui/FloatingTechIcons";
 
@@ -373,6 +374,7 @@ export default function Home() {
         </div>
       </section>
 
+      <HomeBlogSection />
       <FaqSection />
 
       {/* FINAL CTA SECTION */}
