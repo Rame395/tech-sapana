@@ -148,3 +148,14 @@ model HeroSection {
   
   updatedAt        DateTime @updatedAt
 }
+
+model GlobalSettings {
+  id               String   @id @default("default")
+  phone            String   @default("+977 1-4000000")
+  address          String   @default("Baluwatar, Kathmandu 44600, Nepal")
+  email            String   @default("contact@techsapana.com")
+  operatingHours   String   @default("Sun – Fri (9:00 AM – 6:00 PM NPT)")
+  metaTitle        String   @default("TechSapana - Leading Tech Partner")
+  metaDescription  String   @default("TechSapana is a leading technology and software development company.")
+  updatedAt        DateTime @updatedAt
+}

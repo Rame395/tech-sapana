@@ -13,7 +13,8 @@ import {
   UserPlus,
   Megaphone,
   FileText,
-  Presentation
+  Presentation,
+  Settings
 } from "lucide-react";
 
 export default function AdminSidebar() {
@@ -27,6 +28,7 @@ export default function AdminSidebar() {
     { name: "Portfolio", href: "/admin/portfolio", icon: CreditCard },
     { name: "FAQ", href: "/admin/faq", icon: Wrench },
     { name: "Blog", href: "/admin/blog", icon: FileText },
+    { name: "Settings", href: "/admin/settings", icon: Settings },
   ];
 
   const accountLinks = [
@@ -39,7 +41,7 @@ export default function AdminSidebar() {
     <aside className="w-64 fixed h-full border-r border-white/10 bg-[#0F1535]/80 backdrop-blur-xl p-6 hidden md:flex flex-col">
       {/* Brand Logo */}
       <div className="flex items-center gap-3 mb-10 pl-2">
-        <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-extrabold text-[0.95rem] shadow-[inset_0_1px_2px_rgba(255,255,255,0.3),0_2px_10px_rgba(37,99,235,0.4)]">
+        <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center !text-white font-extrabold text-[0.95rem] shadow-[inset_0_1px_2px_rgba(255,255,255,0.3),0_2px_10px_rgba(37,99,235,0.4)]">
           TS
         </div>
         <span className="font-extrabold tracking-wider text-sm uppercase">TechSapana</span>
