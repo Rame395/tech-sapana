@@ -3,6 +3,9 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme inline {
+  --font-sans: var(--font-sans, "ui-sans-serif", "system-ui", "sans-serif");
+  --font-mono: var(--font-mono, "ui-monospace", "SFMono-Regular", "monospace");
+
   --color-brand-blue: #0052cc;
   --color-brand-blue-hover: #003ea3;
   --color-brand-blue-soft: rgba(0, 82, 204, 0.12);

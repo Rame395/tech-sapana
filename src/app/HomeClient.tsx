@@ -80,7 +80,7 @@ export default function HomeClient({
                 </span>
               </motion.div>
 
-              <motion.h1 variants={fadeInUp} className="text-[clamp(2.25rem,4vw,3.5rem)] font-[750] leading-[1.15] tracking-[-0.02em] mb-[1.25rem] !text-white drop-shadow-md whitespace-pre-wrap">
+              <motion.h1 variants={fadeInUp} className="text-[clamp(2rem,4vw,3.25rem)] font-[750] leading-[1.15] tracking-[-0.02em] mb-[1.25rem] !text-white drop-shadow-md whitespace-pre-wrap">
                 {heroData?.heading || "We Build Websites & Software That Move Your Business Forward."}
               </motion.h1>
 
@@ -240,7 +240,7 @@ export default function HomeClient({
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-[2.5rem] md:text-[3.25rem] font-[800] text-gray-900 dark:text-white mb-6 tracking-tight leading-[1.1]">
+              <h2 className="text-[1.75rem] md:text-[2.25rem] lg:text-[2.5rem] font-[800] text-gray-900 dark:text-white mb-6 tracking-tight leading-[1.2]">
                 Built in Nepal.<br />
                 <span className="text-blue-600 dark:text-blue-500">Thinking Globally.</span>
               </h2>
@@ -254,7 +254,7 @@ export default function HomeClient({
               </div>
               <Link
                 href="#contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold shadow-[0_4px_20px_rgba(37,99,235,0.3)] transition-all hover:-translate-y-[2px]"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-blue-600 hover:bg-blue-500 !text-white rounded-full font-bold shadow-[0_4px_20px_rgba(37,99,235,0.3)] transition-all hover:-translate-y-[2px]"
               >
                 Let's discuss your project
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -278,7 +278,7 @@ export default function HomeClient({
                 
                 <ul className="flex flex-col gap-8 relative z-10">
                   <li className="flex items-start gap-5 group">
-                    <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-800/50 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-800/50 group-hover:scale-110 group-hover:bg-blue-600 group-hover:!text-white transition-all duration-300">
                       <span className="text-blue-600 font-bold text-[0.8rem] group-hover:text-white transition-colors">NP</span>
                     </div>
                     <div>
@@ -323,8 +323,8 @@ export default function HomeClient({
               <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
               Tech Academy
             </div>
-            <h2 className="text-3xl md:text-5xl font-[800] text-text-main mb-6 tracking-tight leading-[1.1]">
-              Learn Technology.<br/>Build the Future.
+            <h2 className="text-[1.75rem] md:text-[2.25rem] lg:text-[2.5rem] font-[800] text-gray-900 dark:text-white mb-6 tracking-tight leading-[1.2]">
+              Learn Technology.<br/>Build the <span className="text-blue-600 dark:text-blue-500">Future.</span>
             </h2>
             <p className="text-lg text-text-muted leading-relaxed">
               Practical courses designed to help students, professionals, and business owners use modern technology confidently.
@@ -340,7 +340,7 @@ export default function HomeClient({
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-2xl group-hover:bg-blue-500/10 transition-colors"></div>
               
-              <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 mb-8 border border-blue-100 dark:border-blue-800/50 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500 shadow-sm">
+              <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 mb-8 border border-blue-100 dark:border-blue-800/50 group-hover:scale-110 group-hover:bg-blue-600 group-hover:!text-white transition-all duration-500 shadow-sm">
                 <Bot size={32} strokeWidth={1.5} />
               </div>
 
@@ -403,8 +403,8 @@ export default function HomeClient({
             <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-[80px] translate-y-1/2 translate-x-1/2"></div>
             
             <div className="relative z-10 max-w-3xl mx-auto">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-[800] text-white mb-6 tracking-tight leading-[1.1]">
-                Have a software idea?
+              <h2 className="text-[1.75rem] md:text-[2.25rem] lg:text-[2.5rem] font-[800] text-white mb-6 tracking-tight leading-[1.2]">
+                Have a <span className="text-blue-400">software idea?</span>
               </h2>
               <p className="text-xl md:text-2xl text-blue-100 mb-10 leading-relaxed font-medium">
                 Tell us what you're building. We'll help you turn the idea into a practical, scalable digital product.

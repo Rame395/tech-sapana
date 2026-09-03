@@ -66,7 +66,7 @@ export default function PromoBanner() {
 
       {/* Left side: Icon + Text */}
       <div className="flex flex-col md:flex-row items-center md:items-start lg:items-center gap-4 md:gap-6 z-10 text-center md:text-left w-full md:w-auto">
-        <div className="bg-blue-600 rounded-full p-4 text-white shadow-[0_0_20px_rgba(37,99,235,0.4)] flex-shrink-0 relative">
+        <div className="bg-blue-600 rounded-full p-4 !text-white shadow-[0_0_20px_rgba(37,99,235,0.4)] flex-shrink-0 relative">
           <AlarmClock size={28} strokeWidth={2.5} />
         </div>
         
@@ -94,7 +94,7 @@ export default function PromoBanner() {
           <TimerBox value={timeLeft.seconds} label="Secs" />
         </div>
 
-        <Link href={banner.buttonLink} className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 text-white font-extrabold px-6 py-3.5 rounded-full whitespace-nowrap transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)] hover:shadow-[0_0_25px_rgba(37,99,235,0.5)] flex items-center gap-2">
+        <Link href={banner.buttonLink} className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 !text-white font-extrabold px-6 py-3.5 rounded-full whitespace-nowrap transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)] hover:shadow-[0_0_25px_rgba(37,99,235,0.5)] flex items-center gap-2">
           {banner.buttonText} <ArrowRight size={18} strokeWidth={3} />
         </Link>
       </div>

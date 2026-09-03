@@ -68,7 +68,7 @@ export default function HeroForm({ initialData }: { initialData: any }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       {/* Left Content Settings */}
-      <div className="bg-bg-card border border-border-subtle rounded-xl p-6">
+      <div className="bg-[#0B132B] border border-white/10 shadow-2xl rounded-xl p-6">
         <h2 className="text-xl font-bold text-white mb-6">Left Content Settings</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -167,7 +167,7 @@ export default function HeroForm({ initialData }: { initialData: any }) {
       </div>
 
       {/* Right Slider Settings */}
-      <div className="bg-bg-card border border-border-subtle rounded-xl p-6">
+      <div className="bg-[#0B132B] border border-white/10 shadow-2xl rounded-xl p-6">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold text-white">Visual Slider Content</h2>
           <button
@@ -269,7 +269,7 @@ export default function HeroForm({ initialData }: { initialData: any }) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-70 disabled:hover:bg-blue-600 text-white font-bold rounded-lg transition-colors"
+          className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-70 disabled:hover:bg-blue-600 !text-white font-bold rounded-lg transition-colors"
         >
           {isSubmitting ? "Saving..." : <><Save size={18} /> Save Hero Section</>}
         </button>

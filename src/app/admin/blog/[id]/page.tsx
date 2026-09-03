@@ -2,7 +2,8 @@ import BlogForm from "../BlogForm";
 import { getPostById } from "@/app/actions/blog";
 import { notFound } from "next/navigation";
 
-export default async function EditBlogPage({ params }: { params: { id: string } }) {
+export default async function EditBlogPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const post = await getPostById(params.id);
   
   if (!post) {

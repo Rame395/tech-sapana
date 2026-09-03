@@ -6,7 +6,8 @@ import { Metadata } from "next";
 import { Clock, Calendar, ArrowLeft } from "lucide-react";
 import { getReadingTime } from "../page";
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const post = await prisma.post.findUnique({
     where: { slug: params.slug, status: "PUBLISHED" },
   });
@@ -29,7 +30,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+export default async function BlogPostPage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const post = await prisma.post.findUnique({
     where: { slug: params.slug, status: "PUBLISHED" },
   });
@@ -66,17 +68,17 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           Back to all posts
         </Link>
         
-        <header className="mb-12 text-center md:text-left">
+        <header className="mb-12 text-center">
           {post.category && (
-            <div className="text-brand-blue font-bold tracking-wider uppercase text-xs mb-4">
+            <div className="text-blue-600 font-bold tracking-wider uppercase text-xs mb-4">
               {post.category}
             </div>
           )}
-          <h1 className="text-4xl md:text-5xl font-[800] tracking-tight leading-[1.1] mb-6 text-text-main">
+          <h1 className="text-3xl md:text-4xl font-[800] tracking-tight leading-[1.2] mb-6 text-gray-900 dark:text-white">
             {post.title}
           </h1>
           
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-6 text-sm font-medium text-text-muted">
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm font-medium text-gray-500 dark:text-gray-400">
             <div className="flex items-center gap-2">
               <Calendar size={16} />
               <span>{new Date(post.createdAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
@@ -101,8 +103,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         )}
 
         <div 
-          className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-brand-blue hover:prose-a:text-brand-blue-hover prose-img:rounded-2xl prose-img:shadow-lg prose-p:leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: post.content }}
+          className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-[800] prose-headings:tracking-tight prose-a:text-blue-600 hover:prose-a:text-blue-500 prose-img:rounded-3xl prose-img:shadow-2xl prose-p:leading-[1.8] prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-li:text-gray-700 dark:prose-li:text-gray-300 break-words"
+          dangerouslySetInnerHTML={{ __html: post.content.replace(/&nbsp;/g, ' ') }}
         />
       </article>
     </main>

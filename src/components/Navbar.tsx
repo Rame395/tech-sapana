@@ -37,7 +37,7 @@ export default function Navbar() {
         
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-2 pl-2">
-          <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-extrabold text-[0.95rem] shadow-[inset_0_1px_2px_rgba(255,255,255,0.3),0_2px_10px_rgba(37,99,235,0.4)]">
+          <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center !text-white font-extrabold text-[0.95rem] shadow-[inset_0_1px_2px_rgba(255,255,255,0.3),0_2px_10px_rgba(37,99,235,0.4)]">
             TS
           </div>
           <span className="text-[1.25rem] font-extrabold text-gray-900 dark:text-white tracking-tight hidden sm:block">
@@ -98,7 +98,7 @@ export default function Navbar() {
 
           <Link
             href="/contact"
-            className="hidden lg:flex px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-full text-[0.85rem] font-bold shadow-[inset_0_1px_1px_rgba(255,255,255,0.3),0_4px_15px_rgba(37,99,235,0.4)] hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.3),0_6px_20px_rgba(37,99,235,0.5)] hover:-translate-y-[1px] transition-all whitespace-nowrap"
+            className="hidden lg:flex px-5 py-2 bg-blue-600 hover:bg-blue-500 !text-white rounded-full text-[0.85rem] font-bold shadow-[inset_0_1px_1px_rgba(255,255,255,0.3),0_4px_15px_rgba(37,99,235,0.4)] hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.3),0_6px_20px_rgba(37,99,235,0.5)] hover:-translate-y-[1px] transition-all whitespace-nowrap"
           >
             Let's Talk
           </Link>

@@ -36,7 +36,7 @@ export default function CourseList({ initialCourses }: { initialCourses: any[] }
         </div>
         <Link 
           href="/admin/courses/new"
-          className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl flex items-center gap-2 font-semibold shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-all"
+          className="bg-blue-600 hover:bg-blue-500 !text-white px-4 py-2 rounded-xl flex items-center gap-2 font-semibold shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-all"
         >
           <Plus size={18} /> Add Course
         </Link>

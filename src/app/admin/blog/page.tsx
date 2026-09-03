@@ -17,7 +17,7 @@ export default async function AdminBlogList() {
         <h1 className="text-3xl font-bold">Blog Posts</h1>
         <Link
           href="/admin/blog/new"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-md font-bold transition-colors"
+          className="bg-blue-600 hover:bg-blue-700 !text-white px-5 py-2.5 rounded-md font-bold transition-colors"
         >
           Create New Post
         </Link>

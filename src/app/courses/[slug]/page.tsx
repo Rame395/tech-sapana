@@ -31,7 +31,7 @@ export default function CourseDetails() {
                   active software engineers.
                 </p>
                 <div className="flex flex-wrap items-center gap-4">
-                  <button className="px-6 py-3 bg-brand-blue hover:bg-brand-blue-hover text-white rounded-md font-bold shadow-[0_4px_20px_rgba(0,82,204,0.35)] transition-all">
+                  <button className="px-6 py-3 bg-brand-blue hover:bg-brand-blue-hover !text-white rounded-md font-bold shadow-[0_4px_20px_rgba(0,82,204,0.35)] transition-all">
                     Enroll In Batch 04
                   </button>
                   <a
@@ -225,7 +225,7 @@ export default function CourseDetails() {
                       <div className="text-sm font-bold text-brand-blue">Free Demo Classroom</div>
                       <div className="text-xs text-text-muted">Direct Google Meet Access</div>
                     </div>
-                    <a href="https://meet.google.com/new" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-brand-blue text-white text-xs font-bold rounded hover:bg-brand-blue-hover transition-colors">
+                    <a href="https://meet.google.com/new" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-brand-blue !text-white text-xs font-bold rounded hover:bg-brand-blue-hover transition-colors">
                       Join Live &rarr;
                     </a>
                   </div>
@@ -250,7 +250,7 @@ export default function CourseDetails() {
                   </div>
 
                   <div className="flex flex-col gap-3">
-                    <button className="w-full py-3.5 bg-brand-blue hover:bg-brand-blue-hover text-white rounded-lg font-bold shadow-[0_4px_20px_rgba(0,82,204,0.35)] transition-all">
+                    <button className="w-full py-3.5 bg-brand-blue hover:bg-brand-blue-hover !text-white rounded-lg font-bold shadow-[0_4px_20px_rgba(0,82,204,0.35)] transition-all">
                       Enroll In Batch 04
                     </button>
                     <button className="w-full py-3.5 bg-bg-card hover:bg-bg-card-hover border border-border-medium hover:border-brand-blue text-text-main rounded-lg font-bold transition-all">

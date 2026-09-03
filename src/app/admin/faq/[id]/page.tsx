@@ -2,9 +2,9 @@ import { getFaq } from "@/app/actions/faq";
 import FaqForm from "../FaqForm";
 import { notFound } from "next/navigation";
 
-export default async function EditFaq({ params }: { params: { id: string } }) {
-  const { id } = await params;
-  const faq = await getFaq(id);
+export default async function EditFaq(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
+  const faq = await getFaq(params.id);
 
   if (!faq) notFound();
 

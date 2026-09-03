@@ -8,7 +8,7 @@ export default function Footer() {
           {/* Column 1: Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-[30px] h-[30px] bg-brand-blue rounded-[6px] flex items-center justify-center text-white font-bold text-[0.95rem]">
+              <div className="w-[30px] h-[30px] bg-brand-blue rounded-[6px] flex items-center justify-center !text-white font-bold text-[0.95rem]">
                 TS
               </div>
               <span className="text-[1.35rem] font-extrabold text-white tracking-[-0.03em]">

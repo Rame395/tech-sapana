@@ -147,7 +147,7 @@ export default function BannerSettings() {
           <button 
             type="submit" 
             disabled={saving}
-            className="px-8 py-3 rounded-xl font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all flex items-center gap-2 disabled:opacity-50"
+            className="px-8 py-3 rounded-xl font-bold bg-blue-600 hover:bg-blue-500 !text-white shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all flex items-center gap-2 disabled:opacity-50"
           >
             <Save size={18} /> {saving ? "Saving..." : "Save All Settings"}
           </button>

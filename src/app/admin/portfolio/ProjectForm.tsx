@@ -143,7 +143,7 @@ export default function ProjectForm({ project }: { project?: any }) {
 
       <div className="flex justify-end gap-4">
         <button type="button" onClick={() => router.back()} className="px-6 py-3 border border-white/20 text-white rounded-xl font-bold hover:bg-white/10 transition-colors">Cancel</button>
-        <button type="submit" disabled={loading} className="px-8 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 disabled:opacity-50 shadow-lg shadow-blue-600/30 transition-all">
+        <button type="submit" disabled={loading} className="px-8 py-3 bg-blue-600 !text-white rounded-xl font-bold hover:bg-blue-700 disabled:opacity-50 shadow-lg shadow-blue-600/30 transition-all">
           {loading ? "Saving..." : "Save Project"}
         </button>
       </div>

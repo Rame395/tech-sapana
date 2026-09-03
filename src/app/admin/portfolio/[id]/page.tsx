@@ -2,9 +2,9 @@ import { getProject } from "@/app/actions/portfolio";
 import ProjectForm from "../ProjectForm";
 import { notFound } from "next/navigation";
 
-export default async function EditProject({ params }: { params: { id: string } }) {
-  const { id } = await params;
-  const project = await getProject(id);
+export default async function EditProject(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
+  const project = await getProject(params.id);
 
   if (!project) notFound();
 

@@ -54,7 +54,7 @@ export default function BlogForm({ post }: { post?: any }) {
     // Meta Description Check
     if (formData.metaDescription.toLowerCase().includes(keyword)) {
       score += 30;
-      msgs.push("✅ Focus keyword found in Meta Description.");
+      msgs.push("Focus keyword found in Meta Description.");
     } else {
       msgs.push("❌ Focus keyword missing from Meta Description.");
     }
@@ -120,7 +120,7 @@ export default function BlogForm({ post }: { post?: any }) {
         <button
           type="submit"
           disabled={loading}
-          className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-2.5 rounded-md font-bold transition-colors disabled:opacity-50"
+          className="bg-blue-500 hover:bg-blue-600 !text-white px-8 py-2.5 rounded-md font-bold transition-colors disabled:opacity-50"
         >
           {loading ? "Saving..." : "Save Post"}
         </button>
@@ -178,7 +178,7 @@ export default function BlogForm({ post }: { post?: any }) {
                 <label className="block text-sm font-medium text-gray-300 mb-1">Focus Keyword</label>
                 <input
                   type="text"
-                  placeholder="e.g. PTE reading tips"
+                  placeholder=""
                   value={formData.focusKeyword}
                   onChange={(e) => setFormData({ ...formData, focusKeyword: e.target.value })}
                   className="w-full p-3 bg-[#1e293b] border border-gray-700 rounded-md text-white focus:ring-1 focus:ring-blue-500"
@@ -264,7 +264,7 @@ export default function BlogForm({ post }: { post?: any }) {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-md font-bold transition-colors mt-2"
+                className="w-full bg-blue-500 hover:bg-blue-600 !text-white py-3 rounded-md font-bold transition-colors mt-2"
               >
                 {loading ? "Saving..." : "Save Post"}
               </button>

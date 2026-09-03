@@ -30,21 +30,17 @@ export default async function HomeBlogSection() {
   return (
     <section className="py-24 bg-bg-primary border-b border-border-subtle relative overflow-hidden">
       <div className="w-full max-w-[1240px] mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div className="max-w-2xl">
-            <h2 className="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">
-              Latest from our Blog
-            </h2>
-            <p className="text-lg text-text-muted">
-              Insights on engineering, design, and building scalable tech products.
-            </p>
+        <div className="flex flex-col items-center text-center mb-16 gap-6 max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 text-brand-blue font-bold text-xs uppercase tracking-widest mb-2">
+            <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+            Insights & Updates
           </div>
-          <Link 
-            href="/blog" 
-            className="inline-flex items-center gap-2 text-brand-blue font-bold hover:text-brand-blue-hover transition-colors"
-          >
-            View all articles <ArrowRight size={18} />
-          </Link>
+          <h2 className="text-[1.75rem] md:text-[2.25rem] lg:text-[2.5rem] font-[800] text-gray-900 dark:text-white mb-2 tracking-tight leading-[1.2]">
+            Latest from our <span className="text-blue-600 dark:text-blue-500">Blog.</span>
+          </h2>
+          <p className="text-lg text-text-muted leading-relaxed mb-4">
+            Insights on engineering, design, and building scalable tech products.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -98,6 +94,16 @@ export default async function HomeBlogSection() {
               </Link>
             );
           })}
+        </div>
+
+        <div className="mt-16 flex justify-center">
+          <Link 
+            href="/blog" 
+            className="inline-flex items-center gap-2 !text-white bg-blue-600 hover:bg-blue-700 px-8 py-3.5 rounded-full font-bold transition-all shadow-[0_4px_15px_rgba(37,99,235,0.3)] hover:shadow-[0_6px_20px_rgba(37,99,235,0.4)] hover:-translate-y-1"
+          >
+            View all articles
+            <ArrowRight size={18} strokeWidth={3} />
+          </Link>
         </div>
       </div>
     </section>
