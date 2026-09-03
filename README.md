@@ -11,7 +11,7 @@ This repository contains the full source code for the public-facing website, as 
 - **Framework:** [Next.js](https://nextjs.org/) (App Router)
 - **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) & Vanilla CSS
 - **Animations:** [Framer Motion](https://www.framer.com/motion/)
-- **Database:** SQLite (managed via [Prisma ORM](https://www.prisma.io/))
+- **Database:** PostgreSQL (managed via [Prisma ORM](https://www.prisma.io/))
 - **Authentication:** [NextAuth.js](https://next-auth.js.org/) (Secure credential-based login)
 - **Typography:** [Inter](https://fonts.google.com/specimen/Inter) (UI/Branding) & [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) (Code/Technical)
 - **Icons:** [Lucide React](https://lucide.dev/)
@@ -41,6 +41,7 @@ A fully custom-built dashboard (`/admin`) accessible only to authenticated users
 
 ### Prerequisites
 Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
+Ensure you have a PostgreSQL database connection string ready.
 
 ### 1. Clone the repository
 ```bash
@@ -54,7 +55,7 @@ npm install
 ```
 
 ### 3. Setup the Database
-This project uses Prisma with SQLite for easy setup. First, generate the Prisma client and push the schema to the database:
+This project uses Prisma with PostgreSQL. First, ensure your `.env` file has a valid `DATABASE_URL`, then generate the Prisma client and push the schema to the database:
 ```bash
 npx prisma generate
 npx prisma db push
@@ -68,6 +69,7 @@ npx prisma studio
 ### 4. Configure Environment Variables
 Create a `.env` file in the root directory and add the necessary environment variables. Example:
 ```env
+DATABASE_URL="postgresql://user:password@localhost:5432/techsapana"
 # Secret for NextAuth (generate one using `openssl rand -base64 32`)
 NEXTAUTH_SECRET="your-super-secret-key"
 NEXTAUTH_URL="http://localhost:3000"
