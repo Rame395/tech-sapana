@@ -12,7 +12,8 @@ import {
   LogIn, 
   UserPlus,
   Megaphone,
-  FileText
+  FileText,
+  Presentation
 } from "lucide-react";
 
 export default function AdminSidebar() {
@@ -20,6 +21,7 @@ export default function AdminSidebar() {
 
   const navLinks = [
     { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
+    { name: "Hero", href: "/admin/hero", icon: Presentation },
     { name: "Courses", href: "/admin/courses", icon: Table },
     { name: "Banner", href: "/admin/banner", icon: Megaphone },
     { name: "Portfolio", href: "/admin/portfolio", icon: CreditCard },

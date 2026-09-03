@@ -21,31 +21,22 @@ const staggerContainer = {
   visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
 };
 
-export default function HomeClient({ blogSection }: { blogSection: React.ReactNode }) {
+export default function HomeClient({ 
+  blogSection,
+  heroData
+}: { 
+  blogSection: React.ReactNode,
+  heroData?: any
+}) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const slides = [
-    {
-      img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80",
-      badge: "📡 Live Systems",
-      title: "Client Software & Web Engineering",
-      subtitle: "Kathmandu Development Studio",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&q=80",
-      badge: "🤝 Client Partners",
-      title: "Architecture & UX Strategy Sessions",
-      subtitle: "Serving Nepal, USA & Australia",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80",
-      badge: "🏢 TechSapana HQ",
-      title: "Engineering & AI Innovation Lab",
-      subtitle: "High-Performance Dedicated Teams",
-    },
-  ];
+  // Use dynamic slides if available, otherwise fallback
+  const slides = (heroData?.slides && typeof heroData.slides === 'string' 
+    ? JSON.parse(heroData.slides) 
+    : heroData?.slides) || [];
 
   useEffect(() => {
+    if (slides.length <= 1) return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
@@ -82,35 +73,33 @@ export default function HomeClient({ blogSection }: { blogSection: React.ReactNo
             <motion.div variants={staggerContainer} initial="hidden" animate="visible">
               <motion.div variants={fadeInUp} className="flex flex-wrap justify-center lg:justify-start items-center gap-[0.75rem] mb-[1.25rem]">
                 <span className="inline-flex items-center gap-2 text-[0.75rem] font-bold tracking-[0.1em] uppercase !text-blue-200 bg-blue-500/20 px-[0.9rem] py-[0.3rem] rounded-full border border-blue-400/30 backdrop-blur-md">
-                  WEB • SOFTWARE • AI SOLUTIONS
+                  {heroData?.badgeText || "WEB • SOFTWARE • AI SOLUTIONS"}
                 </span>
                 <span className="text-[0.85rem] font-semibold !text-blue-200 tracking-tight">
-                  Turning Dreams Into Digital Reality
+                  {heroData?.badgeSubText || "Turning Dreams Into Digital Reality"}
                 </span>
               </motion.div>
 
-              <motion.h1 variants={fadeInUp} className="text-[clamp(2.25rem,4vw,3.5rem)] font-[750] leading-[1.15] tracking-[-0.02em] mb-[1.25rem] !text-white drop-shadow-md">
-                We Build Websites &amp; Software That Move Your Business Forward.
+              <motion.h1 variants={fadeInUp} className="text-[clamp(2.25rem,4vw,3.5rem)] font-[750] leading-[1.15] tracking-[-0.02em] mb-[1.25rem] !text-white drop-shadow-md whitespace-pre-wrap">
+                {heroData?.heading || "We Build Websites & Software That Move Your Business Forward."}
               </motion.h1>
 
-              <motion.p variants={fadeInUp} className="text-[1.05rem] md:text-[1.125rem] !text-gray-100 leading-[1.65] mb-[2.5rem] max-w-[560px] mx-auto lg:mx-0 drop-shadow-sm">
-                From high-converting websites to custom enterprise platforms,
-                TechSapana designs and delivers digital products engineered for
-                real revenue growth.
+              <motion.p variants={fadeInUp} className="text-[1.05rem] md:text-[1.125rem] !text-gray-100 leading-[1.65] mb-[2.5rem] max-w-[560px] mx-auto lg:mx-0 drop-shadow-sm whitespace-pre-wrap">
+                {heroData?.description || "From high-converting websites to custom enterprise platforms, TechSapana designs and delivers digital products engineered for real revenue growth."}
               </motion.p>
 
               <motion.div variants={fadeInUp} className="flex flex-wrap justify-center lg:justify-start items-center gap-[1rem]">
                 <Link
-                  href="#contact"
+                  href={heroData?.primaryBtnLink || "#contact"}
                   className="inline-flex items-center justify-center gap-[0.5rem] text-[0.9rem] font-bold px-[1.5rem] py-[0.8rem] rounded-md bg-blue-600 hover:bg-blue-500 !text-white shadow-[0_4px_20px_rgba(37,99,235,0.4)] transition-all hover:-translate-y-[1px]"
                 >
-                  Start Your Project
+                  {heroData?.primaryBtnText || "Start Your Project"}
                 </Link>
                 <Link
-                  href="#about"
+                  href={heroData?.secondaryBtnLink || "#about"}
                   className="inline-flex items-center justify-center gap-[0.5rem] text-[0.9rem] font-bold px-[1.5rem] py-[0.8rem] rounded-md bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 !text-white shadow-sm transition-all hover:-translate-y-[1px] backdrop-blur-md"
                 >
-                  Learn More About Us
+                  {heroData?.secondaryBtnText || "Learn More About Us"}
                 </Link>
               </motion.div>
             </motion.div>
@@ -124,7 +113,7 @@ export default function HomeClient({ blogSection }: { blogSection: React.ReactNo
             >
               <div className="absolute top-[1.25rem] right-[1.25rem] z-30 bg-[#07090E]/85 border border-border-medium backdrop-blur-[10px] px-[0.85rem] py-[0.4rem] rounded-full flex items-center gap-[0.45rem] text-[0.785rem] font-bold text-white shadow-[0_4px_15px_rgba(0,0,0,0.4)]">
                 <span className="w-[7px] h-[7px] rounded-full bg-[#10B981] shadow-[0_0_0_3px_rgba(16,185,129,0.25)]"></span>
-                Web &amp; Software Engineers
+                {heroData?.sliderBadge || "Web & Software Engineers"}
               </div>
 
               <div className="relative rounded-[14px] overflow-hidden aspect-[4/3] bg-black">
@@ -132,12 +121,13 @@ export default function HomeClient({ blogSection }: { blogSection: React.ReactNo
                   className="flex w-full h-full transition-transform duration-700 ease-in-out"
                   style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                 >
-                  {slides.map((slide, idx) => (
+                  {slides.map((slide: any, idx: number) => (
                     <div key={idx} className="min-w-full h-full relative">
                       <Image
                         src={slide.img}
                         alt="Engineering team"
                         fill
+
                         className="object-cover"
                         priority={idx === 0}
                       />
@@ -161,7 +151,7 @@ export default function HomeClient({ blogSection }: { blogSection: React.ReactNo
 
               <div className="flex items-center justify-between mt-[0.85rem] px-[0.5rem]">
                 <div className="flex items-center gap-[0.5rem]">
-                  {slides.map((_, i) => (
+                  {slides.map((_: any, i: number) => (
                     <button
                       key={i}
                       onClick={() => setCurrentSlide(i)}

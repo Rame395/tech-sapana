@@ -128,3 +128,23 @@ model Post {
   updatedAt       DateTime @updatedAt
 }
 
+
+model HeroSection {
+  id               String   @id @default("default")
+  badgeText        String   @default("WEB • SOFTWARE • AI SOLUTIONS")
+  badgeSubText     String   @default("Turning Dreams Into Digital Reality")
+  heading          String   @default("We Build Websites & Software That Move Your Business Forward.")
+  description      String   @default("From high-converting websites to custom enterprise platforms, TechSapana designs and delivers digital products engineered for real revenue growth.")
+  primaryBtnText   String   @default("Start Your Project")
+  primaryBtnLink   String   @default("#contact")
+  secondaryBtnText String   @default("Learn More About Us")
+  secondaryBtnLink String   @default("#about")
+  
+  // Right side slider box text
+  sliderBadge      String   @default("Web & Software Engineers")
+  
+  // Slides as JSON (array of { img, badge, title, subtitle })
+  slides           Json     @default("[{\"img\":\"https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80\",\"badge\":\"📡 Live Systems\",\"title\":\"Client Software & Web Engineering\",\"subtitle\":\"Kathmandu Development Studio\"}]")
+  
+  updatedAt        DateTime @updatedAt
+}
