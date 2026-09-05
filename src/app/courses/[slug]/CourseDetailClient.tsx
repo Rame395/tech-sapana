@@ -106,18 +106,6 @@ export default function CourseDetailClient({
                 <div id="overview" className="scroll-mt-32">
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
                     <h2 className="text-3xl font-extrabold text-text-main">What You Will Master</h2>
-                    {course.syllabusUrl && (
-                      <a 
-                        href={course.syllabusUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-brand-blue hover:bg-brand-blue-hover !text-white rounded-xl font-extrabold transition-all shadow-[0_4px_20px_rgba(0,82,204,0.35)] hover:-translate-y-1"
-                        title="View / Download Syllabus Document"
-                      >
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                        View / Download Syllabus
-                      </a>
-                    )}
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {course.highlights?.map((highlight: string, i: number) => (
@@ -164,19 +152,23 @@ export default function CourseDetailClient({
                   </div>
                 )}
 
-                {/* PDF VIEWER SECTION */}
-                {course.syllabusUrl && course.syllabusUrl.toLowerCase().endsWith('.pdf') && (
-                  <div id="syllabus-pdf" className="scroll-mt-32">
-                    <h2 className="text-3xl font-extrabold text-text-main mb-8">Detailed Syllabus Document</h2>
-                    <div className="w-full h-[600px] md:h-[800px] rounded-2xl overflow-hidden border border-border-medium shadow-[0_10px_30px_rgba(0,0,0,0.05)] bg-white">
-                      <iframe 
-                        src={`${course.syllabusUrl}#toolbar=0`} 
-                        className="w-full h-full border-none"
-                        title="Course Syllabus PDF"
+                {/* DETAILED CONTENT (RICH TEXT) SECTION */}
+                {course.detailedDescription && (
+                  <div id="details" className="scroll-mt-32">
+                    <div className="bg-bg-secondary border border-border-subtle rounded-2xl p-6 md:p-10 shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
+                      <div 
+                        className="prose dark:prose-invert prose-brand max-w-none 
+                                   prose-headings:font-extrabold prose-headings:text-text-main prose-headings:tracking-tight 
+                                   prose-p:text-text-muted prose-p:leading-relaxed 
+                                   prose-a:text-brand-blue prose-a:no-underline hover:prose-a:underline
+                                   prose-strong:text-text-main prose-strong:font-bold
+                                   prose-ul:text-text-muted prose-li:marker:text-brand-blue"
+                        dangerouslySetInnerHTML={{ __html: course.detailedDescription }} 
                       />
                     </div>
                   </div>
                 )}
+
 
                 {/* TOOLS SECTION */}
                 {course.tools?.length > 0 && (
