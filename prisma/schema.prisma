@@ -15,8 +15,6 @@ model User {
   name      String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  
-  enrollments Enrollment[]
 }
 
 enum Role {
@@ -42,19 +40,53 @@ model Course {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  enrollments Enrollment[]
+  // New fields for detail page
+  duration      String?  @default("4 Weeks")
+  availableSeats Int?    @default(20)
+  instructorId  String?
+  classTiming   String?
+  
+  enrollments   Enrollment[]
+  modules       CourseModule[]
+  tools         CourseTool[]
+
+  // Optional relation to TeamMember for instructor details
+  instructor    TeamMember? @relation(fields: [instructorId], references: [id])
+}
+
+model CourseModule {
+  id          String   @id @default(cuid())
+  courseId    String
+  weekLabel   String   // e.g., "WEEK 01"
+  title       String   // e.g., "Foundations of AI"
+  lessons     String[] // Array of bullet points
+  order       Int      @default(0)
+  
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+}
+
+model CourseTool {
+  id          String   @id @default(cuid())
+  courseId    String
+  icon        String   // e.g., "⚡", "🤖"
+  name        String
+  description String
+  order       Int      @default(0)
+
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
 }
 
 model Enrollment {
-  id        String   @id @default(cuid())
-  userId    String
-  courseId  String
-  createdAt DateTime @default(now())
+  id                   String   @id @default(cuid())
+  name                 String
+  email                String
+  phone                String
+  courseId             String
+  paymentScreenshotUrl String?
+  status               String   @default("Pending Verification") // "Pending Verification", "Verified", "Rejected"
+  createdAt            DateTime @default(now())
   
-  user      User     @relation(fields: [userId], references: [id])
-  course    Course   @relation(fields: [courseId], references: [id])
-  
-  @@unique([userId, courseId])
+  course               Course   @relation(fields: [courseId], references: [id])
 }
 
 model ContactMessage {
@@ -157,6 +189,10 @@ model GlobalSettings {
   operatingHours   String   @default("Sun – Fri (9:00 AM – 6:00 PM NPT)")
   metaTitle        String   @default("TechSapana - Leading Tech Partner")
   metaDescription  String   @default("TechSapana is a leading technology and software development company.")
+  
+  // E-commerce/Course settings
+  paymentQrImage   String?
+
   updatedAt        DateTime @updatedAt
 }
 
@@ -191,4 +227,18 @@ model TeamMember {
   order       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  
+  courses     Course[]
+}
+
+model Stat {
+  id        String   @id @default(cuid())
+  value     String
+  symbol    String?
+  title     String
+  desc      String
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

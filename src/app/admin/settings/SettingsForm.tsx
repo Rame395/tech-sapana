@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { updateGlobalSettings, resetAdminPassword } from "@/app/actions/settings";
+import ImageUploader from "@/components/ImageUploader";
 
 type GlobalSettings = {
   phone: string;
@@ -10,6 +11,7 @@ type GlobalSettings = {
   operatingHours: string;
   metaTitle: string;
   metaDescription: string;
+  paymentQrImage: string | null;
 };
 
 export default function SettingsForm({ settings }: { settings: GlobalSettings }) {
@@ -20,12 +22,18 @@ export default function SettingsForm({ settings }: { settings: GlobalSettings })
   const [resetMessage, setResetMessage] = useState("");
   const [resetError, setResetError] = useState("");
 
+  const [paymentQrImage, setPaymentQrImage] = useState<string | null>(settings.paymentQrImage || null);
+
   const handleSettingsSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSaving(true);
     setSaveMessage("");
     
     const formData = new FormData(e.currentTarget);
+    if (paymentQrImage) {
+      formData.append("paymentQrImage", paymentQrImage);
+    }
+
     try {
       await updateGlobalSettings(formData);
       setSaveMessage("Settings updated successfully!");
@@ -62,7 +70,7 @@ export default function SettingsForm({ settings }: { settings: GlobalSettings })
       <div className="bg-[#1a1a2e] rounded-xl border border-white/5 shadow-2xl overflow-hidden">
         <div className="px-6 py-4 border-b border-white/5 bg-black/20">
           <h2 className="text-xl font-bold text-white">Global Configuration</h2>
-          <p className="text-sm text-gray-400 mt-1">Manage contact info and SEO metadata</p>
+          <p className="text-sm text-gray-400 mt-1">Manage contact info, SEO metadata, and payment settings.</p>
         </div>
         <form onSubmit={handleSettingsSubmit} className="p-6 flex flex-col gap-5">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -96,6 +104,19 @@ export default function SettingsForm({ settings }: { settings: GlobalSettings })
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-1">SEO Meta Description</label>
             <textarea name="metaDescription" defaultValue={settings.metaDescription} rows={3} required className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500 resize-none"></textarea>
+          </div>
+
+          <hr className="border-white/5 my-2" />
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-1">Course Payment QR Code (eSewa/Khalti)</label>
+            <p className="text-xs text-gray-500 mb-3">This QR code will be displayed to users during course checkout.</p>
+            <div className="w-64">
+              <ImageUploader 
+                value={paymentQrImage || ""}
+                onChange={(url) => setPaymentQrImage(url || null)}
+              />
+            </div>
           </div>
 
           <div className="flex items-center gap-4 mt-2">

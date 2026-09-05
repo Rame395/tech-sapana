@@ -24,6 +24,8 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
   const [badgeText2, setBadgeText2] = useState(initialData?.badgeText2 || "");
   const [startDateText, setStartDateText] = useState(initialData?.startDateText || "");
   const [scheduleText, setScheduleText] = useState(initialData?.scheduleText || "");
+  const [classTiming, setClassTiming] = useState(initialData?.classTiming || "");
+  const [availableSeats, setAvailableSeats] = useState(initialData?.availableSeats || 20);
   
   const initialHighlights = initialData?.highlights ? [...initialData.highlights] : ["", "", ""];
   const [highlights, setHighlights] = useState(initialHighlights);
@@ -61,6 +63,8 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
       badgeText2: badgeText2 || null,
       startDateText: startDateText || null,
       scheduleText: scheduleText || null,
+      classTiming: classTiming || null,
+      availableSeats: Number(availableSeats),
       highlights: highlights.filter(h => h.trim() !== ""),
       published 
     };
@@ -143,7 +147,15 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
             </div>
             <div>
               <label className="block text-xs font-bold text-white/60 uppercase mb-2">Schedule Text</label>
-              <input type="text" value={scheduleText} onChange={e => setScheduleText(e.target.value)} className="w-full bg-[#0F1535] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="e.g. 7:00 PM - 8:30 PM NPT (Mon, Wed, Fri)" />
+              <input type="text" value={scheduleText} onChange={e => setScheduleText(e.target.value)} className="w-full bg-[#0F1535] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="e.g. Mon, Wed, Fri" />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-white/60 uppercase mb-2">Class Timing</label>
+              <input type="text" value={classTiming} onChange={e => setClassTiming(e.target.value)} className="w-full bg-[#0F1535] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="e.g. 7:00 PM - 8:30 PM NPT" />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-white/60 uppercase mb-2">Available Seats</label>
+              <input type="number" value={availableSeats} onChange={e => setAvailableSeats(Number(e.target.value))} className="w-full bg-[#0F1535] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" />
             </div>
           </div>
 

@@ -92,10 +92,12 @@ const methodologyStages = [
 
 export default function AboutClient({ 
   leadershipProfile, 
-  teamMembers 
+  teamMembers,
+  stats = []
 }: { 
   leadershipProfile: LeadershipProfile;
   teamMembers: TeamMember[];
+  stats?: any[];
 }) {
   const [activeStage, setActiveStage] = useState(0);
 
@@ -156,22 +158,12 @@ export default function AboutClient({
 
                 <div className="p-8 flex flex-col gap-6 flex-grow">
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-gray-50 dark:bg-white/5 p-4 rounded-xl border border-gray-100 dark:border-white/5 text-center">
-                      <div className="text-3xl font-black text-gray-900 dark:text-white mb-1">5<span className="text-blue-600">+</span></div>
-                      <div className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Years Operating</div>
-                    </div>
-                    <div className="bg-gray-50 dark:bg-white/5 p-4 rounded-xl border border-gray-100 dark:border-white/5 text-center">
-                      <div className="text-3xl font-black text-gray-900 dark:text-white mb-1">100<span className="text-blue-600">+</span></div>
-                      <div className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Audited Projects</div>
-                    </div>
-                    <div className="bg-gray-50 dark:bg-white/5 p-4 rounded-xl border border-gray-100 dark:border-white/5 text-center">
-                      <div className="text-3xl font-black text-gray-900 dark:text-white mb-1">3<span className="text-blue-600">+</span></div>
-                      <div className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Core Markets</div>
-                    </div>
-                    <div className="bg-gray-50 dark:bg-white/5 p-4 rounded-xl border border-gray-100 dark:border-white/5 text-center">
-                      <div className="text-3xl font-black text-gray-900 dark:text-white mb-1">99.9<span className="text-blue-600">%</span></div>
-                      <div className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Reliability Rate</div>
-                    </div>
+                    {stats.map((stat, i) => (
+                      <div key={i} className="bg-gray-50 dark:bg-white/5 p-4 rounded-xl border border-gray-100 dark:border-white/5 text-center">
+                        <div className="text-3xl font-black text-gray-900 dark:text-white mb-1">{stat.value}<span className="text-blue-600">{stat.symbol}</span></div>
+                        <div className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">{stat.title}</div>
+                      </div>
+                    ))}
                   </div>
 
                   <div className="mt-auto bg-gray-900 dark:bg-black/50 text-gray-300 font-mono text-sm p-4 rounded-xl border border-gray-800 dark:border-white/10 flex justify-between items-center">

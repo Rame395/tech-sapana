@@ -16,7 +16,9 @@ import {
   Presentation,
   Settings,
   Layers,
-  Users
+  Users,
+  BarChart,
+  ClipboardList
 } from "lucide-react";
 
 export default function AdminSidebar() {
@@ -28,10 +30,12 @@ export default function AdminSidebar() {
     { name: "Team", href: "/admin/team", icon: Users },
     { name: "Services", href: "/admin/services", icon: Layers },
     { name: "Courses", href: "/admin/courses", icon: Table },
+    { name: "Enrollments", href: "/admin/enrollments", icon: ClipboardList },
     { name: "Banner", href: "/admin/banner", icon: Megaphone },
     { name: "Portfolio", href: "/admin/portfolio", icon: CreditCard },
     { name: "FAQ", href: "/admin/faq", icon: Wrench },
     { name: "Blog", href: "/admin/blog", icon: FileText },
+    { name: "Stats", href: "/admin/stats", icon: BarChart },
     { name: "Settings", href: "/admin/settings", icon: Settings },
   ];
 

@@ -23,10 +23,12 @@ const staggerContainer = {
 
 export default function HomeClient({ 
   blogSection,
-  heroData
+  heroData,
+  stats = []
 }: { 
   blogSection: React.ReactNode,
-  heroData?: any
+  heroData?: any,
+  stats?: any[]
 }) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -201,12 +203,7 @@ export default function HomeClient({
             viewport={{ once: true, margin: "-100px" }}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
           >
-            {[
-              { num: "50", sym: "+", title: "Projects Engineered", desc: "Custom web & software platforms" },
-              { num: "30", sym: "+", title: "Businesses Empowered", desc: "SMEs and fast-scaling enterprises" },
-              { num: "3", sym: "+", title: "Global Markets", desc: "Active engagements in NP, US & AU" },
-              { num: "99.9", sym: "%", title: "Reliability", desc: "Continuous uptime & deployments" },
-            ].map((metric, i) => (
+            {stats.map((metric: any, i: number) => (
               <motion.div
                 key={i}
                 variants={fadeInUp}
@@ -215,8 +212,8 @@ export default function HomeClient({
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent dark:from-blue-900/10 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 
                 <div className="relative z-10 text-[3rem] font-[800] tracking-tighter mb-2 flex items-baseline justify-center gap-1 text-gray-900 dark:text-white">
-                  {metric.num}
-                  <span className="text-blue-600 dark:text-blue-500 text-[2.5rem]">{metric.sym}</span>
+                  {metric.value}
+                  <span className="text-blue-600 dark:text-blue-500 text-[2.5rem]">{metric.symbol}</span>
                 </div>
                 <div className="relative z-10 text-[1.1rem] font-bold text-gray-800 dark:text-gray-100 mb-2 tracking-tight">
                   {metric.title}

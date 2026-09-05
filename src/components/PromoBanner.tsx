@@ -13,6 +13,7 @@ export default function PromoBanner() {
     minutes: 0,
     seconds: 0
   });
+  const [isExpired, setIsExpired] = useState(false);
 
   const [mounted, setMounted] = useState(false);
 
@@ -32,9 +33,11 @@ export default function PromoBanner() {
 
       if (distance <= 0) {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setIsExpired(true);
         return;
       }
 
+      setIsExpired(false);
       setTimeLeft({
         days: Math.floor(distance / (1000 * 60 * 60 * 24)),
         hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
@@ -84,15 +87,21 @@ export default function PromoBanner() {
 
       {/* Right side: Timer + Button */}
       <div className="flex flex-col sm:flex-row items-center gap-6 z-10 w-full md:w-auto justify-center md:justify-end">
-        <div className="flex items-center gap-1.5">
-          <TimerBox value={timeLeft.days} label="Days" />
-          <span className="text-gray-300 dark:text-white/20 font-bold mb-3">:</span>
-          <TimerBox value={timeLeft.hours} label="Hrs" />
-          <span className="text-gray-300 dark:text-white/20 font-bold mb-3">:</span>
-          <TimerBox value={timeLeft.minutes} label="Mins" />
-          <span className="text-gray-300 dark:text-white/20 font-bold mb-3">:</span>
-          <TimerBox value={timeLeft.seconds} label="Secs" />
-        </div>
+        {isExpired ? (
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-500/30 px-6 py-3 rounded-xl flex items-center justify-center shadow-sm">
+            <span className="text-red-600 dark:text-red-400 font-extrabold text-sm uppercase tracking-wider">Promotion Ended</span>
+          </div>
+        ) : (
+          <div className="flex items-center gap-1.5">
+            <TimerBox value={timeLeft.days} label="Days" />
+            <span className="text-gray-300 dark:text-white/20 font-bold mb-3">:</span>
+            <TimerBox value={timeLeft.hours} label="Hrs" />
+            <span className="text-gray-300 dark:text-white/20 font-bold mb-3">:</span>
+            <TimerBox value={timeLeft.minutes} label="Mins" />
+            <span className="text-gray-300 dark:text-white/20 font-bold mb-3">:</span>
+            <TimerBox value={timeLeft.seconds} label="Secs" />
+          </div>
+        )}
 
         <Link href={banner.buttonLink} className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 !text-white font-extrabold px-6 py-3.5 rounded-full whitespace-nowrap transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)] hover:shadow-[0_0_25px_rgba(37,99,235,0.5)] flex items-center gap-2">
           {banner.buttonText} <ArrowRight size={18} strokeWidth={3} />

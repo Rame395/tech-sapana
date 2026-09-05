@@ -25,6 +25,7 @@ export async function updateGlobalSettings(formData: FormData) {
   const operatingHours = formData.get("operatingHours") as string;
   const metaTitle = formData.get("metaTitle") as string;
   const metaDescription = formData.get("metaDescription") as string;
+  const paymentQrImage = formData.get("paymentQrImage") as string | null;
 
   await prisma.globalSettings.upsert({
     where: { id: "default" },
@@ -35,6 +36,7 @@ export async function updateGlobalSettings(formData: FormData) {
       operatingHours,
       metaTitle,
       metaDescription,
+      paymentQrImage,
     },
     create: {
       id: "default",
@@ -44,6 +46,7 @@ export async function updateGlobalSettings(formData: FormData) {
       operatingHours,
       metaTitle,
       metaDescription,
+      paymentQrImage,
     },
   });
 
