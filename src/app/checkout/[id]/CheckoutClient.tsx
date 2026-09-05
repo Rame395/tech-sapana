@@ -22,6 +22,7 @@ export default function CheckoutClient({
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
+  const [countryCode, setCountryCode] = useState("+977");
   const [screenshotUrl, setScreenshotUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -32,6 +33,19 @@ export default function CheckoutClient({
         setError("Please fill in all fields to continue.");
         return;
       }
+      
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        setError("Please enter a valid email address.");
+        return;
+      }
+
+      const phoneRegex = /^[0-9]{7,15}$/;
+      if (!phoneRegex.test(formData.phone)) {
+        setError("Please enter a valid phone number (digits only, 7-15 characters).");
+        return;
+      }
+
       setError(null);
       setStep(2);
     }
@@ -76,6 +90,7 @@ export default function CheckoutClient({
 
     const result = await createEnrollment({
       ...formData,
+      phone: `${countryCode}${formData.phone}`,
       courseId,
       paymentScreenshotUrl: screenshotUrl,
     });
@@ -146,9 +161,23 @@ export default function CheckoutClient({
                       </div>
                       <div>
                         <label className="block text-sm font-bold text-text-muted mb-2">WhatsApp Number</label>
-                        <div className="relative">
-                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-text-muted/50"><Phone className="w-5 h-5" /></div>
-                          <input type="tel" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full pl-11 pr-4 py-4 bg-bg-primary border border-border-medium hover:border-brand-blue focus:border-brand-blue rounded-xl text-text-main focus:ring-1 focus:ring-brand-blue outline-none transition-all" placeholder="+977 9800000000" />
+                        <div className="flex gap-2">
+                          <select 
+                            value={countryCode} 
+                            onChange={e => setCountryCode(e.target.value)}
+                            className="w-28 pl-3 pr-2 py-4 bg-bg-primary border border-border-medium hover:border-brand-blue focus:border-brand-blue rounded-xl text-text-main focus:ring-1 focus:ring-brand-blue outline-none transition-all"
+                          >
+                            <option value="+977">+977 (NP)</option>
+                            <option value="+91">+91 (IN)</option>
+                            <option value="+1">+1 (US)</option>
+                            <option value="+44">+44 (UK)</option>
+                            <option value="+61">+61 (AU)</option>
+                            <option value="+971">+971 (AE)</option>
+                          </select>
+                          <div className="relative flex-1">
+                            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-text-muted/50"><Phone className="w-5 h-5" /></div>
+                            <input type="tel" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value.replace(/\D/g, '')})} className="w-full pl-11 pr-4 py-4 bg-bg-primary border border-border-medium hover:border-brand-blue focus:border-brand-blue rounded-xl text-text-main focus:ring-1 focus:ring-brand-blue outline-none transition-all" placeholder="9800000000" />
+                          </div>
                         </div>
                       </div>
                     </div>
