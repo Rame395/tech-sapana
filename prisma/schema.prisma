@@ -159,3 +159,36 @@ model GlobalSettings {
   metaDescription  String   @default("TechSapana is a leading technology and software development company.")
   updatedAt        DateTime @updatedAt
 }
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  imageUrl    String?
+  iconName    String?  // Name of the Lucide icon
+  points      String   // Storing JSON string or simple delimited string. We can use String and JSON.parse in the app.
+  published   Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model LeadershipProfile {
+  id           String   @id @default("default")
+  name         String   @default("KRISH JUNG THAPA")
+  role         String   @default("CEO & FOUNDER | TECHSAPANA")
+  quoteHeading String   @default("AS LONG AS YOU DON'T START... JUST START.")
+  quoteBody    String   @default("\"A great digital product isn't simply about writing code. It begins with understanding the problem. Whether you need a high-converting website, custom software, or an AI workflow, our job is to turn that idea into something people can actually use.\"")
+  image        String?
+  updatedAt    DateTime @updatedAt
+}
+
+model TeamMember {
+  id          String   @id @default(cuid())
+  name        String
+  badge       String
+  description String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
