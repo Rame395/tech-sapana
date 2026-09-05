@@ -164,6 +164,20 @@ export default function CourseDetailClient({
                   </div>
                 )}
 
+                {/* PDF VIEWER SECTION */}
+                {course.syllabusUrl && course.syllabusUrl.toLowerCase().endsWith('.pdf') && (
+                  <div id="syllabus-pdf" className="scroll-mt-32">
+                    <h2 className="text-3xl font-extrabold text-text-main mb-8">Detailed Syllabus Document</h2>
+                    <div className="w-full h-[600px] md:h-[800px] rounded-2xl overflow-hidden border border-border-medium shadow-[0_10px_30px_rgba(0,0,0,0.05)] bg-white">
+                      <iframe 
+                        src={`${course.syllabusUrl}#toolbar=0`} 
+                        className="w-full h-full border-none"
+                        title="Course Syllabus PDF"
+                      />
+                    </div>
+                  </div>
+                )}
+
                 {/* TOOLS SECTION */}
                 {course.tools?.length > 0 && (
                   <div id="tools" className="scroll-mt-32">
