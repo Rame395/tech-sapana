@@ -1,8 +1,6 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import EnrollmentCheckout from "@/components/EnrollmentCheckout";
 
 export default function CourseDetailClient({ 
   course, 
@@ -11,8 +9,6 @@ export default function CourseDetailClient({
   course: any, 
   paymentQrImage: string | null 
 }) {
-  const [showCheckout, setShowCheckout] = useState(false);
-
   return (
     <>
       <main className="min-h-screen">
@@ -41,20 +37,12 @@ export default function CourseDetailClient({
                   {course.description}
                 </p>
                 <div className="flex flex-wrap items-center gap-4">
-                  <button 
-                    onClick={() => setShowCheckout(true)}
+                  <Link 
+                    href={`/checkout/${course.id}`}
                     className="px-6 py-3 bg-brand-blue hover:bg-brand-blue-hover !text-white rounded-md font-bold shadow-[0_4px_20px_rgba(0,82,204,0.35)] transition-all"
                   >
                     Enroll Now
-                  </button>
-                  <a
-                    href="https://meet.google.com/new"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 py-3 bg-bg-card hover:bg-bg-card-hover border border-border-medium hover:border-brand-blue text-text-main rounded-md font-bold transition-all"
-                  >
-                    Join Live Google Meet Demo
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -158,11 +146,14 @@ export default function CourseDetailClient({
                     <div className="bg-bg-secondary border border-border-subtle rounded-2xl p-6 md:p-10 shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
                       <div 
                         className="prose dark:prose-invert prose-brand max-w-none 
-                                   prose-headings:font-extrabold prose-headings:text-text-main prose-headings:tracking-tight 
-                                   prose-p:text-text-muted prose-p:leading-relaxed 
-                                   prose-a:text-brand-blue prose-a:no-underline hover:prose-a:underline
-                                   prose-strong:text-text-main prose-strong:font-bold
-                                   prose-ul:text-text-muted prose-li:marker:text-brand-blue"
+                                   [&_*]:!text-inherit [&_*]:!bg-transparent text-text-muted
+                                   [&_h1]:!text-text-main [&_h2]:!text-text-main [&_h3]:!text-text-main [&_h4]:!text-text-main [&_h5]:!text-text-main [&_h6]:!text-text-main
+                                   [&_strong]:!text-text-main [&_b]:!text-text-main
+                                   [&_a]:!text-brand-blue
+                                   prose-headings:font-extrabold prose-headings:tracking-tight 
+                                   prose-p:leading-relaxed 
+                                   prose-a:no-underline hover:prose-a:underline
+                                   prose-li:marker:text-brand-blue"
                         dangerouslySetInnerHTML={{ __html: course.detailedDescription }} 
                       />
                     </div>
@@ -218,16 +209,6 @@ export default function CourseDetailClient({
                     )}
                   </div>
 
-                  <div className="flex items-center justify-between p-4 bg-brand-blue-soft border border-border-accent rounded-xl mb-6">
-                    <div className="flex flex-col">
-                      <div className="text-sm font-bold text-brand-blue">Free Demo Classroom</div>
-                      <div className="text-xs text-text-muted">Direct Google Meet Access</div>
-                    </div>
-                    <a href="https://meet.google.com/new" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-brand-blue !text-white text-xs font-bold rounded hover:bg-brand-blue-hover transition-colors">
-                      Join Live &rarr;
-                    </a>
-                  </div>
-
                   <div className="flex flex-col gap-3 mb-8">
                     <div className="flex justify-between text-sm">
                       <span className="text-text-muted">Start Date:</span>
@@ -248,12 +229,12 @@ export default function CourseDetailClient({
                   </div>
 
                   <div className="flex flex-col gap-3">
-                    <button 
-                      onClick={() => setShowCheckout(true)}
-                      className="w-full py-3.5 bg-brand-blue hover:bg-brand-blue-hover !text-white rounded-lg font-bold shadow-[0_4px_20px_rgba(0,82,204,0.35)] transition-all"
+                    <Link 
+                      href={`/checkout/${course.id}`}
+                      className="w-full text-center py-3.5 bg-brand-blue hover:bg-brand-blue-hover !text-white rounded-lg font-bold shadow-[0_4px_20px_rgba(0,82,204,0.35)] transition-all inline-block"
                     >
                       Enroll Now
-                    </button>
+                    </Link>
                   </div>
                 </div>
 
@@ -279,15 +260,6 @@ export default function CourseDetailClient({
         </div>
       </main>
 
-      {showCheckout && (
-        <EnrollmentCheckout 
-          courseId={course.id}
-          courseTitle={course.title}
-          coursePrice={course.price}
-          qrImageUrl={paymentQrImage}
-          onClose={() => setShowCheckout(false)}
-        />
-      )}
     </>
   );
 }
