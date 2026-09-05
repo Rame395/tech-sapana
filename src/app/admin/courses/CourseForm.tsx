@@ -7,6 +7,7 @@ import { ArrowLeft, Save, Plus, X } from "lucide-react";
 import Link from "next/link";
 import { createCourse, updateCourse } from "@/app/actions/course";
 import ImageUploader from "@/components/ImageUploader";
+import DocumentUploader from "@/components/DocumentUploader";
 
 export default function CourseForm({ initialData }: { initialData?: any }) {
   const router = useRouter();
@@ -25,6 +26,7 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
   const [startDateText, setStartDateText] = useState(initialData?.startDateText || "");
   const [scheduleText, setScheduleText] = useState(initialData?.scheduleText || "");
   const [classTiming, setClassTiming] = useState(initialData?.classTiming || "");
+  const [syllabusUrl, setSyllabusUrl] = useState(initialData?.syllabusUrl || "");
   const [availableSeats, setAvailableSeats] = useState(initialData?.availableSeats || 20);
   
   const initialHighlights = initialData?.highlights ? [...initialData.highlights] : ["", "", ""];
@@ -64,6 +66,7 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
       startDateText: startDateText || null,
       scheduleText: scheduleText || null,
       classTiming: classTiming || null,
+      syllabusUrl: syllabusUrl || null,
       availableSeats: Number(availableSeats),
       highlights: highlights.filter(h => h.trim() !== ""),
       published 
@@ -176,6 +179,11 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
                 </div>
               ))}
             </div>
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-white/60 uppercase mb-2">Syllabus Document (PDF/Doc)</label>
+            <DocumentUploader value={syllabusUrl} onChange={setSyllabusUrl} />
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 pb-6 border-b border-white/10">

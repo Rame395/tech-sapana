@@ -104,7 +104,21 @@ export default function CourseDetailClient({
                 
                 {/* OVERVIEW SECTION */}
                 <div id="overview" className="scroll-mt-32">
-                  <h2 className="text-3xl font-extrabold text-text-main mb-8">What You Will Master</h2>
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                    <h2 className="text-3xl font-extrabold text-text-main">What You Will Master</h2>
+                    {course.syllabusUrl && (
+                      <a 
+                        href={course.syllabusUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-blue/10 hover:bg-brand-blue/20 text-brand-blue rounded-xl font-bold transition-colors border border-brand-blue/20"
+                        title="Download Syllabus Document"
+                      >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        Download Full Syllabus
+                      </a>
+                    )}
+                  </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {course.highlights?.map((highlight: string, i: number) => (
                       <div key={i} className="flex gap-4 p-6 bg-bg-secondary border border-border-subtle rounded-xl hover:border-brand-blue hover:-translate-y-1 transition-all duration-300 shadow-sm">

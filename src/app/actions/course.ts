@@ -21,6 +21,9 @@ export async function createCourse(data: {
   badgeText2?: string | null;
   startDateText?: string | null;
   scheduleText?: string | null;
+  classTiming?: string | null;
+  availableSeats?: number | null;
+  syllabusUrl?: string | null;
   highlights?: string[];
   published: boolean; 
 }) {
@@ -41,6 +44,9 @@ export async function updateCourse(id: string, data: {
   badgeText2?: string | null;
   startDateText?: string | null;
   scheduleText?: string | null;
+  classTiming?: string | null;
+  availableSeats?: number | null;
+  syllabusUrl?: string | null;
   highlights?: string[];
   published: boolean; 
 }) {
