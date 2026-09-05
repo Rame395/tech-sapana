@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Calendar, Clock, Check, Video } from "lucide-react";
 
 type Course = {
   id: string;
   title: string;
+  slug: string;
   description: string;
   price: number;
   originalPrice: number | null;
@@ -165,9 +167,9 @@ export default function CourseFilterClient({ courses }: { courses: Course[] }) {
                         <a href="https://meet.google.com/new" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 border border-green-200 dark:border-[#064E3B] bg-green-50 dark:bg-[#022C22] hover:bg-green-100 dark:hover:bg-[#064E3B] text-green-700 dark:text-[#34D399] font-bold py-3.5 rounded-xl transition-colors text-[0.95rem]">
                           <Video className="w-[1.15rem] h-[1.15rem]" /> Meet Link
                         </a>
-                        <button className="bg-blue-600 hover:bg-blue-700 !text-white font-bold py-3.5 rounded-xl transition-colors shadow-lg hover:shadow-blue-600/30 text-[0.95rem]">
+                        <Link href={`/courses/${course.slug}`} className="flex items-center justify-center bg-blue-600 hover:bg-blue-700 !text-white font-bold py-3.5 rounded-xl transition-colors shadow-lg hover:shadow-blue-600/30 text-[0.95rem]">
                           Enroll Cohort
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
