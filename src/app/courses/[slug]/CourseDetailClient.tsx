@@ -111,11 +111,11 @@ export default function CourseDetailClient({
                         href={course.syllabusUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-blue/10 hover:bg-brand-blue/20 text-brand-blue rounded-xl font-bold transition-colors border border-brand-blue/20"
-                        title="Download Syllabus Document"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-brand-blue hover:bg-brand-blue-hover !text-white rounded-xl font-extrabold transition-all shadow-[0_4px_20px_rgba(0,82,204,0.35)] hover:-translate-y-1"
+                        title="View / Download Syllabus Document"
                       >
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                        Download Full Syllabus
+                        View / Download Syllabus
                       </a>
                     )}
                   </div>
