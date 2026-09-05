@@ -390,31 +390,38 @@ export default function HomeClient({
       <FaqSection />
 
       {/* FINAL CTA SECTION */}
-      <section id="contact" className="py-24 relative overflow-hidden bg-bg-primary">
-        <div className="w-full max-w-[1240px] mx-auto px-6">
+      <section id="contact" className="py-24 relative overflow-hidden bg-white dark:bg-bg-primary">
+        <div className="w-full max-w-[1000px] mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-900 rounded-[2.5rem] p-12 md:p-20 text-center shadow-[0_20px_80px_rgba(37,99,235,0.25)] relative overflow-hidden"
+            className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 dark:from-transparent dark:to-transparent dark:bg-[#0A132B] dark:border-blue-900/30 rounded-[2rem] p-12 md:p-16 text-center shadow-xl dark:shadow-2xl relative overflow-hidden"
           >
-            {/* Glowing Blobs */}
-            <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-[80px] -translate-y-1/2 -translate-x-1/2"></div>
-            <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-[80px] translate-y-1/2 translate-x-1/2"></div>
+            {/* Soft Radial Glow (Dark Mode Only) */}
+            <div className="hidden dark:block absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent pointer-events-none"></div>
             
-            <div className="relative z-10 max-w-3xl mx-auto">
-              <h2 className="text-[1.75rem] md:text-[2.25rem] lg:text-[2.5rem] font-[800] text-white mb-6 tracking-tight leading-[1.2]">
-                Have a <span className="text-blue-400">software idea?</span>
+            <div className="relative z-10 max-w-2xl mx-auto">
+              <h2 className="text-[1.75rem] md:text-[2.25rem] font-[800] text-gray-900 dark:text-white mb-4 tracking-tight">
+                Have a Complex Software Requirement?
               </h2>
-              <p className="text-xl md:text-2xl text-blue-100 mb-10 leading-relaxed font-medium">
-                Tell us what you're building. We'll help you turn the idea into a practical, scalable digital product.
+              <p className="text-gray-600 dark:text-[#94A3B8] text-base md:text-lg mb-10 leading-relaxed font-medium">
+                Let's discuss your technical scope, database architecture, and project timeline with our engineering leads.
               </p>
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
                 <a
                   href="mailto:contact@techsapana.com"
-                  className="px-10 py-5 bg-white text-blue-600 rounded-2xl font-bold text-lg shadow-[0_10px_30px_rgba(255,255,255,0.2)] hover:shadow-[0_15px_40px_rgba(255,255,255,0.4)] hover:scale-[1.02] transition-all duration-300 flex items-center gap-3"
+                  className="px-8 py-3.5 bg-blue-600 hover:bg-blue-700 !text-white rounded-xl font-semibold text-sm md:text-base shadow-lg shadow-blue-600/20 dark:shadow-blue-900/20 transition-all duration-300"
                 >
-                  Start Your Project <ArrowRight size={20} />
+                  Request Software Scoping
+                </a>
+                <a
+                  href="https://wa.me/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-3.5 bg-gray-900 hover:bg-gray-800 !text-white dark:bg-[#121B2F] dark:hover:bg-[#1A2642] border border-transparent dark:border-white/5 rounded-xl font-semibold text-sm md:text-base transition-all duration-300"
+                >
+                  Talk via WhatsApp
                 </a>
               </div>
             </div>
