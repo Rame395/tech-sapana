@@ -30,7 +30,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-4 text-[0.9rem] text-[#94A3B8]">
               <li>
                 <Link
-                  href="#about"
+                  href="/about"
                   className="hover:text-white transition-colors"
                 >
                   About TechSapana
@@ -38,67 +38,67 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#courses"
+                  href="/services"
                   className="hover:text-white transition-colors"
                 >
-                  Training &amp; Courses
+                  Services
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#industries"
+                  href="/portfolio"
                   className="hover:text-white transition-colors"
                 >
-                  Industries
+                  Portfolio
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#testimonials"
+                  href="/courses"
                   className="hover:text-white transition-colors"
                 >
-                  Testimonials
+                  Training & Courses
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#blog"
+                  href="/blog"
                   className="hover:text-white transition-colors"
                 >
-                  Insights
+                  Blog & Insights
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Courses */}
+          {/* Column 3: Quick Links */}
           <div>
             <h4 className="text-[0.8rem] font-extrabold text-white uppercase tracking-widest mb-6">
-              Courses
+              Quick Links
             </h4>
             <ul className="flex flex-col gap-4 text-[0.9rem] text-[#94A3B8]">
               <li>
                 <Link
-                  href="#courses"
+                  href="/courses"
                   className="hover:text-white transition-colors"
                 >
-                  AI for Business
+                  Enroll in a Course
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#courses"
+                  href="/contact"
                   className="hover:text-white transition-colors"
                 >
-                  Web Development
+                  Start a Project
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#courses"
+                  href="/portfolio"
                   className="hover:text-white transition-colors"
                 >
-                  All Workshops
+                  Browse Our Work
                 </Link>
               </li>
             </ul>

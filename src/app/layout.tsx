@@ -30,8 +30,13 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = settings?.metaDescription || "TechSapana designs and engineers high-converting websites, custom software, and AI solutions.";
 
   return {
+    metadataBase: new URL("https://techsapana.com"),
     title,
     description,
+    keywords: ["software development", "web design", "AI solutions", "TechSapana", "engineering", "Nepal tech company", "digital agency", "full-stack development"],
+    alternates: {
+      canonical: "/",
+    },
     openGraph: {
       title,
       description,
@@ -53,6 +58,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       images: ["https://techsapana.com/og-image.jpg"],
+      creator: "@techsapana",
     },
   };
 }
@@ -66,6 +72,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className="text-[15px]">
       <head>
         <script
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: `
               (function() {

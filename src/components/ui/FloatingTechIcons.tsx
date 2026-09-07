@@ -25,7 +25,7 @@ export default function FloatingTechIcons() {
   ];
 
   return (
-    <div className="absolute inset-0 pointer-events-none z-[5] overflow-hidden">
+    <div className="hidden md:block absolute inset-0 pointer-events-none z-[5] overflow-hidden">
       {icons.map((item, i) => {
         const Icon = item.Icon;
         return (

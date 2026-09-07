@@ -163,6 +163,7 @@ export default function ServicesClient({ dynamicServices }: { dynamicServices: D
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
+                className="text-center lg:text-left flex flex-col items-center lg:items-start"
               >
                 <div className="inline-flex items-center justify-center bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800 text-blue-700 dark:text-blue-400 text-[0.65rem] md:text-[0.75rem] font-extrabold tracking-[0.15em] uppercase px-5 py-2 rounded-full mb-6 shadow-sm">
                   CORE ENGINEERING SERVICE
@@ -170,10 +171,10 @@ export default function ServicesClient({ dynamicServices }: { dynamicServices: D
                 <h1 className="text-[clamp(2rem,4vw,3.25rem)] font-[800] tracking-tight leading-[1.1] text-gray-900 dark:text-white mb-6">
                   Custom Software That <span className="text-blue-600 dark:text-blue-500">Fits Your Workflow.</span>
                 </h1>
-                <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-10">
+                <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-10 text-center lg:text-left">
                   No bloated off-the-shelf templates. We engineer secure web applications, automated ERP systems, and management portals tailored precisely around how your business functions.
                 </p>
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap justify-center lg:justify-start gap-4">
                   <button 
                     onClick={() => setIsModalOpen(true)}
                     className="px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 !text-white font-bold transition-all shadow-lg shadow-blue-600/25 flex items-center gap-2"

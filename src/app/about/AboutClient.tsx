@@ -117,19 +117,19 @@ export default function AboutClient({
           
           <div className="w-full max-w-[1240px] mx-auto px-6 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <motion.div variants={staggerContainer} initial="hidden" animate="visible">
+              <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="text-center lg:text-left flex flex-col items-center lg:items-start">
                 <motion.div variants={fadeInUp} className="inline-flex items-center justify-center bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800 text-blue-700 dark:text-blue-400 text-[0.65rem] md:text-[0.75rem] font-extrabold tracking-[0.15em] uppercase px-5 py-2 rounded-full mb-6 shadow-sm">
                   ABOUT TECHSAPANA
                 </motion.div>
                 <motion.h1 variants={fadeInUp} className="text-[2.25rem] md:text-[2.75rem] lg:text-[3.25rem] font-[800] tracking-tight leading-[1.15] text-gray-900 dark:text-white mb-6">
                   We Engineer Websites & Software That <span className="text-blue-700 dark:text-blue-500">Actually Perform.</span>
                 </motion.h1>
-                <motion.p variants={fadeInUp} className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-8 max-w-xl">
+                <motion.p variants={fadeInUp} className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-8 max-w-xl text-center lg:text-left">
                   We don't just write code. We diagnose commercial bottlenecks,
                   understand workflows, and engineer high-impact digital
                   products for Nepal, the USA, and Australia.
                 </motion.p>
-                <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
+                <motion.div variants={fadeInUp} className="flex flex-wrap justify-center lg:justify-start gap-4">
                   <Link href="#contact" className="bg-blue-600 hover:bg-blue-700 !text-white font-bold py-3.5 px-8 rounded-xl transition-colors shadow-lg shadow-blue-600/30">
                     Start Your Project
                   </Link>
