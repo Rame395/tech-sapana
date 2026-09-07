@@ -4,7 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Bot, Code2, ArrowRight } from "lucide-react";
+import * as LucideIcons from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import PromoBanner from "@/components/PromoBanner";
 import MarqueeBanner from "@/components/MarqueeBanner";
 import FaqSection from "@/components/FaqSection";
@@ -24,11 +25,13 @@ const staggerContainer = {
 export default function HomeClient({ 
   blogSection,
   heroData,
-  stats = []
+  stats = [],
+  courses = []
 }: { 
   blogSection: React.ReactNode,
   heroData?: any,
-  stats?: any[]
+  stats?: any[],
+  courses?: any[]
 }) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -328,57 +331,59 @@ export default function HomeClient({
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="group relative bg-bg-card border border-border-subtle hover:border-brand-blue/40 rounded-[2rem] p-10 md:p-12 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(37,99,235,0.08)] overflow-hidden flex flex-col h-full"
-            >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-2xl group-hover:bg-blue-500/10 transition-colors"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            {courses && courses.length > 0 ? courses.map((course: any, idx: number) => {
+              // Dynamic Icon Loading
+              const IconComponent = (LucideIcons as any)[course.iconName || "BookOpen"] || LucideIcons.BookOpen;
               
-              <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 mb-8 border border-blue-100 dark:border-blue-800/50 group-hover:scale-110 group-hover:bg-blue-600 group-hover:!text-white transition-all duration-500 shadow-sm">
-                <Bot size={32} strokeWidth={1.5} />
-              </div>
+              // Dynamic Color Mapping based on badge1Style
+              const styleMap: Record<string, { bg: string, hoverBg: string, text: string, hoverBorder: string, shadowHover: string, glow: string }> = {
+                blue: { bg: "bg-blue-50 dark:bg-blue-900/30", hoverBg: "group-hover:bg-blue-600", text: "text-blue-600", hoverBorder: "hover:border-blue-500/40", shadowHover: "hover:shadow-[0_20px_60px_rgba(37,99,235,0.08)]", glow: "bg-blue-500/5 group-hover:bg-blue-500/10" },
+                purple: { bg: "bg-purple-50 dark:bg-purple-900/30", hoverBg: "group-hover:bg-purple-600", text: "text-purple-600 dark:text-purple-400", hoverBorder: "hover:border-purple-500/40", shadowHover: "hover:shadow-[0_20px_60px_rgba(168,85,247,0.08)]", glow: "bg-purple-500/5 group-hover:bg-purple-500/10" },
+                gold: { bg: "bg-amber-50 dark:bg-amber-900/30", hoverBg: "group-hover:bg-amber-500", text: "text-amber-600 dark:text-amber-400", hoverBorder: "hover:border-amber-500/40", shadowHover: "hover:shadow-[0_20px_60px_rgba(245,158,11,0.08)]", glow: "bg-amber-500/5 group-hover:bg-amber-500/10" },
+                red: { bg: "bg-red-50 dark:bg-red-900/30", hoverBg: "group-hover:bg-red-600", text: "text-red-600 dark:text-red-400", hoverBorder: "hover:border-red-500/40", shadowHover: "hover:shadow-[0_20px_60px_rgba(239,68,68,0.08)]", glow: "bg-red-500/5 group-hover:bg-red-500/10" },
+                green: { bg: "bg-green-50 dark:bg-green-900/30", hoverBg: "group-hover:bg-green-600", text: "text-green-600 dark:text-green-400", hoverBorder: "hover:border-green-500/40", shadowHover: "hover:shadow-[0_20px_60px_rgba(34,197,94,0.08)]", glow: "bg-green-500/5 group-hover:bg-green-500/10" },
+              };
+              
+              const theme = styleMap[course.badge1Style] || styleMap.blue;
 
-              <div className="inline-block px-3 py-1 bg-brand-blue/10 text-brand-blue text-xs font-bold rounded-full mb-4 w-fit">Online & Kathmandu</div>
-              <h3 className="text-2xl md:text-3xl font-bold text-text-main mb-4 tracking-tight group-hover:text-brand-blue transition-colors">
-                AI for Life & Business
-              </h3>
-              <p className="text-text-muted mb-10 leading-relaxed text-lg flex-grow">
-                Learn how to use modern AI tools for productivity, research, content, automation, and everyday business tasks with hands-on practice.
-              </p>
-              
-              <Link href="/courses" className="inline-flex items-center gap-2 font-bold text-brand-blue group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors mt-auto">
-                Explore Course <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </motion.div>
+              return (
+                <motion.div
+                  key={course.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className={`group relative bg-bg-card border border-border-subtle ${theme.hoverBorder} rounded-[2rem] p-10 md:p-12 transition-all duration-500 ${theme.shadowHover} overflow-hidden flex flex-col h-full`}
+                >
+                  <div className={`absolute top-0 right-0 w-32 h-32 rounded-full blur-2xl transition-colors ${theme.glow}`}></div>
+                  
+                  <div className={`w-16 h-16 rounded-2xl ${theme.bg} flex items-center justify-center ${theme.text} mb-8 border border-border-subtle group-hover:scale-110 ${theme.hoverBg} group-hover:text-white transition-all duration-500 shadow-sm`}>
+                    <IconComponent size={32} strokeWidth={1.5} className="group-hover:text-white transition-colors" />
+                  </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="group relative bg-bg-card border border-border-subtle hover:border-purple-500/40 rounded-[2rem] p-10 md:p-12 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(168,85,247,0.08)] overflow-hidden flex flex-col h-full"
-            >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-2xl group-hover:bg-purple-500/10 transition-colors"></div>
-              
-              <div className="w-16 h-16 rounded-2xl bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 mb-8 border border-purple-100 dark:border-purple-800/50 group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all duration-500 shadow-sm">
-                <Code2 size={32} strokeWidth={1.5} />
-              </div>
-
-              <div className="inline-block px-3 py-1 bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-bold rounded-full mb-4 w-fit">Hybrid Workshop</div>
-              <h3 className="text-2xl md:text-3xl font-bold text-text-main mb-4 tracking-tight group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                Modern Web Development
-              </h3>
-              <p className="text-text-muted mb-10 leading-relaxed text-lg flex-grow">
-                Hands-on frontend and backend training teaching you how to build, deploy, and scale modern web applications from scratch.
-              </p>
-              
-              <Link href="/courses" className="inline-flex items-center gap-2 font-bold text-purple-600 dark:text-purple-400 group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors mt-auto">
-                Explore Course <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </motion.div>
+                  {course.badgeText1 && (
+                    <div className={`inline-block px-3 py-1 ${theme.bg} bg-opacity-20 ${theme.text} text-xs font-bold rounded-full mb-4 w-fit`}>
+                      {course.badgeText1}
+                    </div>
+                  )}
+                  
+                  <h3 className={`text-2xl md:text-3xl font-bold text-text-main mb-4 tracking-tight group-hover:${theme.text.split(" ")[0]} transition-colors`}>
+                    {course.title}
+                  </h3>
+                  
+                  <p className="text-text-muted mb-10 leading-relaxed text-lg flex-grow">
+                    {course.description}
+                  </p>
+                  
+                  <Link href={`/courses/${course.slug}`} className={`inline-flex items-center gap-2 font-bold ${theme.text} transition-colors mt-auto`}>
+                    Explore Course <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </motion.div>
+              );
+            }) : (
+              <div className="col-span-full text-center py-20 text-text-muted font-bold">No courses published yet.</div>
+            )}
           </div>
         </div>
       </section>
