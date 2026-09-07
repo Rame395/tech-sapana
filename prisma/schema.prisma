@@ -45,7 +45,8 @@ model Course {
   availableSeats Int?    @default(20)
   instructorId  String?
   classTiming   String?
-  syllabusUrl   String?
+  detailedDescription String?
+  iconName      String?  @default("BookOpen")
   
   enrollments   Enrollment[]
   modules       CourseModule[]

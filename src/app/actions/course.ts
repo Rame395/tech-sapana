@@ -9,7 +9,7 @@ export async function getCourses() {
   });
 }
 
-export async function createCourse(data: { 
+type CoursePayload = {
   title: string; 
   slug: string; 
   description: string; 
@@ -23,37 +23,52 @@ export async function createCourse(data: {
   scheduleText?: string | null;
   classTiming?: string | null;
   availableSeats?: number | null;
-  syllabusUrl?: string | null;
+  detailedDescription?: string | null;
+  iconName?: string | null;
   highlights?: string[];
-  published: boolean; 
-}) {
-  await prisma.course.create({ data });
+  published: boolean;
+  modules?: { weekLabel: string; title: string; lessons: string[]; order: number }[];
+  tools?: { icon: string; name: string; description: string; order: number }[];
+};
+
+export async function createCourse(data: CoursePayload) {
+  const { modules, tools, ...courseData } = data;
+  
+  await prisma.course.create({ 
+    data: {
+      ...courseData,
+      modules: {
+        create: modules || []
+      },
+      tools: {
+        create: tools || []
+      }
+    } 
+  });
   revalidatePath("/courses");
   revalidatePath("/admin/courses");
 }
 
-export async function updateCourse(id: string, data: { 
-  title: string; 
-  slug: string; 
-  description: string; 
-  price: number;
-  originalPrice?: number | null;
-  imageUrl?: string | null;
-  badgeText1?: string | null;
-  badge1Style?: string | null;
-  badgeText2?: string | null;
-  startDateText?: string | null;
-  scheduleText?: string | null;
-  classTiming?: string | null;
-  availableSeats?: number | null;
-  syllabusUrl?: string | null;
-  highlights?: string[];
-  published: boolean; 
-}) {
-  await prisma.course.update({
-    where: { id },
-    data,
-  });
+export async function updateCourse(id: string, data: CoursePayload) {
+  const { modules, tools, ...courseData } = data;
+
+  await prisma.$transaction([
+    prisma.courseModule.deleteMany({ where: { courseId: id } }),
+    prisma.courseTool.deleteMany({ where: { courseId: id } }),
+    prisma.course.update({
+      where: { id },
+      data: {
+        ...courseData,
+        modules: {
+          create: modules || []
+        },
+        tools: {
+          create: tools || []
+        }
+      },
+    })
+  ]);
+
   revalidatePath("/courses");
   revalidatePath("/admin/courses");
 }
