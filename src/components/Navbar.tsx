@@ -41,7 +41,7 @@ export default function Navbar() {
   return (
     <>
       <div className="fixed top-4 left-0 w-full z-50 flex justify-center pointer-events-none px-4">
-        <nav className="pointer-events-auto w-full lg:w-auto rounded-[2rem] bg-white/70 dark:bg-[#0B1121]/70 backdrop-blur-2xl border border-gray-200/80 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] px-4 py-2.5 flex items-center justify-between lg:justify-center lg:gap-16 transition-all">
+        <nav className="pointer-events-auto w-full lg:w-auto rounded-[2rem] bg-white/90 dark:bg-[#0B1121]/95 backdrop-blur-3xl border border-gray-200/80 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] px-4 py-2.5 flex items-center justify-between lg:justify-center lg:gap-16 transition-all">
         
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-2 pl-2">
@@ -54,7 +54,7 @@ export default function Navbar() {
         </Link>
 
         {/* NEUMORPHIC PILL LINKS */}
-        <div className="hidden lg:flex items-center bg-gray-100/50 dark:bg-[#000000]/40 p-1.5 rounded-full border border-gray-200/50 dark:border-white/5 shadow-inner dark:shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)]">
+        <div className="hidden lg:flex items-center bg-gray-100/50 dark:bg-white/5 p-1.5 rounded-full border border-gray-200/50 dark:border-white/10 shadow-inner dark:shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)]">
           <ul className="flex items-center gap-1 list-none relative">
             {navItems.map((item) => {
               const isActive = pathname === item.path;
@@ -65,7 +65,7 @@ export default function Navbar() {
                   <Link
                     href={item.path}
                     className={`relative px-5 py-2 rounded-full text-[0.85rem] font-bold block transition-colors duration-200 ${
-                      isActive || isHovered ? "text-gray-900 dark:text-white" : "text-gray-500 dark:text-[#8F9BBA] hover:text-gray-900 dark:hover:text-white"
+                      isActive || isHovered ? "text-gray-900 dark:text-white" : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                     }`}
                   >
                     {item.name}
