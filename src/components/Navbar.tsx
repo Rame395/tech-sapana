@@ -36,24 +36,12 @@ export default function Navbar() {
     { name: "Portfolio", path: "/portfolio" },
     { name: "Courses", path: "/courses" },
     { name: "Blog", path: "/blog" },
-    { name: "Contact", path: "/contact" },
   ];
 
   return (
     <>
-      {/* Top Edge Gradient Blur to hide scrolling content smoothly */}
-      <div 
-        className="fixed top-0 left-0 w-full h-28 z-40 pointer-events-none"
-        style={{
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
-          WebkitMaskImage: 'linear-gradient(to bottom, black 20%, transparent 100%)',
-          maskImage: 'linear-gradient(to bottom, black 20%, transparent 100%)',
-        }}
-      />
-
       <div className="fixed top-4 left-0 w-full z-50 flex justify-center pointer-events-none px-4">
-        <nav className="pointer-events-auto w-full lg:w-auto rounded-[2rem] bg-white/95 dark:bg-[#0B1121]/95 backdrop-blur-2xl border border-gray-200/80 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] px-4 py-2.5 flex items-center justify-between lg:justify-center lg:gap-16 transition-all">
+        <nav className="pointer-events-auto w-full lg:w-auto rounded-[2rem] bg-white/70 dark:bg-[#0B1121]/70 backdrop-blur-2xl border border-gray-200/80 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] px-4 py-2.5 flex items-center justify-between lg:justify-center lg:gap-16 transition-all">
         
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-2 pl-2">
