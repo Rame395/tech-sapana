@@ -26,6 +26,12 @@ export async function updateGlobalSettings(formData: FormData) {
   const metaTitle = formData.get("metaTitle") as string;
   const metaDescription = formData.get("metaDescription") as string;
   const paymentQrImage = formData.get("paymentQrImage") as string | null;
+  const facebookUrl = formData.get("facebookUrl") as string | null;
+  const twitterUrl = formData.get("twitterUrl") as string | null;
+  const linkedinUrl = formData.get("linkedinUrl") as string | null;
+  const instagramUrl = formData.get("instagramUrl") as string | null;
+  const youtubeUrl = formData.get("youtubeUrl") as string | null;
+  const githubUrl = formData.get("githubUrl") as string | null;
 
   await prisma.globalSettings.upsert({
     where: { id: "default" },
@@ -37,6 +43,12 @@ export async function updateGlobalSettings(formData: FormData) {
       metaTitle,
       metaDescription,
       paymentQrImage,
+      facebookUrl,
+      twitterUrl,
+      linkedinUrl,
+      instagramUrl,
+      youtubeUrl,
+      githubUrl,
     },
     create: {
       id: "default",
@@ -47,6 +59,12 @@ export async function updateGlobalSettings(formData: FormData) {
       metaTitle,
       metaDescription,
       paymentQrImage,
+      facebookUrl,
+      twitterUrl,
+      linkedinUrl,
+      instagramUrl,
+      youtubeUrl,
+      githubUrl,
     },
   });
 

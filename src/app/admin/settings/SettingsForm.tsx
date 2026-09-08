@@ -12,6 +12,12 @@ type GlobalSettings = {
   metaTitle: string;
   metaDescription: string;
   paymentQrImage: string | null;
+  facebookUrl?: string | null;
+  twitterUrl?: string | null;
+  linkedinUrl?: string | null;
+  instagramUrl?: string | null;
+  youtubeUrl?: string | null;
+  githubUrl?: string | null;
 };
 
 export default function SettingsForm({ settings }: { settings: GlobalSettings }) {
@@ -104,6 +110,38 @@ export default function SettingsForm({ settings }: { settings: GlobalSettings })
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-1">SEO Meta Description</label>
             <textarea name="metaDescription" defaultValue={settings.metaDescription} rows={3} required className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500 resize-none"></textarea>
+          </div>
+
+          <hr className="border-white/5 my-2" />
+          
+          <div>
+            <h3 className="text-lg font-bold text-white mb-4">Social Media Links</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Facebook URL</label>
+                <input type="url" name="facebookUrl" defaultValue={settings.facebookUrl || ""} className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500" placeholder="https://facebook.com/..." />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Twitter (X) URL</label>
+                <input type="url" name="twitterUrl" defaultValue={settings.twitterUrl || ""} className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500" placeholder="https://twitter.com/..." />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">LinkedIn URL</label>
+                <input type="url" name="linkedinUrl" defaultValue={settings.linkedinUrl || ""} className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500" placeholder="https://linkedin.com/in/..." />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Instagram URL</label>
+                <input type="url" name="instagramUrl" defaultValue={settings.instagramUrl || ""} className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500" placeholder="https://instagram.com/..." />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">YouTube URL</label>
+                <input type="url" name="youtubeUrl" defaultValue={settings.youtubeUrl || ""} className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500" placeholder="https://youtube.com/..." />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">GitHub URL</label>
+                <input type="url" name="githubUrl" defaultValue={settings.githubUrl || ""} className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500" placeholder="https://github.com/..." />
+              </div>
+            </div>
           </div>
 
           <hr className="border-white/5 my-2" />

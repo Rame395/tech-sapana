@@ -192,6 +192,14 @@ model GlobalSettings {
   metaTitle        String   @default("TechSapana - Leading Tech Partner")
   metaDescription  String   @default("TechSapana is a leading technology and software development company.")
   
+  // Social Media Links
+  facebookUrl      String?
+  twitterUrl       String?
+  linkedinUrl      String?
+  instagramUrl     String?
+  youtubeUrl       String?
+  githubUrl        String?
+
   // E-commerce/Course settings
   paymentQrImage   String?
 
