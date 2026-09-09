@@ -38,10 +38,23 @@ export default function Navbar() {
     { name: "Blog", path: "/blog" },
   ];
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
-      <div className="fixed top-4 left-0 w-full z-50 flex justify-center pointer-events-none px-4">
-        <nav className="pointer-events-auto w-full lg:w-auto rounded-[2rem] bg-white/90 dark:bg-[#0B1121]/95 backdrop-blur-3xl border border-gray-200/80 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] px-4 py-2.5 flex items-center justify-between lg:justify-center lg:gap-16 transition-all">
+      <div className={`fixed left-0 w-full z-50 flex justify-center pointer-events-none px-4 transition-all duration-300 ${isScrolled ? "top-0 px-0" : "top-4"}`}>
+        <nav className={`pointer-events-auto w-full rounded-[2rem] bg-white/95 dark:bg-[#0B1121]/95 backdrop-blur-3xl border border-gray-200/80 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] px-4 py-2.5 flex items-center justify-between lg:justify-center lg:gap-16 transition-all duration-300 ${
+          isScrolled ? "lg:w-full rounded-t-none border-t-0 bg-white/100 dark:bg-[#0B1121]/100" : "lg:w-auto"
+        }`}>
         
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-2 pl-2">
