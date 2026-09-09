@@ -55,12 +55,11 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top gradient mask dynamically switches color based on scroll position and page to match background */}
-      <div className={`fixed top-0 left-0 w-full h-24 z-40 pointer-events-none transition-colors duration-500 ${
-        isDarkHero || theme === 'dark'
-          ? "bg-gradient-to-b from-[#0B1121] via-[#0B1121]/95 to-transparent"
-          : "bg-gradient-to-b from-white via-white/95 to-transparent"
-      }`}></div>
+      {/* Blurred top mask perfectly matches any background by just blurring what's behind it, hiding scrolling text seamlessly */}
+      <div 
+        className="fixed top-0 left-0 w-full h-16 z-40 pointer-events-none backdrop-blur-2xl"
+        style={{ WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)', maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)' }}
+      ></div>
 
       <div className="fixed top-4 left-0 w-full z-50 flex justify-center pointer-events-none px-4">
         <nav className="pointer-events-auto w-full lg:w-auto rounded-[2rem] bg-white/95 dark:bg-[#0B1121]/95 backdrop-blur-3xl border border-gray-200/80 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] px-4 py-2.5 flex items-center justify-between lg:justify-center lg:gap-16 transition-all">
