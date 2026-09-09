@@ -9,6 +9,7 @@ import { ArrowRight } from "lucide-react";
 import PromoBanner from "@/components/PromoBanner";
 import MarqueeBanner from "@/components/MarqueeBanner";
 import FaqSection from "@/components/FaqSection";
+import MethodologySection from "@/components/MethodologySection";
 import { ShaderBackground } from "@/components/ui/hero-shader";
 import FloatingTechIcons from "@/components/ui/FloatingTechIcons";
 
@@ -305,6 +306,8 @@ export default function HomeClient({
           </div>
         </div>
       </section>
+
+      <MethodologySection />
 
       {/* CLEAN COURSES SECTION */}
       <section id="courses" className="py-24 bg-bg-primary relative overflow-hidden">
