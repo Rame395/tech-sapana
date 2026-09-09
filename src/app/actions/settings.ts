@@ -22,6 +22,10 @@ export async function getGlobalSettings() {
     }
   }
 
+  if (!settings) {
+    throw new Error("Could not initialize global settings");
+  }
+
   return settings;
 }
 
