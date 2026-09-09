@@ -10,9 +10,16 @@ export async function getGlobalSettings() {
   });
 
   if (!settings) {
-    settings = await prisma.globalSettings.create({
-      data: { id: "default" }
-    });
+    try {
+      settings = await prisma.globalSettings.create({
+        data: { id: "default" }
+      });
+    } catch (e) {
+      // Another build worker might have created it simultaneously
+      settings = await prisma.globalSettings.findUnique({
+        where: { id: "default" }
+      });
+    }
   }
 
   return settings;
