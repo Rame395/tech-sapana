@@ -377,48 +377,6 @@ export default function ServicesClient({ dynamicServices }: { dynamicServices: D
           </div>
         </section>
 
-        {/* ==========================================================================
-            FINAL CTA
-            ========================================================================== */}
-        <section className="pt-32 pb-10">
-          <div className="w-full max-w-[1240px] mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-900 rounded-[2.5rem] p-12 md:p-20 text-center shadow-[0_20px_80px_rgba(37,99,235,0.25)] relative overflow-hidden"
-            >
-              <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-[80px] -translate-y-1/2 -translate-x-1/2"></div>
-              <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-[80px] translate-y-1/2 translate-x-1/2"></div>
-              
-              <div className="relative z-10 max-w-3xl mx-auto">
-                <h2 className="text-[1.75rem] md:text-[2.25rem] lg:text-[2.5rem] font-[800] tracking-tight leading-[1.2] text-white mb-6">
-                  Have a Complex <span className="text-blue-400">Software Requirement?</span>
-                </h2>
-                <p className="text-xl md:text-2xl text-blue-100 mb-10 leading-relaxed font-medium">
-                  Let’s discuss your technical scope, database architecture, and project timeline with our engineering leads.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <button 
-                    onClick={() => setIsModalOpen(true)}
-                    className="px-8 py-4 rounded-xl bg-white text-blue-700 hover:bg-gray-50 font-bold transition-all shadow-lg flex items-center justify-center gap-2"
-                  >
-                    Request Software Scoping <ArrowRight size={18} />
-                  </button>
-                  <a 
-                    href="https://wa.me/9779800000000" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-8 py-4 rounded-xl bg-blue-800/40 border border-blue-400/30 hover:bg-blue-800/60 !text-white font-bold transition-all backdrop-blur-sm flex items-center justify-center gap-2"
-                  >
-                    Talk via WhatsApp
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
       </main>
 
       {/* ==========================================================================

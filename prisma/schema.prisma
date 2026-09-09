@@ -104,6 +104,7 @@ model ContactMessage {
 model PromoBanner {
   id              String   @id @default("default")
   isActive        Boolean  @default(false)
+  showTimer       Boolean  @default(true)
   badgeText       String   @default("LIMITED TIME OFFER")
   title           String   @default("20% OFF THE WEEKEND CRASH COURSE.")
   targetDate      DateTime @default(now())

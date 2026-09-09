@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
 
-export default function ClientLayoutWrapper({ children }: { children: React.ReactNode }) {
+export default function ClientLayoutWrapper({ children, globalSettings }: { children: React.ReactNode, globalSettings?: any }) {
   const pathname = usePathname();
   const isAdminOrLogin = pathname.startsWith("/admin") || pathname.startsWith("/login");
 
@@ -25,7 +25,7 @@ export default function ClientLayoutWrapper({ children }: { children: React.Reac
         <Toaster position="top-center" />
         {children}
       </main>
-      <Footer />
+      <Footer settings={globalSettings} />
     </>
   );
 }

@@ -240,12 +240,13 @@ export default function HomeClient({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="text-center lg:text-left"
             >
               <h2 className="text-[1.75rem] md:text-[2.25rem] lg:text-[2.5rem] font-[800] text-gray-900 dark:text-white mb-6 tracking-tight leading-[1.2]">
                 Built in Nepal.<br />
                 <span className="text-blue-600 dark:text-blue-500">Thinking Globally.</span>
               </h2>
-              <div className="flex flex-col gap-6 text-gray-600 dark:text-gray-300 text-[1.05rem] md:text-[1.125rem] mb-10 leading-[1.7]">
+              <div className="flex flex-col gap-6 text-gray-600 dark:text-gray-300 text-[1.05rem] md:text-[1.125rem] mb-10 leading-[1.7] mx-auto lg:mx-0 max-w-xl">
                 <p>
                   TechSapana is a technology and software development company focused on transforming commercial concepts into reliable, high-performance digital products.
                 </p>
@@ -414,14 +415,14 @@ export default function HomeClient({
                 Let's discuss your technical scope, database architecture, and project timeline with our engineering leads.
               </p>
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <a
-                  href="mailto:contact@techsapana.com"
+                <Link
+                  href="/contact"
                   className="px-8 py-3.5 bg-blue-600 hover:bg-blue-700 !text-white rounded-xl font-semibold text-sm md:text-base shadow-lg shadow-blue-600/20 dark:shadow-blue-900/20 transition-all duration-300"
                 >
                   Request Software Scoping
-                </a>
+                </Link>
                 <a
-                  href="https://wa.me/"
+                  href="https://wa.me/97714000000"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-8 py-3.5 bg-gray-900 hover:bg-gray-800 !text-white dark:bg-[#121B2F] dark:hover:bg-[#1A2642] border border-transparent dark:border-white/5 rounded-xl font-semibold text-sm md:text-base transition-all duration-300"

@@ -47,8 +47,8 @@ export default function FaqSection() {
           <div className="inline-flex items-center justify-center bg-[#EBF4FF] dark:bg-[#0B132B] border border-[#BFDBFE] dark:border-[#1E3A8A] text-[#1D4ED8] dark:text-[#3B82F6] text-[0.65rem] md:text-[0.75rem] font-extrabold tracking-[0.15em] uppercase px-5 py-2 rounded-full mb-4 shadow-sm">
             HAVE QUESTIONS?
           </div>
-          <h2 className="text-[2rem] md:text-[2.75rem] font-[800] tracking-tight leading-[1.2] text-gray-900 dark:text-white mb-4">
-            Frequently Asked Questions
+          <h2 className="text-[1.75rem] md:text-[2.25rem] lg:text-[2.5rem] font-[800] text-gray-900 dark:text-white mb-6 tracking-tight leading-[1.2]">
+            Frequently Asked <span className="text-blue-600 dark:text-blue-500">Questions</span>
           </h2>
           <p className="text-lg text-gray-600 dark:text-[#94A3B8] max-w-2xl mx-auto leading-relaxed">
             Everything you need to know about our services, methodologies, and technical stack.

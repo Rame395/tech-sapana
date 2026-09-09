@@ -1,6 +1,17 @@
 import { getCourses } from "@/app/actions/course";
 import CourseFilterClient from "@/components/CourseFilterClient";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Courses & Training | TechSapana",
+  description: "Hands-on technology courses taught by active software engineers. Transparent pricing and free live demo classes available.",
+  openGraph: {
+    title: "Courses & Training | TechSapana",
+    description: "Hands-on technology courses taught by active software engineers.",
+  }
+};
+
 export default async function Courses() {
   const allCourses = await getCourses();
   const publishedCourses = allCourses.filter(c => c.published);

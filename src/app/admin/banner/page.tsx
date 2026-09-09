@@ -10,6 +10,7 @@ export default function BannerSettings() {
   const [saving, setSaving] = useState(false);
 
   const [isActive, setIsActive] = useState(false);
+  const [showTimer, setShowTimer] = useState(true);
   const [badgeText, setBadgeText] = useState("LIMITED TIME OFFER");
   const [title, setTitle] = useState("20% OFF THE WEEKEND CRASH COURSE.");
   const [targetDate, setTargetDate] = useState("");
@@ -24,6 +25,7 @@ export default function BannerSettings() {
     async function load() {
       const data = await getPromoBanner();
       setIsActive(data.isActive);
+      setShowTimer(data.showTimer ?? true);
       setBadgeText(data.badgeText);
       setTitle(data.title);
       setButtonText(data.buttonText);
@@ -49,6 +51,7 @@ export default function BannerSettings() {
     try {
       await updatePromoBanner({
         isActive,
+        showTimer,
         badgeText,
         title,
         targetDate: new Date(targetDate),
@@ -79,16 +82,31 @@ export default function BannerSettings() {
         <div className="bg-gradient-to-br from-[#0F1535]/90 to-[#121A42]/90 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden p-8 shadow-2xl space-y-6">
           <h3 className="text-lg font-bold text-white border-b border-white/10 pb-3 mb-6">Countdown Promo Banner</h3>
           
-          <div className="flex items-center gap-3 p-4 bg-white/5 rounded-xl border border-white/10">
-            <div className="relative flex items-center">
-              <input type="checkbox" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} className="sr-only" id="toggle" />
-              <label htmlFor="toggle" className={`block w-14 h-8 rounded-full cursor-pointer transition-colors ${isActive ? "bg-blue-600" : "bg-white/10"}`}>
-                <div className={`absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform ${isActive ? "transform translate-x-6" : ""}`}></div>
-              </label>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="flex items-center gap-3 p-4 bg-white/5 rounded-xl border border-white/10">
+              <div className="relative flex items-center">
+                <input type="checkbox" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} className="sr-only" id="toggle" />
+                <label htmlFor="toggle" className={`block w-14 h-8 rounded-full cursor-pointer transition-colors ${isActive ? "bg-blue-600" : "bg-white/10"}`}>
+                  <div className={`absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform ${isActive ? "transform translate-x-6" : ""}`}></div>
+                </label>
+              </div>
+              <div>
+                <div className="text-white font-bold">Enable Promo Banner</div>
+                <div className="text-white/50 text-xs">Turn this on to display the banner.</div>
+              </div>
             </div>
-            <div>
-              <div className="text-white font-bold">Enable Promo Banner</div>
-              <div className="text-white/50 text-xs">Turn this on to display the countdown banner below the Hero.</div>
+
+            <div className="flex items-center gap-3 p-4 bg-white/5 rounded-xl border border-white/10">
+              <div className="relative flex items-center">
+                <input type="checkbox" checked={showTimer} onChange={(e) => setShowTimer(e.target.checked)} className="sr-only" id="timerToggle" />
+                <label htmlFor="timerToggle" className={`block w-14 h-8 rounded-full cursor-pointer transition-colors ${showTimer ? "bg-blue-600" : "bg-white/10"}`}>
+                  <div className={`absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform ${showTimer ? "transform translate-x-6" : ""}`}></div>
+                </label>
+              </div>
+              <div>
+                <div className="text-white font-bold">Show Countdown Timer</div>
+                <div className="text-white/50 text-xs">Turn this off for a static banner.</div>
+              </div>
             </div>
           </div>
 

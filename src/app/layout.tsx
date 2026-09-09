@@ -3,6 +3,8 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import "./legacy-styles.css";
 import ClientLayoutWrapper from "@/components/ClientLayoutWrapper";
+import { getGlobalSettings } from "@/app/actions/settings";
+import Script from "next/script";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -63,32 +65,31 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const globalSettings = await getGlobalSettings();
+
   return (
     <html lang="en" suppressHydrationWarning className="text-[15px]">
       <head>
-        <script
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var theme = localStorage.getItem('theme') || 'light';
-                  document.documentElement.setAttribute('data-theme', theme);
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
+        <Script id="theme-script" strategy="beforeInteractive">
+          {`
+            (function() {
+              try {
+                var theme = localStorage.getItem('theme') || 'light';
+                document.documentElement.setAttribute('data-theme', theme);
+              } catch (e) {}
+            })();
+          `}
+        </Script>
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans min-h-screen flex flex-col bg-bg-primary text-text-main`}
       >
-        <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+        <ClientLayoutWrapper globalSettings={globalSettings}>{children}</ClientLayoutWrapper>
       </body>
     </html>
   );

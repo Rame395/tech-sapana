@@ -15,6 +15,7 @@ export async function getPromoBanner() {
     return {
       id: "default",
       isActive: false,
+      showTimer: true,
       badgeText: "LIMITED TIME OFFER",
       title: "20% OFF THE WEEKEND CRASH COURSE.",
       targetDate: defaultDate,
@@ -31,6 +32,7 @@ export async function getPromoBanner() {
 
 export async function updatePromoBanner(data: {
   isActive: boolean;
+  showTimer: boolean;
   badgeText: string;
   title: string;
   targetDate: Date;
