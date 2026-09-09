@@ -10,11 +10,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   return {
     title: `${course.title} | TechSapana Courses`,
-    description: course.shortDescription,
+    description: course.description,
     openGraph: {
       title: `${course.title} | TechSapana Courses`,
-      description: course.shortDescription,
-      images: course.image ? [{ url: course.image }] : [],
+      description: course.description,
+      images: course.imageUrl ? [{ url: course.imageUrl }] : [],
     }
   };
 }
