@@ -29,13 +29,13 @@ export default function ProjectForm({ project }: { project?: any }) {
 
     const formData = new FormData(e.currentTarget);
     const data = {
-      title: formData.get("title"),
-      slug: formData.get("slug"),
-      description: formData.get("description"),
-      category: formData.get("category"),
-      client: formData.get("client"),
-      liveUrl: formData.get("liveUrl"),
-      videoUrl: formData.get("videoUrl"),
+      title: formData.get("title") as string,
+      slug: formData.get("slug") as string,
+      description: formData.get("description") as string,
+      category: formData.get("category") as string,
+      client: formData.get("client") as string | null,
+      liveUrl: formData.get("liveUrl") as string | null,
+      videoUrl: formData.get("videoUrl") as string | null,
       published: formData.get("published") === "true",
       imageUrl,
       technologies,

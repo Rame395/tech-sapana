@@ -3,11 +3,6 @@ import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import type { NextAuthOptions } from "next-auth";
 
-// Fail fast if secret is missing — do not let the app start silently insecure
-if (!process.env.NEXTAUTH_SECRET) {
-  throw new Error("NEXTAUTH_SECRET environment variable is not set. The application cannot start securely.");
-}
-
 // Login attempt rate limiting (in-memory, resets on server restart)
 const loginAttempts = new Map<string, { count: number; resetAt: number }>();
 
