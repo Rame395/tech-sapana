@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth-guard";
 
 export async function getServices() {
   return await prisma.service.findMany({
@@ -25,6 +26,7 @@ export async function createService(data: {
   published: boolean;
   order: number;
 }) {
+  await requireAdmin();
   const service = await prisma.service.create({
     data: {
       title: data.title,
@@ -54,6 +56,7 @@ export async function updateService(
     order?: number;
   }
 ) {
+  await requireAdmin();
   const service = await prisma.service.update({
     where: { id },
     data,
@@ -65,6 +68,7 @@ export async function updateService(
 }
 
 export async function deleteService(id: string) {
+  await requireAdmin();
   await prisma.service.delete({ where: { id } });
   revalidatePath("/services");
   revalidatePath("/admin/services");

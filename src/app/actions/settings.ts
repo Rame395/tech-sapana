@@ -3,6 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth-guard";
 
 export async function getGlobalSettings() {
   let settings = await prisma.globalSettings.findUnique({
@@ -30,6 +31,7 @@ export async function getGlobalSettings() {
 }
 
 export async function updateGlobalSettings(formData: FormData) {
+  await requireAdmin();
   const phone = formData.get("phone") as string;
   const address = formData.get("address") as string;
   const email = formData.get("email") as string;
@@ -83,6 +85,7 @@ export async function updateGlobalSettings(formData: FormData) {
 }
 
 export async function resetAdminPassword(formData: FormData) {
+  await requireAdmin();
   const newPassword = formData.get("newPassword") as string;
   const confirmPassword = formData.get("confirmPassword") as string;
 

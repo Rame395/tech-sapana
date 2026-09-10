@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth-guard";
 
 export async function getHeroSection() {
   try {
@@ -61,6 +62,7 @@ export async function getHeroSection() {
 }
 
 export async function updateHeroSection(data: any) {
+  await requireAdmin();
   try {
     const updated = await prisma.heroSection.update({
       where: { id: "default" },

@@ -1,9 +1,8 @@
 "use server";
 
-import { PrismaClient } from '@prisma/client';
+import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-
-const prisma = new PrismaClient();
+import { requireAdmin } from "@/lib/auth-guard";
 
 export async function createEnrollment(data: {
   name: string;
@@ -18,7 +17,12 @@ export async function createEnrollment(data: {
       return { success: false, error: "Missing required fields." };
     }
 
-    // 2. Regex Validation (Server-side)
+    // 2. Length limits to prevent payload flooding
+    if (data.name.length > 100 || data.email.length > 200 || data.phone.length > 20) {
+      return { success: false, error: "Input too long." };
+    }
+
+    // 3. Regex Validation (Server-side)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(data.email)) {
       return { success: false, error: "Invalid email format." };
@@ -63,6 +67,7 @@ export async function createEnrollment(data: {
 }
 
 export async function getEnrollments() {
+  await requireAdmin();
   try {
     return await prisma.enrollment.findMany({
       include: {
@@ -77,6 +82,7 @@ export async function getEnrollments() {
 }
 
 export async function updateEnrollmentStatus(id: string, status: string) {
+  await requireAdmin();
   try {
     await prisma.$transaction(async (tx) => {
       // Fetch the current enrollment to know its old status

@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth-guard";
 
 export async function getFaqs(onlyPublished = false) {
   return await prisma.faq.findMany({
@@ -17,6 +18,7 @@ export async function getFaq(id: string) {
 }
 
 export async function createFaq(data: { question: string; answer: string; published: boolean }) {
+  await requireAdmin();
   const highestOrder = await prisma.faq.findFirst({
     orderBy: { order: "desc" },
     select: { order: true },
@@ -35,6 +37,7 @@ export async function createFaq(data: { question: string; answer: string; publis
 }
 
 export async function updateFaq(id: string, data: { question: string; answer: string; published: boolean }) {
+  await requireAdmin();
   const res = await prisma.faq.update({
     where: { id },
     data,
@@ -46,6 +49,7 @@ export async function updateFaq(id: string, data: { question: string; answer: st
 }
 
 export async function deleteFaq(id: string) {
+  await requireAdmin();
   await prisma.faq.delete({
     where: { id },
   });
@@ -54,7 +58,7 @@ export async function deleteFaq(id: string) {
 }
 
 export async function reorderFaqs(updates: { id: string; order: number }[]) {
-  // Use a transaction to update all orders
+  await requireAdmin();
   await prisma.$transaction(
     updates.map((update) =>
       prisma.faq.update({

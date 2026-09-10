@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth-guard";
 
 export async function getCourses() {
   return prisma.course.findMany({
@@ -32,6 +33,7 @@ type CoursePayload = {
 };
 
 export async function createCourse(data: CoursePayload) {
+  await requireAdmin();
   const { modules, tools, ...courseData } = data;
   
   await prisma.course.create({ 
@@ -50,6 +52,7 @@ export async function createCourse(data: CoursePayload) {
 }
 
 export async function updateCourse(id: string, data: CoursePayload) {
+  await requireAdmin();
   const { modules, tools, ...courseData } = data;
 
   await prisma.$transaction([
@@ -74,6 +77,7 @@ export async function updateCourse(id: string, data: CoursePayload) {
 }
 
 export async function deleteCourse(id: string) {
+  await requireAdmin();
   await prisma.course.delete({ where: { id } });
   revalidatePath("/courses");
   revalidatePath("/admin/courses");

@@ -1,6 +1,7 @@
 "use server";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth-guard";
 
 export async function getPromoBanner() {
   const banner = await prisma.promoBanner.findUnique({
@@ -41,6 +42,7 @@ export async function updatePromoBanner(data: {
   marqueeIsActive: boolean;
   marqueeText: string;
 }) {
+  await requireAdmin();
   await prisma.promoBanner.upsert({
     where: { id: "default" },
     update: data,

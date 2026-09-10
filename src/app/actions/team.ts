@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth-guard";
 
 // --- Leadership Profile ---
 
@@ -27,6 +28,7 @@ export async function updateLeadershipProfile(data: {
   quoteBody: string;
   image: string | null;
 }) {
+  await requireAdmin();
   const profile = await prisma.leadershipProfile.upsert({
     where: { id: "default" },
     update: data,
@@ -55,6 +57,7 @@ export async function createTeamMember(data: {
   description: string;
   order: number;
 }) {
+  await requireAdmin();
   const member = await prisma.teamMember.create({
     data,
   });
@@ -73,6 +76,7 @@ export async function updateTeamMember(
     order?: number;
   }
 ) {
+  await requireAdmin();
   const member = await prisma.teamMember.update({
     where: { id },
     data,
@@ -84,6 +88,7 @@ export async function updateTeamMember(
 }
 
 export async function deleteTeamMember(id: string) {
+  await requireAdmin();
   await prisma.teamMember.delete({ where: { id } });
   revalidatePath("/about");
   revalidatePath("/admin/team");
