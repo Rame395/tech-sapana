@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import DOMPurify from "isomorphic-dompurify";
 
 export default function CourseDetailClient({ 
   course, 
@@ -154,7 +155,7 @@ export default function CourseDetailClient({
                                    prose-p:leading-relaxed 
                                    prose-a:no-underline hover:prose-a:underline
                                    prose-li:marker:text-brand-blue"
-                        dangerouslySetInnerHTML={{ __html: course.detailedDescription }} 
+                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(course.detailedDescription ?? '') }} 
                       />
                     </div>
                   </div>

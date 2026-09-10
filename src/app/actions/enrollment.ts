@@ -83,6 +83,11 @@ export async function getEnrollments() {
 
 export async function updateEnrollmentStatus(id: string, status: string) {
   await requireAdmin();
+  // Validate status against allowed enum values
+  const VALID_STATUSES = ["Pending Verification", "Verified", "Rejected"];
+  if (!VALID_STATUSES.includes(status)) {
+    return { success: false, error: "Invalid status value." };
+  }
   try {
     await prisma.$transaction(async (tx) => {
       // Fetch the current enrollment to know its old status

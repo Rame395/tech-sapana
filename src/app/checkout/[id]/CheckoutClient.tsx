@@ -61,7 +61,7 @@ export default function CheckoutClient({
     data.append("file", file);
 
     try {
-      const res = await fetch("/api/upload", {
+      const res = await fetch("/api/upload-payment", {
         method: "POST",
         body: data,
       });

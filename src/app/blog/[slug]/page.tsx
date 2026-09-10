@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { Clock, Calendar, ArrowLeft } from "lucide-react";
 import { getReadingTime } from "../page";
+import DOMPurify from "isomorphic-dompurify";
 
 export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const params = await props.params;
@@ -104,7 +105,7 @@ export default async function BlogPostPage(props: { params: Promise<{ slug: stri
 
         <div 
           className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-[800] prose-headings:tracking-tight prose-a:text-blue-600 hover:prose-a:text-blue-500 prose-img:rounded-3xl prose-img:shadow-2xl prose-p:leading-[1.8] prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-li:text-gray-700 dark:prose-li:text-gray-300 break-words"
-          dangerouslySetInnerHTML={{ __html: post.content.replace(/&nbsp;/g, ' ') }}
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content.replace(/&nbsp;/g, ' ')) }}
         />
       </article>
     </main>
