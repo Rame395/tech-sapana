@@ -179,7 +179,7 @@ export default function BlogForm({ post }: { post?: any }) {
                       'header',
                       'bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block',
                       'color', 'background',
-                      'list', 'bullet', 'indent',
+                      'list', 'indent',
                       'align',
                       'link', 'image', 'video'
                     ]}
