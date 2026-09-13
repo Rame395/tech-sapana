@@ -54,6 +54,7 @@ model Course {
   enrollments   Enrollment[]
   modules       CourseModule[]
   tools         CourseTool[]
+  reviews       CourseReview[]
 
   // Optional relation to TeamMember for instructor details
   instructor    TeamMember? @relation(fields: [instructorId], references: [id])
@@ -77,6 +78,18 @@ model CourseTool {
   name        String
   description String
   order       Int      @default(0)
+
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+}
+
+model CourseReview {
+  id          String   @id @default(cuid())
+  courseId    String
+  studentName String
+  rating      Int      @default(5)
+  comment     String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
 
   course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
 }

@@ -9,7 +9,8 @@ export default async function EditCoursePage({ params }: { params: Promise<{ id:
     where: { id },
     include: {
       modules: { orderBy: { order: 'asc' } },
-      tools: { orderBy: { order: 'asc' } }
+      tools: { orderBy: { order: 'asc' } },
+      reviews: { orderBy: { order: 'asc' } }
     }
   });
 

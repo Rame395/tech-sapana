@@ -10,7 +10,7 @@ import ImageUploader from "@/components/ImageUploader";
 import dynamic from "next/dynamic";
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
-type Tab = 'basic' | 'overview' | 'syllabus' | 'tools';
+type Tab = 'basic' | 'overview' | 'syllabus' | 'tools' | 'reviews';
 
 export default function CourseForm({ initialData }: { initialData?: any }) {
   const router = useRouter();
@@ -41,12 +41,15 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
   const initialHighlights = initialData?.highlights ? [...initialData.highlights] : ["", "", ""];
   const [highlights, setHighlights] = useState(initialHighlights);
 
-  // Syllabus & Tools state
+  // Syllabus, Tools & Reviews state
   const [modules, setModules] = useState<{ weekLabel: string; title: string; lessons: string[]; order: number }[]>(
     initialData?.modules?.map((m: any) => ({ weekLabel: m.weekLabel, title: m.title, lessons: m.lessons, order: m.order })) || []
   );
   const [tools, setTools] = useState<{ icon: string; name: string; description: string; order: number }[]>(
     initialData?.tools?.map((t: any) => ({ icon: t.icon, name: t.name, description: t.description, order: t.order })) || []
+  );
+  const [reviews, setReviews] = useState<{ studentName: string; rating: number; comment: string; order: number }[]>(
+    initialData?.reviews?.map((r: any) => ({ studentName: r.studentName, rating: r.rating, comment: r.comment, order: r.order })) || []
   );
 
   // Handlers for Highlights
@@ -103,6 +106,19 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
     setTools(newTools);
   };
 
+  // Handlers for Reviews
+  const addReview = () => {
+    setReviews([...reviews, { studentName: "", rating: 5, comment: "", order: reviews.length }]);
+  };
+  const removeReview = (index: number) => {
+    setReviews(reviews.filter((_, i) => i !== index));
+  };
+  const updateReview = (index: number, field: string, value: any) => {
+    const newReviews = [...reviews];
+    (newReviews[index] as any)[field] = value;
+    setReviews(newReviews);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -110,6 +126,7 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
     // Clean up empty data
     const cleanModules = modules.map((m, i) => ({ ...m, order: i, lessons: m.lessons.filter(l => l.trim() !== "") })).filter(m => m.title.trim() !== "");
     const cleanTools = tools.map((t, i) => ({ ...t, order: i })).filter(t => t.name.trim() !== "");
+    const cleanReviews = reviews.map((r, i) => ({ ...r, order: i })).filter(r => r.studentName.trim() !== "" && r.comment.trim() !== "");
     const cleanHighlights = highlights.filter(h => h.trim() !== "");
 
     const data = { 
@@ -124,7 +141,8 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
       highlights: cleanHighlights,
       published,
       modules: cleanModules,
-      tools: cleanTools
+      tools: cleanTools,
+      reviews: cleanReviews
     };
     
     try {
@@ -220,6 +238,7 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
           <TabButton id="overview" label="Overview" />
           <TabButton id="syllabus" label="Syllabus" />
           <TabButton id="tools" label="Tools Stack" />
+          <TabButton id="reviews" label="Reviews" />
         </div>
 
         <form onSubmit={handleSubmit} className="p-8">
@@ -428,6 +447,47 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
                     <button type="button" onClick={() => removeTool(tIndex)} className="mt-6 text-red-400/50 hover:text-red-400 transition-colors p-2">
                       <Trash2 size={18} />
                     </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* TAB 5: REVIEWS */}
+          <div className={activeTab === 'reviews' ? 'space-y-6 block' : 'hidden'}>
+            <div className="flex justify-between items-center">
+              <div>
+                <h3 className="text-xl font-bold text-white mb-1">Student Reviews</h3>
+                <p className="text-white/50 text-sm">Add manual testimonials from verified students.</p>
+              </div>
+              <button type="button" onClick={addReview} className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-bold text-sm transition-colors flex items-center gap-2">
+                <Plus size={16} /> Add Review
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              {reviews.length === 0 && <p className="text-center text-white/30 py-8 border border-dashed border-white/10 rounded-xl">No reviews added yet.</p>}
+              
+              {reviews.map((review, rIndex) => (
+                <div key={rIndex} className="flex flex-col gap-4 bg-black/20 border border-white/10 rounded-xl p-4">
+                  <div className="flex flex-col md:flex-row gap-4">
+                    <div className="flex-[0.5]">
+                      <label className="block text-[10px] font-bold text-white/60 uppercase mb-1">Student Name</label>
+                      <input type="text" value={review.studentName} onChange={e => updateReview(rIndex, 'studentName', e.target.value)} className="w-full bg-[#0F1535] border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-blue-500 text-sm" placeholder="e.g. John Doe" />
+                    </div>
+                    <div className="w-24">
+                      <label className="block text-[10px] font-bold text-white/60 uppercase mb-1">Rating (1-5)</label>
+                      <input type="number" min="1" max="5" value={review.rating} onChange={e => updateReview(rIndex, 'rating', Number(e.target.value))} className="w-full bg-[#0F1535] border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-blue-500 text-sm" />
+                    </div>
+                    <div className="flex-grow">
+                      <label className="block text-[10px] font-bold text-white/60 uppercase mb-1">Comment</label>
+                      <input type="text" value={review.comment} onChange={e => updateReview(rIndex, 'comment', e.target.value)} className="w-full bg-[#0F1535] border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-blue-500 text-sm" placeholder="e.g. This course changed my life..." />
+                    </div>
+                    <div className="pt-5">
+                      <button type="button" onClick={() => removeReview(rIndex)} className="p-2 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white rounded-lg transition-colors">
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}

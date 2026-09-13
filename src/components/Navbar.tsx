@@ -55,10 +55,13 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Blurred top mask perfectly matches any background by just blurring what's behind it, hiding scrolling text seamlessly */}
+      {/* Solid gradient top mask to completely hide scrolling text behind the navbar */}
       <div 
-        className="fixed top-0 left-0 w-full h-16 z-40 pointer-events-none backdrop-blur-2xl"
-        style={{ WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)', maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)' }}
+        className={`fixed top-0 left-0 w-full h-32 z-30 pointer-events-none bg-gradient-to-b to-transparent ${
+          isDarkHero 
+            ? "from-[#0B1121] via-[#0B1121]/90" 
+            : "from-bg-primary via-bg-primary/90"
+        }`}
       ></div>
 
       <div className="fixed top-4 left-0 w-full z-50 flex justify-center pointer-events-none px-4">

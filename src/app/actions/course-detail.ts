@@ -13,6 +13,9 @@ export async function getCourseDetails(slug: string) {
         tools: {
           orderBy: { order: "asc" }
         },
+        reviews: {
+          orderBy: { order: "asc" }
+        },
         instructor: true
       }
     });

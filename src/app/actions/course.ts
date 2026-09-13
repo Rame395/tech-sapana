@@ -32,11 +32,12 @@ type CoursePayload = {
   published: boolean;
   modules?: { weekLabel: string; title: string; lessons: string[]; order: number }[];
   tools?: { icon: string; name: string; description: string; order: number }[];
+  reviews?: { studentName: string; rating: number; comment: string; order: number }[];
 };
 
 export async function createCourse(data: CoursePayload) {
   await requireAdmin();
-  const { modules, tools, ...courseData } = data;
+  const { modules, tools, reviews, ...courseData } = data;
   
   await prisma.course.create({ 
     data: {
@@ -46,6 +47,9 @@ export async function createCourse(data: CoursePayload) {
       },
       tools: {
         create: tools || []
+      },
+      reviews: {
+        create: reviews || []
       }
     } 
   });
@@ -55,11 +59,12 @@ export async function createCourse(data: CoursePayload) {
 
 export async function updateCourse(id: string, data: CoursePayload) {
   await requireAdmin();
-  const { modules, tools, ...courseData } = data;
+  const { modules, tools, reviews, ...courseData } = data;
 
   await prisma.$transaction([
     prisma.courseModule.deleteMany({ where: { courseId: id } }),
     prisma.courseTool.deleteMany({ where: { courseId: id } }),
+    prisma.courseReview.deleteMany({ where: { courseId: id } }),
     prisma.course.update({
       where: { id },
       data: {
@@ -69,6 +74,9 @@ export async function updateCourse(id: string, data: CoursePayload) {
         },
         tools: {
           create: tools || []
+        },
+        reviews: {
+          create: reviews || []
         }
       },
     })

@@ -2,14 +2,15 @@
 
 import Link from "next/link";
 import DOMPurify from "isomorphic-dompurify";
-import { SiOpenai, SiGooglegemini, SiReact, SiNextdotjs, SiPython, SiJavascript, SiTypescript, SiHtml5, SiCss3, SiNodedotjs, SiTailwindcss, SiGithub, SiFigma, SiVercel, SiPrisma, SiPostgresql, SiDocker, SiAws } from "react-icons/si";
-import { FaToolbox, FaRobot, FaBrain, FaCode } from "react-icons/fa";
+import { SiGooglegemini, SiReact, SiNextdotjs, SiPython, SiJavascript, SiTypescript, SiHtml5, SiCss, SiNodedotjs, SiTailwindcss, SiGithub, SiFigma, SiVercel, SiPrisma, SiPostgresql, SiDocker } from "react-icons/si";
+import { FaToolbox, FaRobot, FaBrain, FaCode, FaAws } from "react-icons/fa";
+import { TbBrandOpenai } from "react-icons/tb";
 
 const iconMap = {
-  SiOpenai, SiGooglegemini, SiReact, SiNextdotjs, SiPython, SiJavascript, 
-  SiTypescript, SiHtml5, SiCss3, SiNodedotjs, SiTailwindcss, SiGithub, 
-  SiFigma, SiVercel, SiPrisma, SiPostgresql, SiDocker, SiAws,
-  FaToolbox, FaRobot, FaBrain, FaCode
+  TbBrandOpenai, SiGooglegemini, SiReact, SiNextdotjs, SiPython, SiJavascript, 
+  SiTypescript, SiHtml5, SiCss, SiNodedotjs, SiTailwindcss, SiGithub, 
+  SiFigma, SiVercel, SiPrisma, SiPostgresql, SiDocker,
+  FaToolbox, FaRobot, FaBrain, FaCode, FaAws
 };
 
 export default function CourseDetailClient({ 
@@ -23,7 +24,7 @@ export default function CourseDetailClient({
     <>
       <main className="min-h-screen">
         {/* HERO SECTION */}
-        <section className="relative pt-24 pb-16 bg-bg-primary overflow-hidden">
+        <section className="relative pt-[130px] pb-16 bg-bg-primary overflow-hidden">
           <div className="w-full max-w-[1240px] mx-auto px-6 relative z-10">
             {/* Breadcrumb */}
             <div className="flex items-center gap-2 text-sm font-semibold text-text-muted mb-8">
@@ -97,13 +98,14 @@ export default function CourseDetailClient({
         </section>
 
         {/* SUBNAV STICKY BAR */}
-        <div className="sticky top-[80px] z-40 bg-bg-secondary/90 backdrop-blur-md border-y border-border-subtle">
+        <div className="sticky top-[100px] z-40 bg-bg-secondary/90 backdrop-blur-md border-y border-border-subtle">
           <div className="w-full max-w-[1240px] mx-auto px-6">
             <ul className="flex items-center gap-8 overflow-x-auto whitespace-nowrap py-4">
               <li><a href="#overview" className="text-sm font-bold text-brand-blue border-b-2 border-brand-blue pb-4">Overview</a></li>
               {course.modules?.length > 0 && <li><a href="#curriculum" className="text-sm font-semibold text-text-muted hover:text-text-main transition-colors pb-4">Syllabus</a></li>}
               {course.tools?.length > 0 && <li><a href="#tools" className="text-sm font-semibold text-text-muted hover:text-text-main transition-colors pb-4">Tools Stack</a></li>}
               {course.instructor && <li><a href="#instructor" className="text-sm font-semibold text-text-muted hover:text-text-main transition-colors pb-4">Instructor</a></li>}
+              {course.reviews?.length > 0 && <li><a href="#reviews" className="text-sm font-semibold text-text-muted hover:text-text-main transition-colors pb-4">Reviews</a></li>}
             </ul>
           </div>
         </div>
@@ -154,8 +156,8 @@ export default function CourseDetailClient({
                           <div className="px-6 pb-6 pt-2 border-t border-border-subtle ml-6 mr-6">
                             <div className="flex flex-col gap-3 mt-4">
                               {module.lessons.map((lesson: string, j: number) => (
-                                <div key={j} className="text-sm text-text-muted flex gap-2 break-words">
-                                  <span className="text-brand-blue shrink-0">•</span> 
+                                <div key={j} className="text-base text-gray-800 dark:text-gray-200 font-medium flex gap-2 break-words leading-relaxed">
+                                  <span className="text-brand-blue shrink-0 mt-0.5">•</span> 
                                   <span className="whitespace-pre-wrap">{lesson}</span>
                                 </div>
                               ))}
@@ -173,13 +175,12 @@ export default function CourseDetailClient({
                     <div className="bg-bg-secondary border border-border-subtle rounded-2xl p-6 md:p-10 shadow-[0_10px_30px_rgba(0,0,0,0.05)] overflow-hidden">
                       <div 
                         className="prose dark:prose-invert prose-brand max-w-none break-words
-                                   [&_*]:!text-inherit [&_*]:!bg-transparent text-text-muted
+                                   [&_*]:!bg-transparent text-gray-800 dark:text-gray-200 text-base md:text-lg leading-[1.8]
                                    [&_h1]:!text-text-main [&_h2]:!text-text-main [&_h3]:!text-text-main [&_h4]:!text-text-main [&_h5]:!text-text-main [&_h6]:!text-text-main
                                    [&_strong]:!text-text-main [&_b]:!text-text-main
                                    [&_a]:!text-brand-blue
                                    [&_pre]:!whitespace-pre-wrap [&_pre]:!break-words [&_code]:!break-words
                                    prose-headings:font-extrabold prose-headings:tracking-tight 
-                                   prose-p:leading-relaxed 
                                    prose-a:no-underline hover:prose-a:underline
                                    prose-li:marker:text-brand-blue"
                         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(course.detailedDescription ?? '') }} 
@@ -221,6 +222,34 @@ export default function CourseDetailClient({
                           {course.instructor.description}
                         </p>
                       </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* REVIEWS SECTION */}
+                {course.reviews?.length > 0 && (
+                  <div id="reviews" className="scroll-mt-32">
+                    <h2 className="text-3xl font-extrabold text-text-main mb-8">What Our Alumni Say</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {course.reviews.map((review: any, i: number) => (
+                        <div key={i} className="p-6 bg-bg-secondary border border-border-subtle rounded-xl flex flex-col gap-4">
+                          <div className="flex text-[#FFB800] text-sm">
+                            {Array.from({ length: 5 }).map((_, idx) => (
+                              <span key={idx}>{idx < review.rating ? '★' : '☆'}</span>
+                            ))}
+                          </div>
+                          <p className="text-text-muted italic text-sm leading-relaxed flex-grow">"{review.comment}"</p>
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-brand-blue-soft text-brand-blue flex items-center justify-center font-bold text-xs uppercase">
+                              {review.studentName.charAt(0)}
+                            </div>
+                            <div>
+                              <div className="font-bold text-text-main text-sm">{review.studentName}</div>
+                              <div className="text-xs text-brand-blue font-semibold">Verified Graduate</div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 )}
