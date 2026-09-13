@@ -28,6 +28,7 @@ This repository contains the full source code for the public-facing website, as 
 
 ### 🛡️ Secure Admin Panel & CMS
 A fully custom-built dashboard (`/admin`) accessible only to authenticated users, providing CRUD capabilities for:
+- **Real-Time Analytics:** View live revenue, student enrollments, course performance, and a monthly financial area chart.
 - **Global Settings:** Dynamically update company contact info (Phone, Email, Address, Operating Hours) and global SEO Metadata. Includes secure admin password resetting.
 - **Promo Banners:** Toggle and edit site-wide promotional banners (e.g., flash sales, new courses).
 - **Blog Management:** Create, edit, publish, and delete blog articles with rich HTML support.
