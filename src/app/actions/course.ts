@@ -26,6 +26,8 @@ type CoursePayload = {
   availableSeats?: number | null;
   detailedDescription?: string | null;
   iconName?: string | null;
+  rating?: number | null;
+  reviewCount?: number | null;
   highlights?: string[];
   published: boolean;
   modules?: { weekLabel: string; title: string; lessons: string[]; order: number }[];

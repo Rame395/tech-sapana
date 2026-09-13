@@ -48,6 +48,9 @@ model Course {
   detailedDescription String?
   iconName      String?  @default("BookOpen")
   
+  rating        Float?   @default(0)
+  reviewCount   Int?     @default(0)
+  
   enrollments   Enrollment[]
   modules       CourseModule[]
   tools         CourseTool[]

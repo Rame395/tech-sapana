@@ -43,6 +43,20 @@ export default function CourseDetailClient({
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight mb-4 text-text-main break-words">
                   {course.title}
                 </h1>
+                
+                {course.reviewCount && course.reviewCount > 0 ? (
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="flex text-[#FFB800] text-lg">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <span key={i}>{i < Math.floor(course.rating || 5) ? '★' : '☆'}</span>
+                      ))}
+                    </div>
+                    <div className="text-sm font-bold text-text-main">
+                      {course.rating?.toFixed(1)} <span className="text-text-muted font-medium">({course.reviewCount} verified ratings)</span>
+                    </div>
+                  </div>
+                ) : null}
+
                 <p className="text-lg text-text-muted mb-8 max-w-xl leading-relaxed">
                   {course.description}
                 </p>

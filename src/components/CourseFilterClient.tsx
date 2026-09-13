@@ -124,6 +124,20 @@ export default function CourseFilterClient({ courses }: { courses: Course[] }) {
 
                   <div className="p-6 flex flex-col flex-grow relative z-10 bg-white dark:bg-[#0B1121]">
                     <h3 className="text-[1.35rem] font-extrabold text-gray-900 dark:text-white mb-2.5 leading-[1.3]">{course.title}</h3>
+                    
+                    {course.reviewCount && course.reviewCount > 0 ? (
+                      <div className="flex items-center gap-2 mb-4">
+                        <div className="flex text-[#FFB800] text-sm">
+                          {Array.from({ length: 5 }).map((_, i) => (
+                            <span key={i}>{i < Math.floor(course.rating || 5) ? '★' : '☆'}</span>
+                          ))}
+                        </div>
+                        <div className="text-xs font-bold text-gray-700 dark:text-gray-300">
+                          {course.rating?.toFixed(1)} <span className="text-gray-500 font-medium">({course.reviewCount})</span>
+                        </div>
+                      </div>
+                    ) : null}
+
                     <p className="text-gray-600 dark:text-[#94A3B8] text-[0.9rem] leading-[1.6] mb-6">{course.description}</p>
 
                     <div className="bg-blue-50/80 dark:bg-[#0F172A] border border-blue-200 dark:border-[#1E3A8A] rounded-xl p-4 space-y-3 mb-5">

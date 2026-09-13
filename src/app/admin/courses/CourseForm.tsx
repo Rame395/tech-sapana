@@ -30,6 +30,8 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
   const [scheduleText, setScheduleText] = useState(initialData?.scheduleText || "");
   const [classTiming, setClassTiming] = useState(initialData?.classTiming || "");
   const [availableSeats, setAvailableSeats] = useState(initialData?.availableSeats || 20);
+  const [rating, setRating] = useState(initialData?.rating || 0);
+  const [reviewCount, setReviewCount] = useState(initialData?.reviewCount || 0);
   const [published, setPublished] = useState(initialData?.published || false);
 
   // Overview state
@@ -117,6 +119,7 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
       badgeText1: badgeText1 || null, badge1Style, badgeText2: badgeText2 || null,
       startDateText: startDateText || null, scheduleText: scheduleText || null,
       classTiming: classTiming || null, availableSeats: Number(availableSeats),
+      rating: Number(rating), reviewCount: Number(reviewCount),
       iconName, detailedDescription: detailedDescription || null,
       highlights: cleanHighlights,
       published,
@@ -276,7 +279,18 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-6 mt-6">
+              <div>
+                <label className="block text-xs font-bold text-white/60 uppercase mb-2">Average Rating (1-5)</label>
+                <input type="number" step="0.1" min="0" max="5" value={rating} onChange={e => setRating(Number(e.target.value))} className="w-full bg-[#0F1535] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="e.g. 4.9" />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-white/60 uppercase mb-2">Total Review Count</label>
+                <input type="number" value={reviewCount} onChange={e => setReviewCount(Number(e.target.value))} className="w-full bg-[#0F1535] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="e.g. 128" />
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6 mt-6">
               <div>
                 <label className="block text-xs font-bold text-white/60 uppercase mb-2">Current Price (NPR)</label>
                 <input required type="number" value={price} onChange={e => setPrice(Number(e.target.value))} className="w-full bg-[#0F1535] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" />
