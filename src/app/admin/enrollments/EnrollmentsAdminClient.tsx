@@ -54,7 +54,12 @@ export default function EnrollmentsAdminClient({ initialEnrollments }: { initial
 
   const handleWhatsAppSingle = (enrollment: Enrollment) => {
     const text = `Hello ${enrollment.name}, your payment for the course *${enrollment.course.title}* has been verified! Welcome to TechSapana!`;
-    const url = `https://wa.me/${enrollment.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(text)}`;
+    let phoneNum = enrollment.phone.replace(/[^0-9]/g, '');
+    // Auto-prepend Nepal country code if it's a standard 10 digit number
+    if (phoneNum.length === 10) {
+      phoneNum = '977' + phoneNum;
+    }
+    const url = `https://wa.me/${phoneNum}?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank');
   };
 

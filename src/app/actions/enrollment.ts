@@ -110,7 +110,7 @@ export async function updateEnrollmentStatus(id: string, status: string) {
         if (enrollment.course.availableSeats && enrollment.course.availableSeats > 0) {
           await tx.course.update({
             where: { id: enrollment.courseId },
-            data: { availableSeats: enrollment.course.availableSeats - 1 }
+            data: { availableSeats: { decrement: 1 } }
           });
         }
       } else if (enrollment.status === "VERIFIED" && status !== "VERIFIED") {
@@ -118,7 +118,7 @@ export async function updateEnrollmentStatus(id: string, status: string) {
         if (enrollment.course.availableSeats !== null) {
           await tx.course.update({
             where: { id: enrollment.courseId },
-            data: { availableSeats: enrollment.course.availableSeats + 1 }
+            data: { availableSeats: { increment: 1 } }
           });
         }
       }
