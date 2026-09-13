@@ -8,7 +8,6 @@ import {
   Table, 
   CreditCard, 
   Wrench, 
-  User, 
   LogOut,
   Megaphone,
   FileText,
@@ -80,15 +79,6 @@ export default function AdminSidebar() {
       {/* Account Navigation */}
       <div className="mt-8 mb-4 px-4 text-xs font-bold text-white/40 uppercase tracking-wider">Account Pages</div>
       <nav className="space-y-1 mb-8">
-        <Link 
-          href="/admin/settings" 
-          className="flex items-center gap-3 text-white/50 hover:text-white rounded-xl px-4 py-3 transition-colors"
-        >
-          <div className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center">
-            <User size={18} />
-          </div>
-          <span className="font-semibold text-sm">Profile</span>
-        </Link>
         <button 
           onClick={() => signOut({ callbackUrl: '/' })}
           className="w-full flex items-center gap-3 text-white/50 hover:text-red-400 rounded-xl px-4 py-3 transition-colors"
@@ -99,19 +89,6 @@ export default function AdminSidebar() {
           <span className="font-semibold text-sm">Log Out</span>
         </button>
       </nav>
-
-      {/* Help Box */}
-      <div className="mt-auto">
-        <div className="bg-gradient-to-br from-blue-600/40 to-purple-600/40 border border-white/10 rounded-2xl p-4 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 blur-xl rounded-full"></div>
-          <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center mb-3">
-            <div className="w-4 h-4 rounded-full bg-blue-600"></div>
-          </div>
-          <div className="font-bold text-sm mb-1">Need help?</div>
-          <div className="text-xs text-white/60 mb-3">Please check our docs</div>
-          <button className="w-full bg-white text-black font-bold text-xs py-2 rounded-lg">DOCUMENTATION</button>
-        </div>
-      </div>
     </aside>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle, XCircle, Eye, Loader2, MessageCircle, Mail, Send, Search } from "lucide-react";
+import { CheckCircle, XCircle, Eye, Loader2, MessageCircle, Mail, Send, Search, ChevronDown } from "lucide-react";
 import { updateEnrollmentStatus } from "@/app/actions/enrollment";
 
 type Enrollment = {
@@ -21,6 +21,7 @@ export default function EnrollmentsAdminClient({ initialEnrollments }: { initial
   const [enrollments, setEnrollments] = useState(initialEnrollments);
   const [loadingId, setLoadingId] = useState<string | null>(null);
   const [selectedCourse, setSelectedCourse] = useState<string>("All");
+  const [selectedStatus, setSelectedStatus] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState("");
   
   // State for Google Meet links per course
@@ -35,9 +36,8 @@ export default function EnrollmentsAdminClient({ initialEnrollments }: { initial
         
         // If it was just verified, prompt for messaging
         if (newStatus === "VERIFIED") {
-          // Use setTimeout so the UI updates first
           setTimeout(() => {
-            const wantToMessage = window.confirm("Student Verified Successfully! (Seat count decremented).\\n\\nWould you like to send them a WhatsApp approval message now?");
+            const wantToMessage = window.confirm("Student Verified Successfully! (Seat count decremented).\n\nWould you like to send them a WhatsApp approval message now?");
             if (wantToMessage) {
               handleWhatsAppSingle(enrollment);
             }
@@ -56,7 +56,6 @@ export default function EnrollmentsAdminClient({ initialEnrollments }: { initial
   const handleWhatsAppSingle = (enrollment: Enrollment) => {
     const text = `Hello ${enrollment.name}, your payment for the course *${enrollment.course.title}* has been verified! Welcome to TechSapana!`;
     let phoneNum = enrollment.phone.replace(/[^0-9]/g, '');
-    // Auto-prepend Nepal country code if it's a standard 10 digit number
     if (phoneNum.length === 10) {
       phoneNum = '977' + phoneNum;
     }
@@ -78,7 +77,6 @@ export default function EnrollmentsAdminClient({ initialEnrollments }: { initial
       return;
     }
     
-    // Only email VERIFIED students
     const verifiedEmails = students.filter(s => s.status === "VERIFIED").map(s => s.email);
     
     if (verifiedEmails.length === 0) {
@@ -94,14 +92,21 @@ export default function EnrollmentsAdminClient({ initialEnrollments }: { initial
     window.open(url, '_blank');
   };
 
-  // 1. Apply global search filter
+  // 1. Apply global search filter AND Status filter
   const searchedEnrollments = enrollments.filter(e => {
+    // Check Status Filter
+    if (selectedStatus !== "All" && e.status !== selectedStatus) {
+      return false;
+    }
+
+    // Check Search Query
     if (!searchQuery) return true;
     const q = searchQuery.toLowerCase();
     return (
       e.name.toLowerCase().includes(q) ||
       e.email.toLowerCase().includes(q) ||
-      e.phone.includes(q)
+      e.phone.includes(q) ||
+      e.status.toLowerCase().includes(q)
     );
   });
 
@@ -126,35 +131,60 @@ export default function EnrollmentsAdminClient({ initialEnrollments }: { initial
   return (
     <div className="space-y-6">
       {/* Filter and Search Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+      <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-4 mb-4">
         <h2 className="text-xl font-bold text-white">Course Enrollments</h2>
         
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-4 w-full md:w-auto">
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-4 w-full xl:w-auto">
           {/* Search Bar */}
-          <div className="relative w-full md:w-64">
+          <div className="relative w-full md:w-[320px]">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input 
               type="text" 
-              placeholder="Search student, email, or phone..."
+              placeholder="Search by name, email, phone, or status..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-black/40 border border-white/10 rounded-lg pl-9 pr-3 py-1.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-colors placeholder:text-gray-600"
             />
           </div>
 
-          <div className="flex items-center gap-2">
-            <label htmlFor="course-filter" className="text-sm text-gray-400 font-medium whitespace-nowrap">Filter by Course:</label>
-            <select 
-              id="course-filter"
-              value={selectedCourse} 
-              onChange={(e) => setSelectedCourse(e.target.value)}
-              className="bg-black/40 border border-white/10 rounded px-3 py-1.5 text-sm text-white focus:outline-none focus:border-blue-500"
-            >
-              <option value="All">All Courses</option>
-              {allCourseTitles.map(title => (
-                <option key={title} value={title}>{title}</option>
-              ))}
-            </select>
+          <div className="flex flex-wrap items-center gap-4">
+            {/* Status Filter */}
+            <div className="flex items-center gap-2">
+              <label htmlFor="status-filter" className="text-sm text-gray-400 font-medium whitespace-nowrap">Status:</label>
+              <div className="relative">
+                <select 
+                  id="status-filter"
+                  value={selectedStatus} 
+                  onChange={(e) => setSelectedStatus(e.target.value)}
+                  className="appearance-none bg-black/40 border border-white/10 rounded-lg pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-blue-500 cursor-pointer"
+                >
+                  <option value="All" className="bg-[#1a1a2e] text-white">All Status</option>
+                  <option value="PENDING" className="bg-[#1a1a2e] text-white">Pending</option>
+                  <option value="VERIFIED" className="bg-[#1a1a2e] text-white">Verified</option>
+                  <option value="REJECTED" className="bg-[#1a1a2e] text-white">Rejected</option>
+                </select>
+                <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+              </div>
+            </div>
+
+            {/* Course Filter */}
+            <div className="flex items-center gap-2">
+              <label htmlFor="course-filter" className="text-sm text-gray-400 font-medium whitespace-nowrap">Course:</label>
+              <div className="relative">
+                <select 
+                  id="course-filter"
+                  value={selectedCourse} 
+                  onChange={(e) => setSelectedCourse(e.target.value)}
+                  className="appearance-none bg-black/40 border border-white/10 rounded-lg pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-blue-500 cursor-pointer"
+                >
+                  <option value="All" className="bg-[#1a1a2e] text-white">All Courses</option>
+                  {allCourseTitles.map(title => (
+                    <option key={title} value={title} className="bg-[#1a1a2e] text-white">{title}</option>
+                  ))}
+                </select>
+                <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -338,18 +338,19 @@ export default function AboutClient({
               viewport={{ once: true }}
               className="bg-white dark:bg-[#0F172A] border border-gray-200 dark:border-white/10 rounded-3xl overflow-hidden grid grid-cols-1 md:grid-cols-[1fr_1.5fr] shadow-xl dark:shadow-2xl relative"
             >
-              <div className="h-[300px] md:h-auto relative bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+              <div className="h-[300px] md:h-[500px] relative bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
                 {leadershipProfile.image ? (
                   <Image
                     src={leadershipProfile.image}
                     alt={leadershipProfile.name}
                     fill
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover object-top"
                   />
                 ) : (
                   <div className="text-gray-400 dark:text-gray-600 font-medium">Image Placeholder</div>
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-white dark:from-[#0F172A] via-white/80 dark:via-[#0F172A]/60 to-transparent"></div>
+                {/* Removed the heavy gradient so the image is fully visible */}
+                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-transparent via-transparent to-white dark:to-[#0F172A]"></div>
               </div>
 
               <div className="p-10 md:p-16 flex flex-col justify-center relative z-10">
