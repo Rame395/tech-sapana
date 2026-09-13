@@ -19,8 +19,10 @@ import {
   Edit3,
   Moon,
   Sun,
-  Calendar
+  Calendar,
+  AlertCircle
 } from "lucide-react";
+import RevenueChart from "./components/RevenueChart";
 
 export default async function AdminDashboard() {
   // Fetch real stats
@@ -34,26 +36,46 @@ export default async function AdminDashboard() {
   const totalRevenue = verifiedEnrollments.reduce((acc, curr) => acc + (curr.course.price || 0), 0);
   const activeCourses = await prisma.course.count({ where: { published: true } });
   const publishedPosts = await prisma.post.count({ where: { status: "PUBLISHED" } });
+  
+  const teamMembersCount = await prisma.teamMember.count();
+  const pendingEnrollmentsCount = await prisma.enrollment.count({ where: { status: "PENDING" } });
 
   // Compute course performance
   const coursePerformance: Record<string, { title: string, students: number, revenue: number }> = {};
   
+  // Compute monthly revenue
+  const monthlyRevenueMap: Record<string, { month: string, revenue: number, students: number }> = {};
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  
+  // Initialize last 6 months
+  const d = new Date();
+  for (let i = 5; i >= 0; i--) {
+    const dTemp = new Date(d.getFullYear(), d.getMonth() - i, 1);
+    const monthKey = `${monthNames[dTemp.getMonth()]} ${dTemp.getFullYear()}`;
+    monthlyRevenueMap[monthKey] = { month: monthKey, revenue: 0, students: 0 };
+  }
+
   verifiedEnrollments.forEach(e => {
+    // Course performance
     if (!coursePerformance[e.courseId]) {
-      coursePerformance[e.courseId] = {
-        title: e.course.title,
-        students: 0,
-        revenue: 0
-      };
+      coursePerformance[e.courseId] = { title: e.course.title, students: 0, revenue: 0 };
     }
     coursePerformance[e.courseId].students += 1;
     coursePerformance[e.courseId].revenue += (e.course.price || 0);
+
+    // Monthly revenue
+    const eDate = new Date(e.createdAt);
+    const monthKey = `${monthNames[eDate.getMonth()]} ${eDate.getFullYear()}`;
+    if (monthlyRevenueMap[monthKey]) {
+      monthlyRevenueMap[monthKey].revenue += (e.course.price || 0);
+      monthlyRevenueMap[monthKey].students += 1;
+    }
   });
 
+  const chartData = Object.values(monthlyRevenueMap);
   const topCourses = Object.values(coursePerformance).sort((a, b) => b.students - a.students);
   const maxStudents = Math.max(...topCourses.map(c => c.students), 1);
   const maxRevenue = Math.max(...topCourses.map(c => c.revenue), 1);
-
 
 
   // Calculate Time and Greeting (Adjusted for Nepal Time roughly)
@@ -95,7 +117,8 @@ export default async function AdminDashboard() {
       </header>
 
       {/* Quick Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Verified Students */}
         <div className="bg-gradient-to-br from-[#0F1535]/90 to-[#121A42]/90 border border-white/10 rounded-2xl p-6 flex flex-col relative overflow-hidden">
           <div className="absolute -right-4 -top-4 w-16 h-16 bg-blue-500/10 rounded-full blur-xl"></div>
           <div className="flex justify-between items-start mb-4">
@@ -108,6 +131,7 @@ export default async function AdminDashboard() {
           <p className="text-white/50 text-sm mt-1 font-medium">Verified Enrollments</p>
         </div>
 
+        {/* Total Revenue */}
         <div className="bg-gradient-to-br from-[#0F1535]/90 to-[#121A42]/90 border border-white/10 rounded-2xl p-6 flex flex-col relative overflow-hidden">
           <div className="absolute -right-4 -top-4 w-16 h-16 bg-green-500/10 rounded-full blur-xl"></div>
           <div className="flex justify-between items-start mb-4">
@@ -120,6 +144,7 @@ export default async function AdminDashboard() {
           <p className="text-white/50 text-sm mt-1 font-medium">Total Verified Revenue</p>
         </div>
 
+        {/* Active Courses */}
         <div className="bg-gradient-to-br from-[#0F1535]/90 to-[#121A42]/90 border border-white/10 rounded-2xl p-6 flex flex-col relative overflow-hidden">
           <div className="absolute -right-4 -top-4 w-16 h-16 bg-purple-500/10 rounded-full blur-xl"></div>
           <div className="flex justify-between items-start mb-4">
@@ -132,6 +157,33 @@ export default async function AdminDashboard() {
           <p className="text-white/50 text-sm mt-1 font-medium">Published Courses</p>
         </div>
 
+        {/* Pending Approvals */}
+        <div className="bg-gradient-to-br from-[#0F1535]/90 to-[#121A42]/90 border border-white/10 rounded-2xl p-6 flex flex-col relative overflow-hidden">
+          <div className="absolute -right-4 -top-4 w-16 h-16 bg-yellow-500/10 rounded-full blur-xl"></div>
+          <div className="flex justify-between items-start mb-4">
+            <div className="p-3 bg-yellow-500/20 text-yellow-400 rounded-lg">
+              <AlertCircle size={20} />
+            </div>
+            <span className="text-xs font-bold text-yellow-400 bg-yellow-500/10 px-2 py-1 rounded-full">Action</span>
+          </div>
+          <h3 className="text-3xl font-black text-white">{pendingEnrollmentsCount}</h3>
+          <p className="text-white/50 text-sm mt-1 font-medium">Pending Approvals</p>
+        </div>
+
+        {/* Team Members */}
+        <div className="bg-gradient-to-br from-[#0F1535]/90 to-[#121A42]/90 border border-white/10 rounded-2xl p-6 flex flex-col relative overflow-hidden">
+          <div className="absolute -right-4 -top-4 w-16 h-16 bg-cyan-500/10 rounded-full blur-xl"></div>
+          <div className="flex justify-between items-start mb-4">
+            <div className="p-3 bg-cyan-500/20 text-cyan-400 rounded-lg">
+              <Users size={20} />
+            </div>
+            <span className="text-xs font-bold text-cyan-400 bg-cyan-500/10 px-2 py-1 rounded-full">Team</span>
+          </div>
+          <h3 className="text-3xl font-black text-white">{teamMembersCount}</h3>
+          <p className="text-white/50 text-sm mt-1 font-medium">Total Team Members</p>
+        </div>
+
+        {/* Published Posts */}
         <div className="bg-gradient-to-br from-[#0F1535]/90 to-[#121A42]/90 border border-white/10 rounded-2xl p-6 flex flex-col relative overflow-hidden">
           <div className="absolute -right-4 -top-4 w-16 h-16 bg-orange-500/10 rounded-full blur-xl"></div>
           <div className="flex justify-between items-start mb-4">
@@ -145,7 +197,8 @@ export default async function AdminDashboard() {
         </div>
       </div>
 
-
+      {/* Revenue Chart Section */}
+      <RevenueChart data={chartData} />
 
       {/* Course Performance Section & Quick Links Container */}
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6">
