@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { ArrowLeft, Save, Plus, X, Trash2, GripVertical } from "lucide-react";
@@ -8,9 +8,7 @@ import Link from "next/link";
 import { createCourse, updateCourse } from "@/app/actions/course";
 import ImageUploader from "@/components/ImageUploader";
 import dynamic from "next/dynamic";
-import "react-quill-new/dist/quill.snow.css";
-
-const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
+const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 type Tab = 'basic' | 'overview' | 'syllabus' | 'tools';
 
@@ -153,6 +151,44 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
     </button>
   );
 
+  const config = React.useMemo(() => ({
+    readonly: false,
+    placeholder: "Start writing...",
+    height: 600,
+    theme: "default",
+    uploader: {
+      url: '/api/upload',
+      format: 'json',
+      isSuccess: function (resp: any) {
+        return !resp.error;
+      },
+      process: function (resp: any) {
+        return {
+          files: resp.url ? [resp.url] : [],
+          path: resp.url,
+          baseurl: '',
+          error: resp.error ? 1 : 0,
+          msg: resp.error
+        };
+      },
+      defaultHandlerSuccess: function (this: any, data: any) {
+        if (data.files && data.files.length) {
+          this.s.insertImage(data.baseurl + data.files[0]);
+        }
+      }
+    },
+    buttons: [
+      'bold', 'italic', 'underline', 'strikethrough', 'source', '|',
+      'font', 'fontsize', 'brush', 'paragraph', '|',
+      'ul', 'ol', '|',
+      'outdent', 'indent', '|',
+      'align', '|',
+      'image', 'video', 'table', 'link', '|',
+      'undo', 'redo', '|',
+      'hr', 'eraser', 'fullsize'
+    ],
+  }), []);
+
   return (
     <div className="w-full max-w-4xl pb-20">
       <div className="flex items-center gap-4 mb-8">
@@ -275,31 +311,14 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
 
             <div className="border border-white/10 rounded-xl overflow-hidden">
               <label className="block text-xs font-bold text-white/80 bg-[#121A42] px-4 py-3 border-b border-white/10 uppercase">Detailed Course Content (Rich Text)</label>
-              <ReactQuill 
-                theme="snow" 
-                value={detailedDescription} 
-                onChange={setDetailedDescription} 
-                className="bg-white text-black min-h-[300px]"
-                modules={{
-                  toolbar: [
-                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                    ['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
-                    [{ 'color': [] }, { 'background': [] }],
-                    [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'indent': '-1'}, { 'indent': '+1' }],
-                    [{ 'align': [] }],
-                    ['link', 'image', 'video'],
-                    ['clean']
-                  ],
-                }}
-                formats={[
-                  'header',
-                  'bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block',
-                  'color', 'background',
-                  'list', 'indent',
-                  'align',
-                  'link', 'image', 'video'
-                ]}
-              />
+              <div className="prose-editor-container bg-white text-black min-h-[300px]">
+                <JoditEditor
+                  ref={null}
+                  value={detailedDescription}
+                  config={config}
+                  onBlur={newContent => setDetailedDescription(newContent)}
+                />
+              </div>
             </div>
           </div>
 

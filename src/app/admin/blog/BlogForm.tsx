@@ -1,14 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { createPost, updatePost } from "@/app/actions/blog";
 import ImageUploader from "@/components/ImageUploader";
 import dynamic from "next/dynamic";
-import "react-quill-new/dist/quill.snow.css";
 import Link from "next/link";
 
-const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
+const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 export default function BlogForm({ post }: { post?: any }) {
   const router = useRouter();
@@ -31,51 +30,113 @@ export default function BlogForm({ post }: { post?: any }) {
     messages: [] as string[]
   });
 
-  // Simple SEO analysis logic
+  // Advanced SEO analysis logic
   useEffect(() => {
     if (!formData.focusKeyword) {
-      setSeoScore({ score: 0, messages: ["Set a Focus Keyword to get real-time SEO scoring."] });
+      setSeoScore({ score: 0, messages: ["⚠️ Set a Focus Keyword to get real-time SEO scoring."] });
       return;
     }
 
-    const keyword = formData.focusKeyword.toLowerCase();
+    const keyword = formData.focusKeyword.toLowerCase().trim();
     let score = 0;
     const msgs = [];
+    
+    // Helper to strip HTML tags for accurate word counting
+    const stripHtml = (html: string) => html.replace(/<[^>]*>?/gm, '');
+    const plainContent = stripHtml(formData.content).toLowerCase();
 
-    // Title Check
+    // 1. Title Checks (Max 20 points)
     const titleToCheck = formData.metaTitle || formData.title;
-    if (titleToCheck.toLowerCase().includes(keyword)) {
-      score += 30;
-      msgs.push("✅ Focus keyword found in SEO Title.");
+    if (titleToCheck) {
+      if (titleToCheck.toLowerCase().includes(keyword)) {
+        score += 10;
+        msgs.push("✅ Focus keyword found in SEO Title.");
+      } else {
+        msgs.push("❌ Focus keyword missing from SEO Title.");
+      }
+      
+      if (titleToCheck.length >= 40 && titleToCheck.length <= 60) {
+        score += 10;
+        msgs.push("✅ SEO Title length is optimal.");
+      } else {
+        msgs.push("⚠️ SEO Title length is not optimal (aim for 40-60 characters).");
+      }
     } else {
-      msgs.push("❌ Focus keyword missing from SEO Title.");
+      msgs.push("❌ SEO Title is empty.");
     }
 
-    // Meta Description Check
-    if (formData.metaDescription.toLowerCase().includes(keyword)) {
-      score += 30;
-      msgs.push("Focus keyword found in Meta Description.");
+    // 2. Meta Description Checks (Max 20 points)
+    if (formData.metaDescription) {
+      if (formData.metaDescription.toLowerCase().includes(keyword)) {
+        score += 10;
+        msgs.push("✅ Focus keyword found in Meta Description.");
+      } else {
+        msgs.push("❌ Focus keyword missing from Meta Description.");
+      }
+
+      if (formData.metaDescription.length >= 120 && formData.metaDescription.length <= 160) {
+        score += 10;
+        msgs.push("✅ Meta Description length is optimal.");
+      } else {
+        msgs.push("⚠️ Meta Description length should be 120-160 characters.");
+      }
     } else {
-      msgs.push("❌ Focus keyword missing from Meta Description.");
+      msgs.push("❌ Meta Description is empty.");
     }
 
-    // Content Check (Simple word match)
-    if (formData.content.toLowerCase().includes(keyword)) {
-      score += 30;
-      msgs.push("✅ Focus keyword found in content.");
+    // 3. Slug Check (Max 10 points)
+    const slugToCheck = formData.slug || formData.title;
+    if (slugToCheck.toLowerCase().includes(keyword.replace(/\s+/g, '-'))) {
+      score += 10;
+      msgs.push("✅ Focus keyword found in URL Slug.");
+    } else {
+      msgs.push("⚠️ Focus keyword missing from URL Slug.");
+    }
+
+    // 4. Content length (Max 15 points)
+    const wordCount = plainContent.split(/\s+/).filter(word => word.length > 0).length;
+    if (wordCount >= 300) {
+      score += 15;
+      msgs.push("✅ Content length is good (300+ words).");
+    } else {
+      msgs.push("❌ Content is too short. Minimum recommended is 300 words.");
+    }
+
+    // 5. Keyword in Content & Density (Max 25 points)
+    if (plainContent.includes(keyword)) {
+      score += 10;
+      
+      // Calculate Keyword Density
+      const keywordRegex = new RegExp(keyword, 'g');
+      const matches = plainContent.match(keywordRegex);
+      const keywordCount = matches ? matches.length : 0;
+      const density = wordCount > 0 ? ((keywordCount / wordCount) * 100).toFixed(2) : "0";
+      
+      if (parseFloat(density) >= 0.5 && parseFloat(density) <= 2.5) {
+        score += 15;
+        msgs.push(`✅ Keyword density is optimal (${density}%).`);
+      } else if (parseFloat(density) > 2.5) {
+        msgs.push(`⚠️ Keyword density is too high (${density}%). Avoid keyword stuffing.`);
+      } else {
+        msgs.push(`⚠️ Keyword density is a bit low (${density}%). Try using it more naturally.`);
+      }
+
+      // Check if keyword is in first 10% of content
+      const first10Percent = plainContent.slice(0, Math.max(200, plainContent.length * 0.1));
+      if (first10Percent.includes(keyword)) {
+        score += 10;
+        msgs.push("✅ Focus keyword appears in the first paragraph.");
+      } else {
+        msgs.push("⚠️ Focus keyword does not appear in the first paragraph.");
+      }
+
     } else {
       msgs.push("❌ Focus keyword missing from content.");
     }
 
-    // Length checks
-    if (formData.content.length > 300) {
-      score += 10;
-    } else {
-      msgs.push("⚠️ Content is too short.");
-    }
-
-    setSeoScore({ score, messages: msgs });
-  }, [formData.focusKeyword, formData.metaTitle, formData.title, formData.metaDescription, formData.content]);
+    // Cap the score at 100 just in case
+    setSeoScore({ score: Math.min(score, 100), messages: msgs });
+  }, [formData.focusKeyword, formData.metaTitle, formData.title, formData.metaDescription, formData.content, formData.slug]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -109,6 +170,44 @@ export default function BlogForm({ post }: { post?: any }) {
     if (score < 80) return "text-yellow-500";
     return "text-green-500";
   };
+
+  const config = React.useMemo(() => ({
+    readonly: false,
+    placeholder: "Start writing...",
+    height: 600,
+    theme: "default",
+    uploader: {
+      url: '/api/upload',
+      format: 'json',
+      isSuccess: function (resp: any) {
+        return !resp.error;
+      },
+      process: function (resp: any) {
+        return {
+          files: resp.url ? [resp.url] : [],
+          path: resp.url,
+          baseurl: '',
+          error: resp.error ? 1 : 0,
+          msg: resp.error
+        };
+      },
+      defaultHandlerSuccess: function (this: any, data: any) {
+        if (data.files && data.files.length) {
+          this.s.insertImage(data.baseurl + data.files[0]);
+        }
+      }
+    },
+    buttons: [
+      'bold', 'italic', 'underline', 'strikethrough', 'source', '|',
+      'font', 'fontsize', 'brush', 'paragraph', '|',
+      'ul', 'ol', '|',
+      'outdent', 'indent', '|',
+      'align', '|',
+      'image', 'video', 'table', 'link', '|',
+      'undo', 'redo', '|',
+      'hr', 'eraser', 'fullsize'
+    ],
+  }), []);
 
   return (
     <form onSubmit={handleSubmit} className="max-w-[1400px] mx-auto text-white pb-24">
@@ -159,31 +258,14 @@ export default function BlogForm({ post }: { post?: any }) {
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-1">Content</label>
                 <div className="bg-white rounded-md overflow-hidden text-black h-[500px]">
-                  <ReactQuill 
-                    theme="snow" 
-                    value={formData.content} 
-                    onChange={(val) => setFormData({ ...formData, content: val })} 
-                    className="h-[450px]"
-                    modules={{
-                      toolbar: [
-                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                        ['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
-                        [{ 'color': [] }, { 'background': [] }],
-                        [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'indent': '-1'}, { 'indent': '+1' }],
-                        [{ 'align': [] }],
-                        ['link', 'image', 'video'],
-                        ['clean']
-                      ],
-                    }}
-                    formats={[
-                      'header',
-                      'bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block',
-                      'color', 'background',
-                      'list', 'indent',
-                      'align',
-                      'link', 'image', 'video'
-                    ]}
-                  />
+                  <div className="prose-editor-container bg-white text-black min-h-[500px]">
+                    <JoditEditor
+                      ref={null}
+                      value={formData.content}
+                      config={config}
+                      onBlur={newContent => setFormData({ ...formData, content: newContent })}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
