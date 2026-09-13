@@ -18,8 +18,8 @@ type Course = {
   startDateText: string | null;
   scheduleText: string | null;
   highlights: string[];
-  rating: number;
-  reviewCount: number;
+  rating: number | null;
+  reviewCount: number | null;
 };
 
 export default function CourseFilterClient({ courses }: { courses: Course[] }) {
