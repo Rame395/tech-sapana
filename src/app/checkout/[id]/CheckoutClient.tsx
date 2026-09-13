@@ -12,11 +12,13 @@ export default function CheckoutClient({
   courseTitle,
   coursePrice,
   qrImageUrl,
+  isWaitlist = false,
 }: {
   courseId: string;
   courseTitle: string;
   coursePrice: number;
   qrImageUrl?: string | null;
+  isWaitlist?: boolean;
 }) {
   const router = useRouter();
   const [step, setStep] = useState<1 | 2 | 3>(1);
@@ -111,8 +113,12 @@ export default function CheckoutClient({
         {/* Header */}
         <div className="mb-10 text-center md:text-left">
           <Link href={`/courses`} className="text-brand-blue hover:underline text-sm font-bold mb-4 inline-block">&larr; Back to Courses</Link>
-          <h1 className="text-3xl md:text-4xl font-extrabold text-text-main">Secure Enrollment</h1>
-          <p className="text-text-muted mt-2">Complete your purchase to secure your seat.</p>
+          <h1 className="text-3xl md:text-4xl font-extrabold text-text-main">
+            {isWaitlist ? "Join Waitlist" : "Secure Enrollment"}
+          </h1>
+          <p className="text-text-muted mt-2">
+            {isWaitlist ? "This course is currently full. Secure your spot on the waitlist." : "Complete your purchase to secure your seat."}
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -229,8 +235,8 @@ export default function CheckoutClient({
 
                   <div className="flex gap-4">
                     <button onClick={() => setStep(1)} className="flex-1 py-4 bg-bg-card hover:bg-bg-card-hover border border-border-medium text-text-main font-bold rounded-xl transition-colors">Back</button>
-                    <button onClick={handleSubmit} disabled={loading || !screenshotUrl} className="flex-[2] py-4 bg-brand-blue hover:bg-brand-blue-hover disabled:opacity-50 disabled:hover:bg-brand-blue !text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-[0_10px_25px_rgba(0,82,204,0.3)] transition-all">
-                      {loading ? "Verifying..." : "Complete Enrollment"}
+                    <button onClick={handleSubmit} disabled={loading || !screenshotUrl} className={`flex-[2] py-4 disabled:opacity-50 !text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-[0_10px_25px_rgba(0,0,0,0.3)] transition-all ${isWaitlist ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-brand-blue hover:bg-brand-blue-hover'}`}>
+                      {loading ? "Submitting..." : (isWaitlist ? "Submit Waitlist Request" : "Complete Enrollment")}
                     </button>
                   </div>
                 </motion.div>
@@ -238,12 +244,17 @@ export default function CheckoutClient({
 
               {step === 3 && (
                 <motion.div key="step3" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="py-12 flex flex-col items-center text-center">
-                  <div className="w-24 h-24 bg-green-500/10 text-green-500 rounded-full flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(34,197,94,0.3)] border border-green-500/20">
+                  <div className={`w-24 h-24 ${isWaitlist ? 'bg-yellow-500/10 text-yellow-500 shadow-[0_0_40px_rgba(234,179,8,0.3)] border-yellow-500/20' : 'bg-green-500/10 text-green-500 shadow-[0_0_40px_rgba(34,197,94,0.3)] border-green-500/20'} rounded-full flex items-center justify-center mb-6 border`}>
                     <ShieldCheck className="w-12 h-12" />
                   </div>
-                  <h3 className="text-3xl font-extrabold text-text-main mb-4">Enrollment Successful!</h3>
+                  <h3 className="text-3xl font-extrabold text-text-main mb-4">
+                    {isWaitlist ? "Waitlist Request Received!" : "Enrollment Successful!"}
+                  </h3>
                   <p className="text-text-muted mb-8 leading-relaxed max-w-md">
-                    We have received your payment screenshot. Our team will verify the receipt and send your official access links to your WhatsApp and Email shortly.
+                    {isWaitlist 
+                      ? "We have received your waitlist request and payment screenshot. If a seat opens up or a new cohort launches, you will be the first to know via WhatsApp and Email!" 
+                      : "We have received your payment screenshot. Our team will verify the receipt and send your official access links to your WhatsApp and Email shortly."
+                    }
                   </p>
                   <button onClick={() => router.push(`/courses`)} className="bg-bg-card hover:bg-bg-card-hover border border-border-medium text-text-main font-bold py-4 px-8 rounded-xl transition-all hover:-translate-y-1">
                     Return to Courses

@@ -32,6 +32,7 @@ export default async function CheckoutPage({ params }: { params: { id: string } 
       courseTitle={course.title}
       coursePrice={course.price}
       qrImageUrl={settings?.paymentQrImage || null}
+      isWaitlist={course.availableSeats !== null && course.availableSeats <= 0}
     />
   );
 }

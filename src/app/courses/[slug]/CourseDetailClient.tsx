@@ -51,7 +51,7 @@ export default function CourseDetailClient({
                     href={`/checkout/${course.id}`}
                     className="px-6 py-3 bg-brand-blue hover:bg-brand-blue-hover !text-white rounded-md font-bold shadow-[0_4px_20px_rgba(0,82,204,0.35)] transition-all"
                   >
-                    Enroll Now
+                    {course.availableSeats > 0 ? "Enroll Now" : "Join Waitlist"}
                   </Link>
                 </div>
               </div>
@@ -67,10 +67,12 @@ export default function CourseDetailClient({
                   {/* Floating Badge */}
                   {course.startDateText && (
                     <div className="absolute bottom-4 right-4 bg-bg-card/90 backdrop-blur-md border border-border-subtle p-3 rounded-lg shadow-lg flex items-center gap-3">
-                      <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_#10B981]"></div>
+                      <div className={`w-2 h-2 rounded-full animate-pulse shadow-[0_0_8px] ${course.availableSeats > 0 ? 'bg-green-500 shadow-green-500' : 'bg-yellow-500 shadow-yellow-500'}`}></div>
                       <div className="flex flex-col">
                         <div className="text-sm font-bold text-text-main">Starts {course.startDateText}</div>
-                        <div className="text-xs text-text-muted">Only {course.availableSeats} seats remaining</div>
+                        <div className="text-xs text-text-muted">
+                          {course.availableSeats > 0 ? `Only ${course.availableSeats} seats remaining` : "Waitlist Open"}
+                        </div>
                       </div>
                     </div>
                   )}
@@ -240,16 +242,18 @@ export default function CourseDetailClient({
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-text-muted">Remaining Seats:</span>
-                      <span className="font-bold text-red-500">Only {course.availableSeats} Left</span>
+                      <span className={`font-bold ${course.availableSeats > 0 ? 'text-red-500' : 'text-yellow-500'}`}>
+                        {course.availableSeats > 0 ? `Only ${course.availableSeats} Left` : "Waitlist Open"}
+                      </span>
                     </div>
                   </div>
 
                   <div className="flex flex-col gap-3">
                     <Link 
                       href={`/checkout/${course.id}`}
-                      className="w-full text-center py-3.5 bg-brand-blue hover:bg-brand-blue-hover !text-white rounded-lg font-bold shadow-[0_4px_20px_rgba(0,82,204,0.35)] transition-all inline-block"
+                      className={`w-full text-center py-3.5 !text-white rounded-lg font-bold shadow-[0_4px_20px_rgba(0,0,0,0.15)] transition-all inline-block ${course.availableSeats > 0 ? 'bg-brand-blue hover:bg-brand-blue-hover shadow-[0_4px_20px_rgba(0,82,204,0.35)]' : 'bg-yellow-600 hover:bg-yellow-700'}`}
                     >
-                      Enroll Now
+                      {course.availableSeats > 0 ? "Enroll Now" : "Join Waitlist"}
                     </Link>
                   </div>
                 </div>
