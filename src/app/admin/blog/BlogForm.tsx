@@ -177,8 +177,19 @@ export default function BlogForm({ post }: { post?: any }) {
     height: 600,
     theme: "default",
     uploader: {
+      insertImageAsBase64URI: false,
       url: '/api/upload',
       format: 'json',
+      method: 'POST',
+      prepareData: function (formdata: any) {
+        // Jodit sends files as files[0]. Our API expects 'file'.
+        const file = formdata.get('files[0]');
+        if (file) {
+          formdata.append('file', file);
+          formdata.delete('files[0]');
+        }
+        return formdata;
+      },
       isSuccess: function (resp: any) {
         return !resp.error;
       },
