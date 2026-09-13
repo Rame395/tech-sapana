@@ -66,7 +66,7 @@ export default function CourseFilterClient({ courses }: { courses: Course[] }) {
   return (
     <>
       {/* BEAUTIFIED FILTER STRIP */}
-      <div className="sticky top-[100px] z-40 bg-white/80 dark:bg-bg-primary/80 backdrop-blur-xl border-b border-gray-200 dark:border-white/10 shadow-sm py-3 mb-12">
+      <div className="bg-white/80 dark:bg-bg-primary/80 backdrop-blur-xl border-b border-gray-200 dark:border-white/10 shadow-sm py-3 mb-12">
         <div className="w-full max-w-[1240px] mx-auto px-6">
           <div className="flex overflow-x-auto gap-3 pb-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             {tabs.map(tab => (

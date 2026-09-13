@@ -98,7 +98,7 @@ export default function CourseDetailClient({
         </section>
 
         {/* SUBNAV STICKY BAR */}
-        <div className="sticky top-[100px] z-40 bg-bg-secondary/90 backdrop-blur-md border-y border-border-subtle">
+        <div className="bg-bg-secondary/90 backdrop-blur-md border-y border-border-subtle">
           <div className="w-full max-w-[1240px] mx-auto px-6">
             <ul className="flex items-center gap-8 overflow-x-auto whitespace-nowrap py-4">
               <li><a href="#overview" className="text-sm font-bold text-brand-blue border-b-2 border-brand-blue pb-4">Overview</a></li>
