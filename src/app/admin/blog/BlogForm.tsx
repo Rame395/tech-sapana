@@ -164,6 +164,25 @@ export default function BlogForm({ post }: { post?: any }) {
                     value={formData.content} 
                     onChange={(val) => setFormData({ ...formData, content: val })} 
                     className="h-[450px]"
+                    modules={{
+                      toolbar: [
+                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                        ['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
+                        [{ 'color': [] }, { 'background': [] }],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'indent': '-1'}, { 'indent': '+1' }],
+                        [{ 'align': [] }],
+                        ['link', 'image', 'video'],
+                        ['clean']
+                      ],
+                    }}
+                    formats={[
+                      'header',
+                      'bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block',
+                      'color', 'background',
+                      'list', 'bullet', 'indent',
+                      'align',
+                      'link', 'image', 'video'
+                    ]}
                   />
                 </div>
               </div>

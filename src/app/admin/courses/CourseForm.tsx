@@ -280,6 +280,25 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
                 value={detailedDescription} 
                 onChange={setDetailedDescription} 
                 className="bg-white text-black min-h-[300px]"
+                modules={{
+                  toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'align': [] }],
+                    ['link', 'image', 'video'],
+                    ['clean']
+                  ],
+                }}
+                formats={[
+                  'header',
+                  'bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block',
+                  'color', 'background',
+                  'list', 'bullet', 'indent',
+                  'align',
+                  'link', 'image', 'video'
+                ]}
               />
             </div>
           </div>
