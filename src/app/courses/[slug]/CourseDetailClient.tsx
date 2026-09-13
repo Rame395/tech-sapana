@@ -2,6 +2,15 @@
 
 import Link from "next/link";
 import DOMPurify from "isomorphic-dompurify";
+import { SiOpenai, SiGooglegemini, SiReact, SiNextdotjs, SiPython, SiJavascript, SiTypescript, SiHtml5, SiCss3, SiNodedotjs, SiTailwindcss, SiGithub, SiFigma, SiVercel, SiPrisma, SiPostgresql, SiDocker, SiAws } from "react-icons/si";
+import { FaToolbox, FaRobot, FaBrain, FaCode } from "react-icons/fa";
+
+const iconMap = {
+  SiOpenai, SiGooglegemini, SiReact, SiNextdotjs, SiPython, SiJavascript, 
+  SiTypescript, SiHtml5, SiCss3, SiNodedotjs, SiTailwindcss, SiGithub, 
+  SiFigma, SiVercel, SiPrisma, SiPostgresql, SiDocker, SiAws,
+  FaToolbox, FaRobot, FaBrain, FaCode
+};
 
 export default function CourseDetailClient({ 
   course, 
@@ -169,13 +178,17 @@ export default function CourseDetailClient({
                   <div id="tools" className="scroll-mt-32">
                     <h2 className="text-3xl font-extrabold text-text-main mb-8">Tools &amp; Frameworks Stack</h2>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                      {course.tools.map((tool: any, i: number) => (
-                        <div key={i} className="p-6 bg-bg-secondary border border-border-subtle rounded-xl text-center hover:border-brand-blue hover:-translate-y-1 transition-all">
-                          <div className="text-3xl mb-3">{tool.icon}</div>
-                          <div className="font-bold text-text-main text-sm mb-1">{tool.name}</div>
-                          <div className="text-xs text-text-muted">{tool.description}</div>
-                        </div>
-                      ))}
+                      {course.tools.map((tool: any, i: number) => {
+                        // Dynamically map icon strings to actual React components. Fallback to FaToolbox.
+                        const IconComponent = (iconMap as any)[tool.icon] || (iconMap as any)["FaToolbox"];
+                        return (
+                          <div key={i} className="p-6 bg-bg-secondary border border-border-subtle rounded-xl text-center hover:border-brand-blue hover:-translate-y-1 transition-all">
+                            <div className="text-3xl mb-3 text-brand-blue flex justify-center"><IconComponent /></div>
+                            <div className="font-bold text-text-main text-sm mb-1">{tool.name}</div>
+                            <div className="text-xs text-text-muted">{tool.description}</div>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 )}
