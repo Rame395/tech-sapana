@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle, XCircle, Eye, Loader2, MessageCircle, Mail, Send } from "lucide-react";
+import { CheckCircle, XCircle, Eye, Loader2, MessageCircle, Mail, Send, Search } from "lucide-react";
 import { updateEnrollmentStatus } from "@/app/actions/enrollment";
 
 type Enrollment = {
@@ -21,6 +21,7 @@ export default function EnrollmentsAdminClient({ initialEnrollments }: { initial
   const [enrollments, setEnrollments] = useState(initialEnrollments);
   const [loadingId, setLoadingId] = useState<string | null>(null);
   const [selectedCourse, setSelectedCourse] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState("");
   
   // State for Google Meet links per course
   const [meetLinks, setMeetLinks] = useState<Record<string, string>>({});
@@ -93,8 +94,19 @@ export default function EnrollmentsAdminClient({ initialEnrollments }: { initial
     window.open(url, '_blank');
   };
 
-  // Group enrollments by course title
-  const groupedEnrollments = enrollments.reduce((acc, enrollment) => {
+  // 1. Apply global search filter
+  const searchedEnrollments = enrollments.filter(e => {
+    if (!searchQuery) return true;
+    const q = searchQuery.toLowerCase();
+    return (
+      e.name.toLowerCase().includes(q) ||
+      e.email.toLowerCase().includes(q) ||
+      e.phone.includes(q)
+    );
+  });
+
+  // 2. Group enrollments by course title
+  const groupedEnrollments = searchedEnrollments.reduce((acc, enrollment) => {
     const courseTitle = enrollment.course.title;
     if (!acc[courseTitle]) {
       acc[courseTitle] = [];
@@ -103,30 +115,47 @@ export default function EnrollmentsAdminClient({ initialEnrollments }: { initial
     return acc;
   }, {} as Record<string, Enrollment[]>);
 
-  const courseTitles = Object.keys(groupedEnrollments);
+  // We still want all course titles for the dropdown filter, regardless of search query
+  const allCourseTitles = Array.from(new Set(enrollments.map(e => e.course.title)));
 
+  // 3. Apply Course Filter dropdown
   const filteredGroups = selectedCourse === "All" 
     ? groupedEnrollments 
     : { [selectedCourse]: groupedEnrollments[selectedCourse] };
 
   return (
     <div className="space-y-6">
-      {/* Filter Header */}
-      <div className="flex justify-between items-center mb-4">
+      {/* Filter and Search Header */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
         <h2 className="text-xl font-bold text-white">Course Enrollments</h2>
-        <div className="flex items-center gap-2">
-          <label htmlFor="course-filter" className="text-sm text-gray-400 font-medium">Filter by Course:</label>
-          <select 
-            id="course-filter"
-            value={selectedCourse} 
-            onChange={(e) => setSelectedCourse(e.target.value)}
-            className="bg-black/40 border border-white/10 rounded px-3 py-1.5 text-sm text-white focus:outline-none focus:border-blue-500"
-          >
-            <option value="All">All Courses</option>
-            {courseTitles.map(title => (
-              <option key={title} value={title}>{title}</option>
-            ))}
-          </select>
+        
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-4 w-full md:w-auto">
+          {/* Search Bar */}
+          <div className="relative w-full md:w-64">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input 
+              type="text" 
+              placeholder="Search student, email, or phone..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-black/40 border border-white/10 rounded-lg pl-9 pr-3 py-1.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-colors placeholder:text-gray-600"
+            />
+          </div>
+
+          <div className="flex items-center gap-2">
+            <label htmlFor="course-filter" className="text-sm text-gray-400 font-medium whitespace-nowrap">Filter by Course:</label>
+            <select 
+              id="course-filter"
+              value={selectedCourse} 
+              onChange={(e) => setSelectedCourse(e.target.value)}
+              className="bg-black/40 border border-white/10 rounded px-3 py-1.5 text-sm text-white focus:outline-none focus:border-blue-500"
+            >
+              <option value="All">All Courses</option>
+              {allCourseTitles.map(title => (
+                <option key={title} value={title}>{title}</option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
