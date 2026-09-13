@@ -31,7 +31,7 @@ export default function CourseDetailClient({
                     {course.badgeText1}
                   </div>
                 )}
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-4 text-text-main">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight mb-4 text-text-main break-words">
                   {course.title}
                 </h1>
                 <p className="text-lg text-text-muted mb-8 max-w-xl leading-relaxed">
@@ -89,12 +89,12 @@ export default function CourseDetailClient({
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-12 items-start">
               
               {/* Main Content */}
-              <div className="flex flex-col gap-16">
+              <div className="flex flex-col gap-16 min-w-0">
                 
                 {/* OVERVIEW SECTION */}
                 <div id="overview" className="scroll-mt-32">
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-                    <h2 className="text-3xl font-extrabold text-text-main">What You Will Master</h2>
+                    <h2 className="text-3xl font-extrabold text-text-main break-words">What You Will Master</h2>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {course.highlights?.map((highlight: string, i: number) => (
@@ -102,8 +102,8 @@ export default function CourseDetailClient({
                         <div className="flex-shrink-0 w-12 h-12 bg-brand-blue-soft text-brand-blue rounded-lg flex items-center justify-center">
                           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
                         </div>
-                        <div>
-                          <div className="font-bold text-text-main mb-1">{highlight}</div>
+                        <div className="min-w-0">
+                          <div className="font-bold text-text-main mb-1 break-words">{highlight}</div>
                         </div>
                       </div>
                     ))}
@@ -118,19 +118,20 @@ export default function CourseDetailClient({
                       {course.modules.map((module: any, i: number) => (
                         <div key={i} className="bg-bg-secondary border border-border-subtle rounded-xl overflow-hidden group">
                           <div className="flex items-center justify-between p-6 cursor-pointer hover:bg-bg-card-hover transition-colors">
-                            <div className="flex items-center gap-4">
-                              <span className="px-3 py-1 bg-brand-blue-soft text-brand-blue text-xs font-extrabold tracking-wider rounded-full">
+                            <div className="flex items-center gap-4 min-w-0">
+                              <span className="shrink-0 px-3 py-1 bg-brand-blue-soft text-brand-blue text-xs font-extrabold tracking-wider rounded-full">
                                 {module.weekLabel}
                               </span>
-                              <span className="font-bold text-text-main text-lg">{module.title}</span>
+                              <span className="font-bold text-text-main text-lg break-words truncate whitespace-normal">{module.title}</span>
                             </div>
-                            <div className="text-text-muted">▼</div>
+                            <div className="text-text-muted shrink-0 ml-4">▼</div>
                           </div>
                           <div className="px-6 pb-6 pt-2 border-t border-border-subtle ml-6 mr-6">
                             <div className="flex flex-col gap-3 mt-4">
                               {module.lessons.map((lesson: string, j: number) => (
-                                <div key={j} className="text-sm text-text-muted flex gap-2">
-                                  <span className="text-brand-blue">•</span> {lesson}
+                                <div key={j} className="text-sm text-text-muted flex gap-2 break-words">
+                                  <span className="text-brand-blue shrink-0">•</span> 
+                                  <span className="whitespace-pre-wrap">{lesson}</span>
                                 </div>
                               ))}
                             </div>
@@ -144,13 +145,14 @@ export default function CourseDetailClient({
                 {/* DETAILED CONTENT (RICH TEXT) SECTION */}
                 {course.detailedDescription && (
                   <div id="details" className="scroll-mt-32">
-                    <div className="bg-bg-secondary border border-border-subtle rounded-2xl p-6 md:p-10 shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
+                    <div className="bg-bg-secondary border border-border-subtle rounded-2xl p-6 md:p-10 shadow-[0_10px_30px_rgba(0,0,0,0.05)] overflow-hidden">
                       <div 
-                        className="prose dark:prose-invert prose-brand max-w-none 
+                        className="prose dark:prose-invert prose-brand max-w-none break-words
                                    [&_*]:!text-inherit [&_*]:!bg-transparent text-text-muted
                                    [&_h1]:!text-text-main [&_h2]:!text-text-main [&_h3]:!text-text-main [&_h4]:!text-text-main [&_h5]:!text-text-main [&_h6]:!text-text-main
                                    [&_strong]:!text-text-main [&_b]:!text-text-main
                                    [&_a]:!text-brand-blue
+                                   [&_pre]:!whitespace-pre-wrap [&_pre]:!break-words [&_code]:!break-words
                                    prose-headings:font-extrabold prose-headings:tracking-tight 
                                    prose-p:leading-relaxed 
                                    prose-a:no-underline hover:prose-a:underline

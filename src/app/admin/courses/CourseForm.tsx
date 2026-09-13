@@ -398,9 +398,9 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
               {tools.map((tool, tIndex) => (
                 <div key={tIndex} className="flex flex-col md:flex-row gap-4 items-start bg-black/20 border border-white/10 rounded-xl p-4">
                   <div className="w-full md:w-1/4">
-                    <label className="block text-[10px] font-bold text-white/60 uppercase mb-1">React Icon Name</label>
-                    <input type="text" value={tool.icon} onChange={e => updateTool(tIndex, 'icon', e.target.value)} className="w-full bg-[#0F1535] border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-blue-500 text-sm" placeholder="e.g. SiReact" />
-                    <a href="https://react-icons.github.io/react-icons/" target="_blank" className="text-[10px] text-blue-400 mt-1 block hover:underline">Find icons</a>
+                    <label className="block text-[10px] font-bold text-white/60 uppercase mb-1">Icon Code (e.g. FaReact)</label>
+                    <input type="text" value={tool.icon} onChange={e => updateTool(tIndex, 'icon', e.target.value)} className="w-full bg-[#0F1535] border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-blue-500 text-sm" placeholder="e.g. FaRobot" />
+                    <a href="https://react-icons.github.io/react-icons/icons/fa6/" target="_blank" className="text-[10px] text-blue-400 mt-1 block hover:underline">Click here to find icon codes</a>
                   </div>
                   <div className="w-full md:w-1/4">
                     <label className="block text-[10px] font-bold text-white/60 uppercase mb-1">Tool Name</label>
