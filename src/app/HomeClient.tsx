@@ -52,7 +52,7 @@ export default function HomeClient({
   return (
     <main className="min-h-screen bg-bg-primary text-text-main">
       {/* RESTORED HERO SECTION (WITH TIGHTER TYPOGRAPHY AND ANIMATED SHADER) */}
-      <section className="relative min-h-[92vh] flex items-center pt-[6rem] pb-[3.5rem] overflow-hidden border-b border-border-subtle bg-[#0B1121]">
+      <section className="relative min-h-[92vh] flex items-center pt-[9rem] lg:pt-[7rem] pb-[3.5rem] overflow-hidden border-b border-border-subtle bg-[#0B1121]">
         {/* Animated Shader Background */}
         <ShaderBackground />
         
@@ -335,55 +335,49 @@ export default function HomeClient({
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {courses && courses.length > 0 ? courses.map((course: any, idx: number) => {
               // Dynamic Icon Loading
               const IconComponent = (LucideIcons as any)[course.iconName || "BookOpen"] || LucideIcons.BookOpen;
-              
-              // Dynamic Color Mapping based on badge1Style
-              const styleMap: Record<string, { bg: string, hoverBg: string, text: string, hoverBorder: string, shadowHover: string, glow: string }> = {
-                blue: { bg: "bg-blue-50 dark:bg-blue-900/30", hoverBg: "group-hover:bg-blue-600", text: "text-blue-600", hoverBorder: "hover:border-blue-500/40", shadowHover: "hover:shadow-[0_20px_60px_rgba(37,99,235,0.08)]", glow: "bg-blue-500/5 group-hover:bg-blue-500/10" },
-                purple: { bg: "bg-purple-50 dark:bg-purple-900/30", hoverBg: "group-hover:bg-purple-600", text: "text-purple-600 dark:text-purple-400", hoverBorder: "hover:border-purple-500/40", shadowHover: "hover:shadow-[0_20px_60px_rgba(168,85,247,0.08)]", glow: "bg-purple-500/5 group-hover:bg-purple-500/10" },
-                gold: { bg: "bg-amber-50 dark:bg-amber-900/30", hoverBg: "group-hover:bg-amber-500", text: "text-amber-600 dark:text-amber-400", hoverBorder: "hover:border-amber-500/40", shadowHover: "hover:shadow-[0_20px_60px_rgba(245,158,11,0.08)]", glow: "bg-amber-500/5 group-hover:bg-amber-500/10" },
-                red: { bg: "bg-red-50 dark:bg-red-900/30", hoverBg: "group-hover:bg-red-600", text: "text-red-600 dark:text-red-400", hoverBorder: "hover:border-red-500/40", shadowHover: "hover:shadow-[0_20px_60px_rgba(239,68,68,0.08)]", glow: "bg-red-500/5 group-hover:bg-red-500/10" },
-                green: { bg: "bg-green-50 dark:bg-green-900/30", hoverBg: "group-hover:bg-green-600", text: "text-green-600 dark:text-green-400", hoverBorder: "hover:border-green-500/40", shadowHover: "hover:shadow-[0_20px_60px_rgba(34,197,94,0.08)]", glow: "bg-green-500/5 group-hover:bg-green-500/10" },
-              };
-              
-              const theme = styleMap[course.badge1Style] || styleMap.blue;
 
               return (
-                <motion.div
+                <Link
+                  href={`/courses/${course.slug}`}
                   key={course.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className={`group relative bg-bg-card border border-border-subtle ${theme.hoverBorder} rounded-[2rem] p-10 md:p-12 transition-all duration-500 ${theme.shadowHover} overflow-hidden flex flex-col h-full`}
+                  className="group flex flex-col bg-white dark:bg-[#0B132B] border border-gray-200/80 dark:border-white/10 rounded-2xl p-8 hover:shadow-xl hover:shadow-blue-500/5 hover:border-blue-400 dark:hover:border-blue-500/40 transition-all duration-300"
                 >
-                  <div className={`absolute top-0 right-0 w-32 h-32 rounded-full blur-2xl transition-colors ${theme.glow}`}></div>
-                  
-                  <div className={`w-16 h-16 rounded-2xl ${theme.bg} flex items-center justify-center ${theme.text} mb-8 border border-border-subtle group-hover:scale-110 ${theme.hoverBg} group-hover:text-white transition-all duration-500 shadow-sm`}>
-                    <IconComponent size={32} strokeWidth={1.5} className="group-hover:text-white transition-colors" />
+                  {/* Icon (Always Blue Theme) */}
+                  <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 bg-blue-50 text-blue-600 dark:bg-blue-900/30 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                    <IconComponent size={28} strokeWidth={1.5} />
                   </div>
 
+                  {/* Badge (Dynamic Color) */}
                   {course.badgeText1 && (
-                    <div className={`inline-block px-3 py-1 ${theme.bg} bg-opacity-20 ${theme.text} text-xs font-bold rounded-full mb-4 w-fit`}>
+                    <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider mb-4 w-fit ${
+                      course.badge1Style === 'red' ? 'bg-red-100/50 text-red-700' :
+                      course.badge1Style === 'green' ? 'bg-green-100/50 text-green-700' :
+                      course.badge1Style === 'purple' ? 'bg-purple-100/50 text-purple-700' :
+                      course.badge1Style === 'gold' ? 'bg-amber-100/50 text-amber-700' :
+                      'bg-blue-100/50 text-blue-700'
+                    }`}>
                       {course.badgeText1}
                     </div>
                   )}
                   
-                  <h3 className={`text-2xl md:text-3xl font-bold text-text-main mb-4 tracking-tight group-hover:${theme.text.split(" ")[0]} transition-colors`}>
+                  {/* Title & Description */}
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3 tracking-tight group-hover:text-blue-600 transition-colors">
                     {course.title}
                   </h3>
                   
-                  <p className="text-text-muted mb-10 leading-relaxed text-lg flex-grow">
+                  <p className="text-gray-500 dark:text-gray-400 text-sm md:text-[0.95rem] leading-relaxed mb-8 line-clamp-3 flex-grow">
                     {course.description}
                   </p>
                   
-                  <Link href={`/courses/${course.slug}`} className={`inline-flex items-center gap-2 font-bold ${theme.text} transition-colors mt-auto`}>
+                  {/* Footer Link */}
+                  <div className="mt-auto flex items-center gap-2 text-[0.95rem] font-bold text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">
                     Explore Course <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </motion.div>
+                  </div>
+                </Link>
               );
             }) : (
               <div className="col-span-full text-center py-20 text-text-muted font-bold">No courses published yet.</div>
