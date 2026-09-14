@@ -140,7 +140,7 @@ export default function ServiceForm({ services: initialServices }: { services: S
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-400 mb-1">Icon Name (Lucide React)</label>
+                <label className="block text-sm font-medium text-gray-400 mb-1">Icon Name (Optional)</label>
                 <input
                   type="text"
                   value={currentService.iconName || ""}

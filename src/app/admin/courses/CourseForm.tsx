@@ -19,6 +19,7 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
 
   // Basic Info state
   const [title, setTitle] = useState(initialData?.title || "");
+  const [category, setCategory] = useState(initialData?.category || "Uncategorized");
   const [slug, setSlug] = useState(initialData?.slug || "");
   const [price, setPrice] = useState(initialData?.price || 0);
   const [originalPrice, setOriginalPrice] = useState(initialData?.originalPrice || "");
@@ -130,7 +131,7 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
     const cleanHighlights = highlights.filter(h => h.trim() !== "");
 
     const data = { 
-      title, slug, description, 
+      title, slug, category, description, 
       price: Number(price), originalPrice: originalPrice ? Number(originalPrice) : null,
       imageUrl: imageUrl || null,
       badgeText1: badgeText1 || null, badge1Style, badgeText2: badgeText2 || null,
@@ -250,7 +251,7 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
               <ImageUploader value={imageUrl} onChange={setImageUrl} />
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-3 gap-6">
               <div>
                 <label className="block text-xs font-bold text-white/60 uppercase mb-2">Course Title</label>
                 <input required type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[#0F1535] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="e.g. AI for Life & Business" />
@@ -258,6 +259,10 @@ export default function CourseForm({ initialData }: { initialData?: any }) {
               <div>
                 <label className="block text-xs font-bold text-white/60 uppercase mb-2">URL Slug</label>
                 <input required type="text" value={slug} onChange={e => setSlug(e.target.value)} className="w-full bg-[#0F1535] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="e.g. ai-for-life" />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-white/60 uppercase mb-2">Category (Tab Name)</label>
+                <input required type="text" value={category} onChange={e => setCategory(e.target.value)} className="w-full bg-[#0F1535] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="e.g. Applied AI" />
               </div>
             </div>
 

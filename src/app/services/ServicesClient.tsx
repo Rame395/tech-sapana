@@ -13,7 +13,7 @@ import React from "react";
 
 // Helper to resolve icon by string name from DB
 const resolveIcon = (name: string | null) => {
-  if (!name) return <Server size={20} />;
+  if (!name) return null;
   switch (name.toLowerCase()) {
     case "database": return <Database size={20} />;
     case "cloud": return <Cloud size={20} />;
@@ -27,7 +27,8 @@ const resolveIcon = (name: string | null) => {
     case "monitor": return <Monitor size={20} />;
     case "cpu": return <Cpu size={20} />;
     case "shieldcheck": return <ShieldCheck size={20} />;
-    default: return <Server size={20} />;
+    case "server": return <Server size={20} />;
+    default: return null;
   }
 };
 
@@ -101,27 +102,30 @@ type DynamicService = {
 };
 
 export default function ServicesClient({ dynamicServices }: { dynamicServices: DynamicService[] }) {
-  // Merge dynamic services into the default capabilities
-  const mergedCapabilities: Record<string, Capability> = { ...defaultCapabilities };
+  // If we have dynamic services from the DB, ONLY use those. Otherwise, fallback to the placeholder defaults.
+  let mergedCapabilities: Record<string, Capability> = {};
 
-  dynamicServices.forEach((service) => {
-    let parsedPoints = [];
-    try {
-      parsedPoints = JSON.parse(service.points);
+  if (dynamicServices && dynamicServices.length > 0) {
+    dynamicServices.forEach((service) => {
+      let parsedPoints = [];
+      try {
+        parsedPoints = JSON.parse(service.points);
       if (!Array.isArray(parsedPoints)) parsedPoints = [service.points];
     } catch {
       parsedPoints = [service.points];
     }
-
-    mergedCapabilities[service.id] = {
-      id: service.id,
-      title: service.title,
-      icon: resolveIcon(service.iconName),
-      desc: service.description,
-      points: parsedPoints,
-      image: service.imageUrl || "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80"
-    };
-  });
+      mergedCapabilities[service.id] = {
+        id: service.id,
+        title: service.title,
+        icon: resolveIcon(service.iconName),
+        desc: service.description,
+        points: parsedPoints,
+        image: service.imageUrl || "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80"
+      };
+    });
+  } else {
+    mergedCapabilities = { ...defaultCapabilities };
+  }
 
   const capabilityKeys = Object.keys(mergedCapabilities);
   const [activeCap, setActiveCap] = useState<string>(capabilityKeys[0]);
@@ -267,9 +271,11 @@ export default function ServicesClient({ dynamicServices }: { dynamicServices: D
                       transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                     />
                   )}
-                  <span className={activeCap === key ? "text-blue-600 dark:text-blue-400" : "text-gray-400 dark:text-gray-500"}>
-                    {mergedCapabilities[key].icon}
-                  </span>
+                  {mergedCapabilities[key].icon && (
+                    <span className={activeCap === key ? "text-blue-600 dark:text-blue-400" : "text-gray-400 dark:text-gray-500"}>
+                      {mergedCapabilities[key].icon}
+                    </span>
+                  )}
                   {mergedCapabilities[key].title.split(" ")[0]} {mergedCapabilities[key].title.split(" ")[1]}
                 </button>
               ))}
@@ -287,9 +293,11 @@ export default function ServicesClient({ dynamicServices }: { dynamicServices: D
                   className="grid grid-cols-1 lg:grid-cols-2"
                 >
                   <div className="p-8 md:p-12 flex flex-col justify-center">
-                    <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-6 border border-blue-100 dark:border-blue-800 shadow-sm">
-                      {activeData.icon}
-                    </div>
+                    {activeData.icon && (
+                      <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-6 border border-blue-100 dark:border-blue-800 shadow-sm">
+                        {activeData.icon}
+                      </div>
+                    )}
                     <h3 className="text-2xl md:text-3xl font-[800] text-gray-900 dark:text-white mb-4 tracking-tight">
                       {activeData.title}
                     </h3>

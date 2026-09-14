@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Calendar, Clock, Check, Video } from "lucide-react";
+import { Calendar, Clock, Check, Video, Zap, Star, LayoutGrid, Folder } from "lucide-react";
 
 type Course = {
   id: string;
@@ -20,6 +20,7 @@ type Course = {
   highlights: string[];
   rating: number | null;
   reviewCount: number | null;
+  category: string;
 };
 
 export default function CourseFilterClient({ courses }: { courses: Course[] }) {
@@ -43,24 +44,31 @@ export default function CourseFilterClient({ courses }: { courses: Course[] }) {
     if (activeTab === "top-picks") return courses.filter(c => c.badge1Style === "gold");
     if (activeTab === "upcoming") return courses.filter(c => c.badge1Style === "blue");
     
-    // Keyword based for the others since there is no category field yet
-    if (activeTab === "ai") return courses.filter(c => c.title.toLowerCase().includes("ai") || c.title.toLowerCase().includes("data"));
-    if (activeTab === "dev") return courses.filter(c => c.title.toLowerCase().includes("engineering") || c.title.toLowerCase().includes("stack") || c.title.toLowerCase().includes("web"));
-    if (activeTab === "design") return courses.filter(c => c.title.toLowerCase().includes("design") || c.title.toLowerCase().includes("ui") || c.title.toLowerCase().includes("ux"));
+    // Dynamic category filtering
+    if (activeTab.startsWith("cat-")) {
+      const catName = activeTab.replace("cat-", "");
+      return courses.filter(c => c.category === catName);
+    }
     
     return courses;
   };
 
   const filteredCourses = getFilteredCourses();
 
+  // Dynamically generate tabs based on unique categories from the database
+  const uniqueCategories = Array.from(new Set(courses.map(c => c.category).filter(Boolean)));
+  const dynamicTabs = uniqueCategories.map(cat => ({
+    id: `cat-${cat}`,
+    label: cat,
+    icon: <Folder size={14} className="text-purple-500" />
+  }));
+
   const tabs = [
-    { id: "all", label: `All Programs (${courses.length})` },
-    { id: "this-week", label: "⚡ Starting This Week" },
-    { id: "top-picks", label: "⭐ Top Picks" },
-    { id: "upcoming", label: "📅 Upcoming Cohorts" },
-    { id: "ai", label: "Applied AI & Automation" },
-    { id: "dev", label: "Software & Web Engineering" },
-    { id: "design", label: "UI/UX & Product Design" },
+    { id: "all", label: `All Programs (${courses.length})`, icon: <LayoutGrid size={14} className="opacity-80" /> },
+    { id: "this-week", label: "Starting This Week", icon: <Zap size={14} className="text-red-500" /> },
+    { id: "top-picks", label: "Top Picks", icon: <Star size={14} className="text-yellow-500" /> },
+    { id: "upcoming", label: "Upcoming Cohorts", icon: <Calendar size={14} className="text-blue-500" /> },
+    ...dynamicTabs
   ];
 
   return (
@@ -73,12 +81,13 @@ export default function CourseFilterClient({ courses }: { courses: Course[] }) {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`whitespace-nowrap px-5 py-2.5 rounded-full text-sm font-extrabold transition-all duration-300 ${
+                className={`whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-extrabold transition-all duration-300 ${
                   activeTab === tab.id
                     ? "bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.4)] border-transparent"
                     : "bg-gray-100 dark:bg-[#0F172A] text-gray-600 dark:text-gray-400 border border-transparent hover:border-gray-300 dark:hover:border-blue-800 hover:text-gray-900 dark:hover:text-blue-400"
                 }`}
               >
+                {tab.icon && <span>{tab.icon}</span>}
                 {tab.label}
               </button>
             ))}

@@ -13,6 +13,7 @@ export async function getCourses() {
 type CoursePayload = {
   title: string; 
   slug: string; 
+  category: string;
   description: string; 
   price: number; 
   originalPrice?: number | null;

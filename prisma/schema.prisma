@@ -36,6 +36,7 @@ model Course {
   startDateText String?
   scheduleText  String?
   highlights    String[] // Array of strings for bullet points
+  category      String   @default("Uncategorized")
   published     Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
