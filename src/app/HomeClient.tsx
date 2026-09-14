@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import * as LucideIcons from "lucide-react";
 import { ArrowRight } from "lucide-react";
 import PromoBanner from "@/components/PromoBanner";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import MarqueeBanner from "@/components/MarqueeBanner";
 import FaqSection from "@/components/FaqSection";
 import MethodologySection from "@/components/MethodologySection";
@@ -216,7 +217,10 @@ export default function HomeClient({
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent dark:from-blue-900/10 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 
                 <div className="relative z-10 text-[3rem] font-[800] tracking-tighter mb-2 flex items-baseline justify-center gap-1 text-gray-900 dark:text-white">
-                  {metric.value}
+                  <AnimatedCounter 
+                    value={parseFloat(metric.value) || 0} 
+                    decimals={metric.value.includes('.') ? metric.value.split('.')[1].length : 0} 
+                  />
                   <span className="text-blue-600 dark:text-blue-500 text-[2.5rem]">{metric.symbol}</span>
                 </div>
                 <div className="relative z-10 text-[1.1rem] font-bold text-gray-800 dark:text-gray-100 mb-2 tracking-tight">
