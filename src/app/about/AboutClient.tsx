@@ -349,8 +349,6 @@ export default function AboutClient({
                 ) : (
                   <div className="text-gray-400 dark:text-gray-600 font-medium">Image Placeholder</div>
                 )}
-                {/* Removed the heavy gradient so the image is fully visible */}
-                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-transparent via-transparent to-white dark:to-[#0F172A]"></div>
               </div>
 
               <div className="p-10 md:p-16 flex flex-col justify-center relative z-10">
