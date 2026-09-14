@@ -54,8 +54,8 @@ export async function createCourse(data: CoursePayload) {
       }
     } 
   });
-  revalidatePath("/courses");
-  revalidatePath("/admin/courses");
+  revalidatePath("/courses", "layout");
+  revalidatePath("/admin/courses", "layout");
 }
 
 export async function updateCourse(id: string, data: CoursePayload) {
@@ -83,8 +83,8 @@ export async function updateCourse(id: string, data: CoursePayload) {
     })
   ]);
 
-  revalidatePath("/courses");
-  revalidatePath("/admin/courses");
+  revalidatePath("/courses", "layout");
+  revalidatePath("/admin/courses", "layout");
 }
 
 export async function deleteCourse(id: string) {

@@ -10,7 +10,12 @@ const iconMap = {
   TbBrandOpenai, SiGooglegemini, SiReact, SiNextdotjs, SiPython, SiJavascript, 
   SiTypescript, SiHtml5, SiCss, SiNodedotjs, SiTailwindcss, SiGithub, 
   SiFigma, SiVercel, SiPrisma, SiPostgresql, SiDocker,
-  FaToolbox, FaRobot, FaBrain, FaCode, FaAws
+  FaToolbox, FaRobot, FaBrain, FaCode, FaAws,
+  
+  // Aliases for common inputs
+  SiOpenai: TbBrandOpenai,
+  SiGoogleboard: SiGooglegemini,
+  SiGoogle: SiGooglegemini
 };
 
 export default function CourseDetailClient({ 
